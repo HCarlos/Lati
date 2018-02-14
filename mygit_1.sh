@@ -11,10 +11,8 @@ git status
 
 git add .
 
-git commit -m "Lati - 1a Alfa"
+git commit -m "Lati - 1b Alfa"
 
 git push -u origin master --force
 
 exit
-
- 

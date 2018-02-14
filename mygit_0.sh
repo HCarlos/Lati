@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "# PS, WebAPP" >> README.md
 echo "# Plataforma de Gestión Educativa" >> README.md
 git init
