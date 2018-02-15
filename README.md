@@ -1,6 +1,5 @@
 # Lati.mx
-![Picture](https://platsource.mx/images/web/logo-0.png)
-Plataforma Educativa
+![Picture](https://platsource.mx/images/web/plataforma-gestion-0-logo.png)
 ## Qué es Lati.mx?
 Es una plataforma educativa que permite gestionar todos los  `recursos` de uns institución educativa. Los niveles que soporta Lati.mx son:
 * **Preescolar** - Nivel Preeescolar
