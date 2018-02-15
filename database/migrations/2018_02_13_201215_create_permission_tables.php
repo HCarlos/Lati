@@ -1,6 +1,6 @@
 <?php
 /*
- * By @DevCH - Feb 15, 2018
+ * By @DevCH - Feb 15, 2018 - Arji
  */
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
