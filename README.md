@@ -16,5 +16,6 @@ Permite gestionar control de pases se salida, tareas, kardex, tarjetas de reinsc
 * **Alumnos** - Consultan sus tareas, circulares, boletas de calificaciones, etc.
 ## Author
 Esta plataforma fue desarrollada por:
-* [@DevCH](https://twitter.com.devch) - Carlos Hidalgo.
+* [@DevCH](https://twitter.com/devch) - Carlos Hidalgo.
 * [Lati.mx](http://lati.mx) - Sitio web Lati.mx
+###### © 2017
