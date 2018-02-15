@@ -167,6 +167,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
+    / by @DevCH
     |--------------------------------------------------------------------------
     |
     | This array of class aliases will be registered when this application
