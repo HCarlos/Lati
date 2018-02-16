@@ -14,19 +14,35 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+// INIT
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/index/{id?}','CatalogListController@index')->name('listItem');
+    Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
+    Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 
-Auth::routes();
+    Route::group(['middleware' => ['permission:destroy_user']], function () {
+        Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
+        Route::post('admin/home/role/create', 'RoleController@create')->name('admin/home/role/create');
+        Route::get('catalogos/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@index')->name('catalogos/');
 
-Route::get('/home', 'HomeController@index')->name('home');
+        // Editoriales
+        Route::post('/store_editorial','Catalogos\EditorialController@editorialStore');
+        Route::post('/update_editorial','Catalogos\EditorialController@update')->name('editorialUpdate/');
+        Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');
 
-Auth::routes();
+        // Lugares
+        Route::post('/store_lugar','Catalogos\LugaresController@store');
+        Route::post('/update_lugar','Catalogos\LugaresController@update');
+        Route::get('/destroy_lugar/{id}/{idItem}/{action}', 'Catalogos\LugaresController@destroy')->name('destroy_lugar/');
 
-Route::get('/home', 'HomeController@index')->name('home');
+        // Roles
+        Route::post('/store_role','Catalogos\RolesController@store');
+        Route::post('/update_role','Catalogos\RolesController@update');
+        Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RolesController@destroy')->name('destroy_role/');
+    });
+
+});

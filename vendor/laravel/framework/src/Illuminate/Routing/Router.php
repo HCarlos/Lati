@@ -1136,9 +1136,14 @@ class Router implements RegistrarContract, BindingRegistrar
         $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
         $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         $this->post('password/reset', 'Auth\ResetPasswordController@reset');
+
+        // Edita Registro Routes...
+        $this->get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
+        $this->post('Edit', 'Auth\EditUserDataController@create')->name('Edit');
+
     }
 
-    /**
+        /**
      * Set the unmapped global resource parameters to singular.
      *
      * @param  bool  $singular
