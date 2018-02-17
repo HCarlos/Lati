@@ -28,5 +28,8 @@ class UsersInitializeSeeder extends Seeder
         $user->email = 'admin@example.com';
         $user->password = bcrypt('secret');
         $user->save();
-        $user->roles()->attach($role_admin);    }
+        $user->roles()->attach($role_user);
+        $user->roles()->attach($role_admin);
+    }
+
 }
