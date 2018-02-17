@@ -78,7 +78,7 @@ class RegisterController extends Controller
         ]);
 
         $role = Role::where('name', 'user')->first();
-        $role->givePermissionTo('editar_registro');
+        //$role->givePermissionTo('editar_registro');
 
         $user
             ->roles()
