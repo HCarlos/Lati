@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
-use App\Role;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsCapturistaAReloadedSeeder extends Seeder
 {
@@ -14,18 +14,17 @@ class RolesAndPermissionsCapturistaAReloadedSeeder extends Seeder
      */
     public function run()
     {
-        app()['cache']->forget('spatie.permission.cache');
 
         // create permissions
-        Permission::create(['name' => 'editar']);
-        Permission::create(['name' => 'eliminar']);
-        Permission::create(['name' => 'crear']);
+        Permission::create(['name' => 'editar_2']);
+        Permission::create(['name' => 'eliminar_2']);
+        Permission::create(['name' => 'crear_2']);
 
         // create roles and assign existing permissions
         $role = Role::create(['name' => 'Capturista_A_Reloaded']);
-        $role->givePermissionTo('editar');
-        $role->givePermissionTo('eliminar');
-        $role->givePermissionTo('crear');
+        $role->givePermissionTo('editar_2');
+        $role->givePermissionTo('eliminar_2');
+        $role->givePermissionTo('crear_2');
 
     }
 }
