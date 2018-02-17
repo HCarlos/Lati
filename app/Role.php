@@ -14,6 +14,8 @@ class Role extends Model
     public function permissions() {
         return $this->belongsTo(Permission::class);
     }
+    protected $fillable = ['name',];
+
     public function users() {
         return $this->belongsToMany(User::class);
     }

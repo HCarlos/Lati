@@ -24,7 +24,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
     Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 
-    Route::group(['middleware' => ['role:Capturista_A_Reloaded']], function () {
+    Route::group([
+        'middleware' => ['role:user'],
+        'middleware' => ['role:administrator'],
+    ], function () {
 /*
         Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
         Route::post('admin/home/role/create', 'RoleController@create')->name('admin/home/role/create');

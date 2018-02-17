@@ -15,12 +15,12 @@
                             </div>
                         @endif
 
-                        @role('Capturista_A_Reloaded')
+                        @hasanyrole('user|administrator')
                             <a class="button list-group-item" href="{{ route('editorialIndex/') }}">Editoriales</a>
-                        @endrole
+                        @endhasanyrole
                     </div>
                 </div>
-                @role('Admin')
+                @role('administrator')
                 <div>Acceso como Administrador</div>
                 @else
                     <div>Acceso usuario</div>

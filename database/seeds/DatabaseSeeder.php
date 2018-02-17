@@ -11,8 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        app()['cache']->forget('spatie.permission.cache');
         $this->call(RolesAndPermissionsCapturistaASeeder::class);
-        $this->call(RolesAndPermissionsAdminSeeder::class);
         $this->call(AgregarEditorialesSeeder::class);
+        $this->call(RolesAndPermissionsAdminstratorUserSeeder::class);
+        $this->call(UsersInitializeSeeder::class);
     }
 }
