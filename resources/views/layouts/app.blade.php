@@ -12,11 +12,39 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css_/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/ace-fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/sg-01.css') }}" rel="stylesheet">
     <link href="{{ asset('css/my_style_sheet.css') }}" rel="stylesheet">
 
+
+    <style>
+
+        ul.role-list-hrz {
+            list-style-type: none;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+
+        ul.role-list-hrz li {
+            float: left;
+            margin: 0.5em;
+        }
+
+        ul.role-list-hrz li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .role-list-hrz li a:hover {
+            background-color: #111111;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -36,7 +64,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto pull-right">
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
@@ -44,7 +72,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a  class="dropdown-item" href="{{ route('edit') }}">Edit</a>

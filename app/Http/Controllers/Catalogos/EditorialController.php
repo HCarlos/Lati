@@ -2,15 +2,31 @@
 
 namespace App\Http\Controllers\Catalogos;
 
-use App\Models\Editorial;
-use App\User;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
+use App\User;
+use App\Models\Editorial;
+use Illuminate\Support\Facades\Response;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+
 
 class EditorialController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //
+    public function index(){
+        //return view('catalogos.editorial_list');
+        return "Editorial SLit";
+    }
     public function store(Request $request)
     {
 /*

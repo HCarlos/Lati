@@ -1,23 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Dashboard</div>
+    <div class="container">
+        <div class="row">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Catálogos</div>
 
-                   <strong class="text-primary">{{ Auth::user()->name }}</strong> You are logged in!
+                    <div class="panel-body list-group">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        @role('Capturista_A_Reloaded')
+                            <a class="button list-group-item" href="{{ route('editorialIndex/') }}">Editoriales</a>
+                        @endrole
+                    </div>
+                </div>
+                @role('Admin')
+                <div>Acceso como Administrador</div>
+                @else
+                    <div>Acceso usuario</div>
+                    @endrole
+
+            </div>
+
+            <div class="col-md-8">
+                <div class="panel panel-primary">
+                    @yield('content_catalogo')
+                    @yield('content_form_permisions')
                 </div>
             </div>
+
         </div>
     </div>
-</div>
 @endsection
