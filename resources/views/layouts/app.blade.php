@@ -45,13 +45,17 @@
         }
 
     </style>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    {{--<script defer src="{{ asset('js/fontawesome/fontawesome-all.js') }}"></script>--}}
+    {{--<script defer src="{{ asset('js/fontawesome/fa-v4-shim.js') }}"></script>--}}
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <i class="fa fa-book blue"></i>  {{ config('app.name', 'Laravel') }}
+                    <i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -75,7 +79,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a  class="dropdown-item" href="{{ route('edit') }}">Edit</a>
+                                    <a  class="dropdown-item" href="{{ route('edit') }}"><i class="far fa-address-card"></i> Perfil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

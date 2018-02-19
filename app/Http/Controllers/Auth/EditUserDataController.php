@@ -19,7 +19,7 @@ class EditUserDataController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/edit';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -41,9 +41,9 @@ class EditUserDataController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre_completo' => 'string|max:255',
-            'twitter' => 'string|max:50',
-            'facebook' => 'string|max:50',
-            'instagram' => 'string|max:50',
+//            'twitter' => 'string|max:50',
+//            'facebook' => 'string|max:50',
+//            'instagram' => 'string|max:50',
         ]);
 
         if ($validator->fails()) {
@@ -65,9 +65,9 @@ class EditUserDataController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nombre_completo' => 'string|max:255',
-            'twitter' => 'string|max:50',
-            'facebook' => 'string|max:50',
-            'instagram' => 'string|max:50',
+//            'twitter' => 'string|max:50',
+//            'facebook' => 'string|max:50',
+//            'instagram' => 'string|max:50',
         ]);
 
         if ($validator->fails()) {
