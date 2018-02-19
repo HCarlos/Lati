@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/index/{id?}','CatalogListController@index')->name('listItem');
+    Route::get('/index/{id?}','Catalogos\CatalogosListController@index')->name('listItem');
     Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
     Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 
@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
         // Editoriales
-        Route::get('/index_editorial/','Catalogos\EditorialController@index')->name('editorialIndex/');
+        //Route::get('/index_editorial/','Catalogos\EditorialController@index')->name('editorialIndex/');
         Route::post('/store_editorial','Catalogos\EditorialController@store')->name('editorialStore/');
         Route::put('/update_editorial','Catalogos\EditorialController@update')->name('editorialUpdate/');
         Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');

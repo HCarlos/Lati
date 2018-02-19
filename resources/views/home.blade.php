@@ -16,7 +16,7 @@
                         @endif
 
                         @hasanyrole('user|administrator')
-                            <a class="button list-group-item" href="{{ route('editorialIndex/') }}">Editoriales</a>
+                            <a class="button list-group-item" href="{{ route('listItem', array('id' => 1)) }}">Editoriales</a>
                         @endhasanyrole
                     </div>
                 </div>
