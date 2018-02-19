@@ -1139,7 +1139,7 @@ class Router implements RegistrarContract, BindingRegistrar
 
         // Edita Registro Routes...
         $this->get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
-        $this->post('Edit', 'Auth\EditUserDataController@create')->name('Edit');
+        $this->put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
 
     }
 

@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Editoriales
         Route::get('/index_editorial/','Catalogos\EditorialController@index')->name('editorialIndex/');
         Route::post('/store_editorial','Catalogos\EditorialController@store')->name('editorialStore/');
-        Route::post('/update_editorial','Catalogos\EditorialController@update')->name('editorialUpdate/');
+        Route::put('/update_editorial','Catalogos\EditorialController@update')->name('editorialUpdate/');
         Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');
 /*
         // Lugares

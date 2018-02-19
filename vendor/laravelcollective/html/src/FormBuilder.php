@@ -572,7 +572,7 @@ class FormBuilder
      *
      * @param  string $name
      * @param  array  $list
-     * @param  string $selected
+     * @param  string|bool $selected
      * @param  array  $selectAttributes
      * @param  array  $optionsAttributes
      * @param  array  $optgroupsAttributes
@@ -787,7 +787,9 @@ class FormBuilder
         } elseif ($selected instanceof Collection) {
             return $selected->contains($value) ? 'selected' : null;
         }
-
+        if (is_int($value) && is_bool($selected)) {
+            return (bool)$value === $selected;
+        }
         return ((string) $value === (string) $selected) ? 'selected' : null;
     }
 
@@ -1184,7 +1186,7 @@ class FormBuilder
         }
 
         $request = $this->request($name);
-        if (! is_null($request)) {
+        if (! is_null($request) && $name != '_method') {
             return $request;
         }
 
@@ -1268,7 +1270,7 @@ class FormBuilder
      */
     public function oldInputIsEmpty()
     {
-        return (isset($this->session) && count($this->session->getOldInput()) === 0);
+        return (isset($this->session) && count((array) $this->session->getOldInput()) === 0);
     }
 
     /**

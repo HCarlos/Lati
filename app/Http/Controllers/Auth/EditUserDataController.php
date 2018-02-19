@@ -20,6 +20,7 @@ class EditUserDataController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $redirectToError = '/edit';
 
     /**
      * Create a new controller instance.
@@ -28,60 +29,30 @@ class EditUserDataController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nombre_completo' => 'string|max:255',
-//            'twitter' => 'string|max:50',
-//            'facebook' => 'string|max:50',
-//            'instagram' => 'string|max:50',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect($this->redirectTo)
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(Request $request)
+    protected function update(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'nombre_completo' => 'string|max:255',
-//            'twitter' => 'string|max:50',
-//            'facebook' => 'string|max:50',
-//            'instagram' => 'string|max:50',
+            'nombre_completo' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
-            return redirect($this->redirectTo)
+            return redirect($this->redirectToError)
                         ->withErrors($validator)
                         ->withInput();
         }else{
-            $user = Auth::user();        
+            $user = Auth::user();
+            // $input = $request->only('nombre_completo', 'twitter', 'facebook', 'instagram');
+            $input = $request->all();
             $user->nombre_completo = $request->input('nombre_completo');
-            $user->twitter   = $request->input('twitter');
-            $user->facebook  = $request->input('facebook');
+            $user->twitter = $request->input('twitter');
+            $user->facebook = $request->input('facebook');
             $user->instagram = $request->input('instagram');
-            $user->save();     
-            return redirect($this->redirectTo);   
+            $user->save();
+            return redirect($this->redirectTo);
         }
 
         

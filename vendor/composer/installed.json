@@ -4206,17 +4206,17 @@
     },
     {
         "name": "laravelcollective/html",
-        "version": "v5.6",
-        "version_normalized": "5.6.0.0",
+        "version": "v5.6.3",
+        "version_normalized": "5.6.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/LaravelCollective/html.git",
-            "reference": "e6496328af51384e60f7b3ceaf0f4fb6075ae68e"
+            "reference": "41cd9291a69bd24f2184e504be041348a87308a8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/LaravelCollective/html/zipball/e6496328af51384e60f7b3ceaf0f4fb6075ae68e",
-            "reference": "e6496328af51384e60f7b3ceaf0f4fb6075ae68e",
+            "url": "https://api.github.com/repos/LaravelCollective/html/zipball/41cd9291a69bd24f2184e504be041348a87308a8",
+            "reference": "41cd9291a69bd24f2184e504be041348a87308a8",
             "shasum": ""
         },
         "require": {
@@ -4229,10 +4229,10 @@
         },
         "require-dev": {
             "illuminate/database": "5.6.*",
-            "mockery/mockery": "~0.9.4",
+            "mockery/mockery": "~1.0",
             "phpunit/phpunit": "~5.4"
         },
-        "time": "2018-02-08T16:16:30+00:00",
+        "time": "2018-02-12T14:19:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
