@@ -104,6 +104,40 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() { init(); });
+        function init() {
+            $("#preloaderGlobal").hide();
 
+            if ( $("#titulo_catalogo") ){
+                        @if ( isset($titulo_catalogo) )
+                var titulo = "{{ $titulo_catalogo}}";
+                $("#titulo_catalogo").html(titulo);
+                @endif
+            }
+
+            if ( $(".btnAction2") ){
+                $('.btnAction2').on('click', function(event) {
+                    event.preventDefault();
+                    var aID = event.currentTarget.id.split('-');
+                    var x = confirm("Desea eliminar el registro: "+aID[1]);
+                    if (!x){
+                        return false;
+                    }
+                    $(function() {
+                        $.ajax({
+                            method: "GET",
+                            url: aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4]
+                        })
+                            .done(function( response ) {
+                                window.location.href = '/index/'+aID[3];
+                            });
+                    });
+                });
+            }
+
+        }
+
+    </script>
 </body>
 </html>

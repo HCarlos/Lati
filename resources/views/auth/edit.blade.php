@@ -10,9 +10,8 @@
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('Edit') }}">
-                            {{ method_field('PUT') }}
                             {{ csrf_field() }}
-
+                            {{ method_field('PUT') }}
                             <div class="form-group{{ $errors->has('nombre_completo') ? ' has-error' : '' }}">
                                 <label for="nombre_completo" class="col-md-4 control-label">Nombre Completo</label>
                                 <div class="col-md-6">

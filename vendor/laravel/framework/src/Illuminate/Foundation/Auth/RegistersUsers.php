@@ -20,12 +20,6 @@ trait RegistersUsers
         return view('auth.register');
     }
 
-    public function showEditUserData()
-    {
-        $user = Auth::User();
-        return view('auth.edit',['user' => $user]);
-    }
-
     /**
      * Handle a registration request for the application.
      *

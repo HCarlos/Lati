@@ -1141,9 +1141,10 @@ class Router implements RegistrarContract, BindingRegistrar
         $this->get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
         $this->put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
 
+
     }
 
-        /**
+    /**
      * Set the unmapped global resource parameters to singular.
      *
      * @param  bool  $singular

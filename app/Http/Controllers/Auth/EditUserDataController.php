@@ -55,8 +55,13 @@ class EditUserDataController extends Controller
             return redirect($this->redirectTo);
         }
 
-        
     }
+
+    protected function showEditUserData(){
+        $user = Auth::user();
+        return view('auth.edit',compact("user"));
+    }
+
 
 
 }

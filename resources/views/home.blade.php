@@ -14,17 +14,15 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('catalogos.side_bar_left')
 
-                        @hasanyrole('user|administrator')
-                            <a class="button list-group-item" href="{{ route('listItem', array('id' => 1)) }}">Editoriales</a>
-                        @endhasanyrole
                     </div>
                 </div>
                 @role('administrator')
-                <div>Acceso como Administrador</div>
+                    <div>Acceso como Administrador</div>
                 @else
                     <div>Acceso usuario</div>
-                    @endrole
+                @endrole
 
             </div>
 

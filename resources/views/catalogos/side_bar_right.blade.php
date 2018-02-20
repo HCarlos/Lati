@@ -1,6 +1,7 @@
 @extends('home')
 
 @section('content_catalogo')
+
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
@@ -11,11 +12,10 @@
         @endif
     </div>
 
-
     <div class="panel-body">
         @switch($id)
 
-            @case(1)
+            @case(0)
             @if(Auth::user()->hasRole('user'))
                 <table class="table table-responsive" >
                     <thead>
@@ -30,9 +30,19 @@
                     @foreach ($items as $item)
                         <tr>
                             <td class="active">{{ $item->id }}</td>
-                            <td class="success">{{ $item->nombre }}</td>
+                            <td class="success">{{ $item->editorial }}</td>
                             <td class="warning">{{ $item->representante }}</td>
-                            <td></td>
+                            <td>
+
+                                    <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" >
+                                        <i class="fa fa-trash fa-lg red" ></i>
+                                    </a>
+
+                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-default btn-xs pull-right" >
+                                    <i class="fas fa-pencil-alt blue"></i>
+                                </a>
+
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -40,6 +50,9 @@
                 </table>
             @endif
             @break;
+
+{{--
+
             @case(2)
 
             <table class="table table-responsive" >
@@ -227,6 +240,7 @@
 
             @endif
             @break;
+--}}
 
         @endswitch
 

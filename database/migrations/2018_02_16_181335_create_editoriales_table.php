@@ -15,8 +15,8 @@ class CreateEditorialesTable extends Migration
     {
         Schema::create('editoriales', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('no');
-            $table->string('nombre',100)->unique();
+            $table->unsignedInteger('no')->nullable();
+            $table->string('editorial',100)->unique();
             $table->string('representante',150)->nullable();
             $table->timestamps();
         });

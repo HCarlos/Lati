@@ -17,7 +17,7 @@ class CatalogosListController extends Controller
     {
         $name = "nothing";
         switch ($id) {
-            case 1:
+            case 0:
                 $name  = "Carlos Hidalgo";
                 $catit = "Catálogo de Editoriales";
                 // $items = DB::table('users')->get();

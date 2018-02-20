@@ -25,11 +25,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 
     Route::group(['middleware' => ['role:user']], function () {
-/*
-        Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
-        Route::post('admin/home/role/create', 'RoleController@create')->name('admin/home/role/create');
+
         Route::get('catalogos/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@index')->name('catalogos/');
-*/
+
+        /*
+                Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
+                Route::post('admin/home/role/create', 'RoleController@create')->name('admin/home/role/create');
+        */
 
         // Editoriales
         //Route::get('/index_editorial/','Catalogos\EditorialController@index')->name('editorialIndex/');
