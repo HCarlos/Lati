@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');
 /*
  *
+ *
         // Lugares
         Route::post('/store_lugar','Catalogos\LugaresController@store');
         Route::post('/update_lugar','Catalogos\LugaresController@update');
