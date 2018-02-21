@@ -41,7 +41,8 @@ class EditorialController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'editorial' => "required|unique:editoriales,editorial|max:255",
+            'editorial' => "required|unique:editoriales,editorial|max:100",
+            'representante' => "max:150",
         ]);
 
         if ($validator->fails()) {
@@ -87,9 +88,9 @@ class EditorialController extends Controller
 */
 
 
-/*
+
         $validator = request()->validate([
-            'editorial' => "required|unique:editoriales,editorial|max:255",
+            'representante' => "max:150",
         ]);
         if ($validator->fails()) {
             return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action)
@@ -97,7 +98,7 @@ class EditorialController extends Controller
                 ->withInput();
         }
 
-*/
+
 
 
         $Editorial = Editorial::findOrFail($idItem);
