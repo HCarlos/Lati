@@ -13,9 +13,6 @@ class AgregarEditorialesSeeder extends Seeder
     public function run()
     {
         Editorial::query()->truncate();
-        // $edito->truncate();
-
-        // Editorial::create(['no' => 0, 'editorial' => 'prueba', 'representante' => '',]);
         Editorial::create(['no'=>1,'editorial'=>'Editorial Nueva Imagen','representante'=>'',]);
         Editorial::create(['no'=>2,'editorial'=>'Editorial Santillana','representante'=>'',]);
         Editorial::create(['no'=>3,'editorial'=>'Ediciones SM','representante'=>'',]);

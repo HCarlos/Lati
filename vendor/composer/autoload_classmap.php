@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AgregarEditorialesSeeder' => $baseDir . '/database/seeds/AgregarEditorialesSeeder.php',
+    'AgregarFichasSeeder' => $baseDir . '/database/seeds/AgregarFichasSeeder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\EditUserDataController' => $baseDir . '/app/Http/Controllers/Auth/EditUserDataController.php',
@@ -17,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\Catalogos\\CatalogosController' => $baseDir . '/app/Http/Controllers/Catalogos/CatalogosController.php',
     'App\\Http\\Controllers\\Catalogos\\CatalogosListController' => $baseDir . '/app/Http/Controllers/Catalogos/CatalogosListController.php',
     'App\\Http\\Controllers\\Catalogos\\EditorialController' => $baseDir . '/app/Http/Controllers/Catalogos/EditorialController.php',
+    'App\\Http\\Controllers\\Catalogos\\FichaController' => $baseDir . '/app/Http/Controllers/Catalogos/FichaController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -26,6 +28,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Editorial' => $baseDir . '/app/Models/Editorial.php',
+    'App\\Models\\Ficha' => $baseDir . '/app/Models/Ficha.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

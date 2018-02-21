@@ -34,10 +34,14 @@ Route::group(['middleware' => 'auth'], function () {
         */
 
         // Editoriales
-        //Route::get('/index_editorial/','Catalogos\EditorialController@index')->name('editorialIndex/');
         Route::post('/store_editorial','Catalogos\EditorialController@store')->name('editorialStore/');
         Route::put('/update_editorial','Catalogos\EditorialController@update')->name('editorialUpdate/');
         Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');
+
+        Route::post('/store_ficha','Catalogos\FichaController@store')->name('fichaStore/');
+        Route::put('/update_ficha','Catalogos\FichaController@update')->name('fichaUpdate/');
+        Route::get('/destroy_ficha/{id}/{idItem}/{action}', 'Catalogos\FichaController@destroy')->name('fichaDestroy/');
+
 /*
  *
  *

@@ -19,6 +19,13 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get();
                 break;
+            case 1:
+                $name  = "Carlos Hidalgo";
+                $catit = "Catálogo de Fichas";
+                $items = DB::table('fichas')
+                    ->orderBy('id','desc')
+                    ->get();
+                break;
 
         }
 

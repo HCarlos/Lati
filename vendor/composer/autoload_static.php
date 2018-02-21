@@ -332,6 +332,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
 
     public static $classMap = array (
         'AgregarEditorialesSeeder' => __DIR__ . '/../..' . '/database/seeds/AgregarEditorialesSeeder.php',
+        'AgregarFichasSeeder' => __DIR__ . '/../..' . '/database/seeds/AgregarFichasSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\EditUserDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/EditUserDataController.php',
@@ -342,6 +343,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'App\\Http\\Controllers\\Catalogos\\CatalogosController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/CatalogosController.php',
         'App\\Http\\Controllers\\Catalogos\\CatalogosListController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/CatalogosListController.php',
         'App\\Http\\Controllers\\Catalogos\\EditorialController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/EditorialController.php',
+        'App\\Http\\Controllers\\Catalogos\\FichaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/FichaController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -351,6 +353,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Editorial' => __DIR__ . '/../..' . '/app/Models/Editorial.php',
+        'App\\Models\\Ficha' => __DIR__ . '/../..' . '/app/Models/Ficha.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

@@ -11,16 +11,16 @@ class CatalogosController extends Controller
 {
     public function index($id=0,$idItem=0,$action=0)
     {
-        $tables = ['editoriales'];
+        $tables = ['editoriales','fichas'];
         if ($action == 0){
-            $views  = ['catalogos.editorial_new'];
+            $views  = ['editorial_new','ficha_new'];
         }else{
-            $views  = ['catalogos.editorial_edit'];
+            $views  = ['editorial_edit','ficha_edit'];
         }
         $user = Auth::User();
         if ($action == 0 or $action == 1){
             $items = DB::table($tables[$id])->whereId($idItem)->first();
-            return view ($views[$id],
+            return view ('catalogos.'.$views[$id],
                 [
                     'id'   => $id,
                     'idItem' => $idItem,

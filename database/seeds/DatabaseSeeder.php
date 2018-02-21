@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         app()['cache']->forget('spatie.permission.cache');
         $this->call(RolesAndPermissionsCapturistaASeeder::class);
-        $this->call(AgregarEditorialesSeeder::class);
         $this->call(RolesAndPermissionsAdminstratorUserSeeder::class);
         $this->call(UsersInitializeSeeder::class);
+        $this->call(AgregarEditorialesSeeder::class);
+        $this->call(AgregarFichasSeeder::class);
     }
 }

@@ -3,11 +3,11 @@
 @section('content_form_permisions')
 
     <div class="panel-heading">
-        @if ($idItem == 0)
-            <span><strong>{{ ucwords($titulo) }}</strong> | Nuevo Registro</span>
-        @else
-            <span><strong>{{ ucwords($titulo) }}</strong> | Editando registro {{$idItem}}</span>
-        @endif
+            <span><strong>{{ ucwords($titulo) }}</strong> | Nuevo Registro
+                <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id" }}">
+                    Regresar
+                </a>
+            </span>
     </div>
 
     <div class="panel-body">

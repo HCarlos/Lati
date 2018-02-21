@@ -5,38 +5,75 @@
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-        @if ( $id != 1)
             <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-default btn-xs pull-right" title="Agregar nuevo registro">
                 <i class="fa fa-plus-circle fa-lg green" aria-hidden="true"></i>
             </a>
-        @endif
     </div>
 
     <div class="panel-body">
         @switch($id)
 
             @case(0)
+                @if(Auth::user()->hasRole('user'))
+                    <table class="table table-responsive" >
+                        <thead>
+                        <tr>
+                            <th class="active">ID</th>
+                            <th class="success">EDITORIAL</th>
+                            <th class="warning">REPRESENTANTE</th>
+                            <th class="active"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($items as $item)
+                            <tr>
+                                <td class="active">{{ $item->id }}</td>
+                                <td class="success">{{ $item->editorial }}</td>
+                                <td class="warning">{{ $item->representante }}</td>
+                                <td class="danger" width="100">
+
+                                        <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" >
+                                            <i class="fa fa-trash fa-lg red" ></i>
+                                        </a>
+
+                                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-default btn-xs pull-right" >
+                                        <i class="fas fa-pencil-alt blue"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+
+                    </table>
+                @endif
+            @break;
+            @case(1)
             @if(Auth::user()->hasRole('user'))
                 <table class="table table-responsive" >
                     <thead>
                     <tr>
                         <th class="active">ID</th>
-                        <th class="success">EDITORIAL</th>
-                        <th class="warning">REPRESENTANTE</th>
-                        <th></th>
+                        <th class="success">NO</th>
+                        <th class="success">ISB</th>
+                        <th class="warning">TITULO</th>
+                        <th class="danger">AUTOR</th>
+                        <th class="active" width="100"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($items as $item)
                         <tr>
                             <td class="active">{{ $item->id }}</td>
-                            <td class="success">{{ $item->editorial }}</td>
-                            <td class="warning">{{ $item->representante }}</td>
-                            <td>
+                            <td class="success">{{ $item->ficha_no }}</td>
+                            <td class="success">{{ $item->isbn }}</td>
+                            <td class="warning">{{ $item->titulo }}</td>
+                            <td class="danger">{{ $item->autor }}</td>
+                            <td class="active">
 
-                                    <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" >
-                                        <i class="fa fa-trash fa-lg red" ></i>
-                                    </a>
+                                <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" >
+                                    <i class="fa fa-trash fa-lg red" ></i>
+                                </a>
 
                                 <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-default btn-xs pull-right" >
                                     <i class="fas fa-pencil-alt blue"></i>

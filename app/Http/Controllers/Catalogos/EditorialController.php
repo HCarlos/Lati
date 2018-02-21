@@ -44,7 +44,7 @@ class EditorialController extends Controller
             'representante' => $representante,
             'no' => $no,
         ]);
-        
+
         return redirect('index/'.$cat_id);
 
     }
