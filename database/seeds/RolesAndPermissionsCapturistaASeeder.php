@@ -17,12 +17,17 @@ class RolesAndPermissionsCapturistaASeeder extends Seeder
         // app()['cache']->forget('spatie.permission.cache');
 
         // create permissions
-        Permission::create(['name' => 'editar_registro']);
-        Permission::create(['name' => 'eliminar_registro']);
-        Permission::create(['name' => 'crear_registro']);
+
+        //Permission::query()->truncate();
+        Permission::create(['name' => 'editar_registro',]);
+        Permission::create(['name' => 'eliminar_registro',]);
+        Permission::create(['name' => 'crear_registro',]);
+        Permission::create(['name' => 'all',]);
 
         // create roles and assign existing permissions
-        $role = Role::create(['name' => 'capturista_a']);
+
+        //Role::query()->truncate();
+        $role = Role::create(['name' => 'capturista_a',]);
         $role->givePermissionTo('editar_registro');
         $role->givePermissionTo('eliminar_registro');
         $role->givePermissionTo('crear_registro');

@@ -26,11 +26,11 @@
                         @endif
                         <div class="form-group">
                             <label for = "editorial">Editorial</label>
-                            <input type="text" name="editorial" value="{{ old('editorial',$items->editorial) }}" />
+                            <input type="text" name="editorial" value="{{ old('editorial',$items->editorial) }}" readonly />
                         </div>
                         <div class="form-group">
                             <label for = "representante">Representante</label>
-                            <input type="text" name="representante"  value="{{ old('representante',$items->representante) }}" />
+                            <input type="text" name="representante"  value="{{ old('representante',$items->representante) }}" autofocus />
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Guardar

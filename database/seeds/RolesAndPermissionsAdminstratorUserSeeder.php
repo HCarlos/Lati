@@ -13,7 +13,7 @@ class RolesAndPermissionsAdminstratorUserSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'all']);
+        //Permission::create(['name' => 'all']);
 
         $role = Role::create([
             'name' => 'administrator',
@@ -22,10 +22,11 @@ class RolesAndPermissionsAdminstratorUserSeeder extends Seeder
             ]);
         $role->givePermissionTo('all');
 
-        Role::create([
+        $role = Role::create([
             'name' => 'user',
             'description' => 'user',
             'guard_name' => 'web',
             ]);
+        $role->givePermissionTo('editar_registro');
     }
 }

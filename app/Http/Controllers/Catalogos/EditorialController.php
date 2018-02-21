@@ -53,6 +53,8 @@ class EditorialController extends Controller
         $user = User::findOrFail($user_id);
         Editorial::create(['editorial' => $editorial, 'representante' => $representante, 'no' => $no]);
         $items = Editorial::all()->sortByDesc('id');
+
+        /*
         return view ('catalogos.side_bar_right',
             ['editorial' => $this->name,
                 'items' => $items,
@@ -61,6 +63,8 @@ class EditorialController extends Controller
                 'user' => $user
             ]
         );
+*/
+        return redirect('index/'.$cat_id);
 
     }
 
@@ -77,26 +81,38 @@ class EditorialController extends Controller
         $action     = $request->input('action');
         $user = User::find($user_id);
 
-        $validator = Validator::make($request->all(), [
+/*
+        $Editorial = Editorial::findOrFail($idItem);
+        if ($Editorial->editorial ==
+*/
+
+
+/*
+        $validator = request()->validate([
             'editorial' => "required|unique:editoriales,editorial|max:255",
         ]);
-
         if ($validator->fails()) {
             return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action)
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $Editorial = Editorial::find($idItem);
+*/
+
+
+        $Editorial = Editorial::findOrFail($idItem);
         $Editorial->editorial = $editorial;
         $Editorial->representante = $representante;
         $Editorial->no = $no;
-        //dd($Editorial);
         $Editorial->save();
 
+/*
+        $Edito = request()->all();
+        $Edito->update($Edito);
+*/
         $items = Editorial::all()->sortByDesc('id');
-
-        return view ('catalogos.side_bar_right',
+/*
+        return view ('/index/'.$cat_id,
             ['editorial' => $this->name,
                 'items' => $items,
                 'id' => $cat_id,
@@ -104,7 +120,8 @@ class EditorialController extends Controller
                 'user' => $user
             ]
         );
-
+*/
+        return redirect('index/'.$cat_id);
     }
 
     public function destroy($id=0,$idItem=0,$action=0){
