@@ -89,9 +89,10 @@ class EditorialController extends Controller
 
 
 
-        $validator = request()->validate([
+        $validator = Validator::make($request->all(), [
             'representante' => "max:150",
         ]);
+
         if ($validator->fails()) {
             return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action)
                 ->withErrors($validator)
