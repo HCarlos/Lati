@@ -30,6 +30,8 @@
                 <div class="panel panel-primary">
                     @yield('content_catalogo')
                     @yield('content_form_permisions')
+                    @yield('scripts')
+
                 </div>
             </div>
 

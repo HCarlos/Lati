@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['role:user']], function () {
 
         Route::get('catalogos/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@index')->name('catalogos/');
+        Route::get('catalogos/{id}', 'Catalogos\CatalogosController@ajaxIndex')->name('ajaxIndexCatList');
 
         /*
                 Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
