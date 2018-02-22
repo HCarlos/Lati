@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Ingresar</div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading ">Ingresar</div>
 
-                <div class="card-body">
+                <div class="panel-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
