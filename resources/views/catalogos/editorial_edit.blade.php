@@ -26,7 +26,7 @@
                         @endif
                         <div class="form-group">
                             <label for = "editorial">Editorial</label>
-                            <input type="text" name="editorial" value="{{ old('editorial',$items->editorial) }}" readonly />
+                            <input type="text" name="editorial" value="{{ old('editorial',$items->editorial) }}" />
                         </div>
                         <div class="form-group">
                             <label for = "representante">Representante</label>

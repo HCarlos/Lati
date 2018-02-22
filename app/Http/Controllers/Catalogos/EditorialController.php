@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Editorial;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\Rule;
 
 class EditorialController extends Controller
 {
@@ -61,6 +62,7 @@ class EditorialController extends Controller
         $action     = $request->input('action');
 
         $validator = Validator::make($request->all(), [
+            'editorial' => "required|unique:editoriales,editorial,$idItem|max:100",
             'representante' => "max:150",
         ]);
 
@@ -76,6 +78,7 @@ class EditorialController extends Controller
         $Editorial->no = $no;
         $Editorial->save();
 
+        //$edito->update($validator)
         return redirect('index/'.$cat_id);
     }
 

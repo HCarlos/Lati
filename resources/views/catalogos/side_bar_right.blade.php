@@ -5,8 +5,8 @@
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-default btn-xs pull-right" title="Agregar nuevo registro">
-                <i class="fa fa-plus-circle fa-lg green" aria-hidden="true"></i>
+            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs pull-right" title="Agregar nuevo registro">
+                <i class="fa fa-plus-circle "></i> Nuevo registro
             </a>
     </div>
 
@@ -32,11 +32,11 @@
                                 <td class="warning">{{ $item->representante }}</td>
                                 <td class="danger" width="100">
 
-                                        <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" >
+                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" title="Eliminar">
                                             <i class="fa fa-trash fa-lg red" ></i>
                                         </a>
 
-                                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-default btn-xs pull-right" >
+                                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar" >
                                         <i class="fas fa-pencil-alt blue"></i>
                                     </a>
 
@@ -71,11 +71,11 @@
                             <td class="danger">{{ $item->autor }}</td>
                             <td class="active">
 
-                                <a href="#" class="btn btn-default btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" >
+                                <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" title="Eliminar">
                                     <i class="fa fa-trash fa-lg red" ></i>
                                 </a>
 
-                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-default btn-xs pull-right" >
+                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                     <i class="fas fa-pencil-alt blue"></i>
                                 </a>
 
