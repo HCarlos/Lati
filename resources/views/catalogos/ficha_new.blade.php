@@ -25,15 +25,15 @@
                         @endif
                         <div class="form-group">
                             <label for = "fecha">Fecha</label>
-                            <input type="date" name="fecha" id="fecha" value="{{ old('fecha') }}" />
+                            {{ Form::date('fecha', \Carbon\Carbon::now(), ['id'=>'fecha']) }}
                         </div>
                         <div class="form-group">
                             <label for = "datos_fijos">Datos fijos</label>
-                            <input type="text" name="datos_fijos" id="datos_fijos" value="{{ old('datos_fijos') }}" />
+                            <input type="text" name="datos_fijos" id="datos_fijos" value="{{ old('datos_fijos') }}" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label for = "etiqueta_marc">Etiquetas</label>
-                            <textarea cols="100" rows="4" name="etiqueta_marc" id="etiqueta_marc">{{ old('etiqueta_marc') }}</textarea>
+                            <textarea cols="100" rows="4" name="etiqueta_marc" id="etiqueta_marc" class="form-control">{{ old('etiqueta_marc') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for = "isbn">ISBN</label>

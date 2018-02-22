@@ -13,7 +13,7 @@ class Ficha extends Model
 
     protected $table = 'fichas';
     protected $fillable = [
-        'ficha_no','fecha','fecha_mod','datos_fijos',
+        'fecha','fecha_mod','datos_fijos',
         'etiqueta_marc','tipo_material','isbn','titulo',
         'autor','clasificacion','status','no_coleccion',
         ];

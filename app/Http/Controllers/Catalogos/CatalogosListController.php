@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Editorial;
+use App\Models\Ficha;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +20,7 @@ class CatalogosListController extends Controller
                 $items = DB::table('editoriales')
                     ->orderBy('id','desc')
                     ->get();
+                $items = Editorial::all()->sortByDesc('id');
                 break;
             case 1:
                 $name  = "Carlos Hidalgo";
@@ -25,6 +28,7 @@ class CatalogosListController extends Controller
                 $items = DB::table('fichas')
                     ->orderBy('id','desc')
                     ->get();
+                $items = Ficha::all()->sortByDesc('id');
                 break;
 
         }

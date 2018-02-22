@@ -11,7 +11,7 @@
     </div>
 
     <div class="panel-body">
-                    <form method="post" action="{{ action('Catalogos\FichaController@update') }}">
+                    <form method="post" action="{{ action('Catalogos\FichaController@update',['oFichas'=>$items]) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
 

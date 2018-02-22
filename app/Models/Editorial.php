@@ -13,6 +13,6 @@ class Editorial extends Model
     protected $guard_name = 'web'; // or whatever guard you want to use
 
     protected $table = 'editoriales';
-    protected $fillable = ['editorial','no',];
+    protected $fillable = ['editorial','representante','no'];
 
 }

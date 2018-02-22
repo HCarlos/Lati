@@ -11,8 +11,6 @@ use Illuminate\Validation\Rule;
 
 class EditorialController extends Controller
 {
-    private	$name  = "Editoriales";
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,15 +19,12 @@ class EditorialController extends Controller
     public function store(Request $request)
     {
 
-        $editorial       = $request->input('editorial');
-        $representante = $request->input('representante');
-        $no = $request->input('no');
+        $data = $request->all();
+        $cat_id     = $data['cat_id'];
+        $idItem     = $data['idItem'];
+        $action     = $data['action'];
 
-        $cat_id     = $request->input('cat_id');
-        $idItem     = $request->input('idItem');
-        $action     = $request->input('action');
-
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($data, [
             'editorial' => "required|unique:editoriales,editorial|max:100",
             'representante' => "max:150",
         ]);
@@ -40,28 +35,23 @@ class EditorialController extends Controller
                 ->withInput();
         }
 
-        Editorial::create([
-            'editorial' => strtoupper($editorial),
-            'representante' => $representante,
-            'no' => $no,
-        ]);
+        $data['editorial'] = strtoupper($data['editorial']);
+        $data['representante'] = strtoupper($data['representante']);
+        Editorial::create($data);
 
         return redirect('index/'.$cat_id);
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Editorial $edi)
     {
 
-        $editorial       = $request->input('editorial');
-        $representante = $request->input('representante');
-        $no = $request->input('no');
+        $data = $request->all();
+        $cat_id     = $data['cat_id'];
+        $idItem     = $data['idItem'];
+        $action     = $data['action'];
 
-        $cat_id     = $request->input('cat_id');
-        $idItem     = $request->input('idItem');
-        $action     = $request->input('action');
-
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($data, [
             'editorial' => "required|unique:editoriales,editorial,$idItem|max:100",
             'representante' => "max:150",
         ]);
@@ -72,13 +62,10 @@ class EditorialController extends Controller
                 ->withInput();
         }
 
-        $Editorial = Editorial::findOrFail($idItem);
-        $Editorial->editorial = strtoupper($editorial);
-        $Editorial->representante = $representante;
-        $Editorial->no = $no;
-        $Editorial->save();
+        $data['editorial'] = strtoupper($data['editorial']);
+        $data['representante'] = strtoupper($data['representante']);
+        $edi->update($data);
 
-        //$edito->update($validator)
         return redirect('index/'.$cat_id);
     }
 
