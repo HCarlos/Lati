@@ -72,6 +72,9 @@ class RegisterController extends Controller
         ]);
         */
 
+       // return "Proceso Cerrado";
+
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -86,6 +89,8 @@ class RegisterController extends Controller
             ->attach($role);
 
         return $user;
+
+
 
     }
 }

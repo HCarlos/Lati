@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Catalogos;
 use App\Http\Controllers\Controller;
 use App\Models\Editorial;
 use App\Models\Ficha;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
@@ -19,32 +19,86 @@ class CatalogosListController extends Controller
         return view('datatable');
 
     }
+
     public function index($id = 0)
     {
         $name = "nothing";
         switch ($id) {
             case 0:
-                $name  = "Carlos Hidalgo";
+                $name = "Carlos Hidalgo";
                 $catit = "Catálogo de Editoriales";
                 $tableName = 'editoriales';
-                $items = Editorial::all()->sortByDesc('id');
+                $items = Editorial::all()->sortByDesc('id')->forPage(1,100);
                 break;
             case 1:
                 $name  = "Carlos Hidalgo";
                 $catit = "Catálogo de Fichas";
                 $tableName = 'fichas';
-                $items = Ficha::all()->sortByDesc('id');
-
-                $totalPaginas = $items->count();
-
-                //dd($items);
-
+                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
                 break;
-
         }
 
         $user = Auth::User();
+        return view ('catalogos.side_bar_right',
+            ['nombre' => $name,
+                'items' => $items,
+                'id' => $id,
+                'titulo_catalogo' => $catit,
+                'user' => $user,
+                'tableName'=>$tableName,
+            ]
+        );
+    }
 
+    public function indexSearch(Request $request)
+    {
+        $name = "nothing";
+        $search = trim($request->input('search'));
+        $id = $request->input('id');
+
+        // dd($search);
+        //dd($id);
+
+        switch ($id) {
+            case 0:
+                $name = "Carlos Hidalgo";
+                $catit = "Catálogo de Editoriales";
+                $tableName = 'editoriales';
+                $total = Editorial::all()->count();
+                if ($search !== ""){
+                    $items = Editorial::orWhere('editorial','LIKE',"%{$search}%")
+                        ->orWhere('representante','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                        //dd($items);
+                }else{
+                    $items = [];
+                }
+                break;
+            case 1:
+                $name  = "Carlos Hidalgo";
+                $catit = "Catálogo de Fichas";
+                $tableName = 'fichas';
+                $total = Ficha::all()->count();
+                if ($search !== ""){
+                    $items = Ficha::orWhere('titulo','LIKE',"%{$search}%")
+                        ->orWhere('autor','LIKE',"%{$search}%")
+                        ->orWhere('isbn','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                }else{
+                    $items = [];
+                }
+
+                break;
+        }
+
+        if ($total == count($items) ){
+            $items = [];
+        }
+
+
+        $user = Auth::User();
         return view ('catalogos.side_bar_right',
             ['nombre' => $name,
                 'items' => $items,

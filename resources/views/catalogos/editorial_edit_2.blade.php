@@ -1,9 +1,6 @@
-@extends('home')
-
-@section('content_form_permisions')
-<div class="panel panel-primary" id="frmNew0">
+<div class="panel panel-primary hide" id="frmEdit0" >
     <div class="panel-heading">
-            <span><strong>{{ ucwords($titulo) }}</strong> | Nuevo Registro
+            <span><strong>{{ ucwords($titulo) }}</strong> | Editando registro {{$idItem}}
                 <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id" }}">
                     Regresar
                 </a>
@@ -11,8 +8,9 @@
     </div>
 
     <div class="panel-body">
-                    <form method="post" action="{{ action('Catalogos\EditorialController@store') }}">
-                        {{ csrf_field()   }}
+                    <form method="post" action="{{ action('Catalogos\EditorialController@update',['editorial'=>$items]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -25,11 +23,11 @@
                         @endif
                         <div class="form-group">
                             <label for = "editorial">Editorial</label>
-                            <input type="text" name="editorial" value="" />
+                            <input type="text" name="editorial" value="{{ old('editorial',$items->editorial) }}" />
                         </div>
                         <div class="form-group">
                             <label for = "representante">Representante</label>
-                            <input type="text" name="representante"  value="" />
+                            <input type="text" name="representante"  value="{{ old('representante',$items->representante) }}" autofocus />
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Guardar
@@ -44,10 +42,9 @@
                         <input type="hidden" name="idItem" value="{{$idItem}}" />
                         <input type="hidden" name="nombre" value="{{$nombre}}" />
                         <input type="hidden" name="action" value="{{$action}}" />
-                        <input type="hidden" name="no" value="0" />
+                        <input type="hidden" name="no" value="0{{$user->no}}" />
 
                     </form>
     </div>
 </div>
-@endsection
 

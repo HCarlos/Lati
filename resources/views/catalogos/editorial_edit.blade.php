@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('content_form_permisions')
-
+<div class="panel panel-primary" id="frmEdit0">
     <div class="panel-heading">
             <span><strong>{{ ucwords($titulo) }}</strong> | Editando registro {{$idItem}}
                 <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id" }}">
@@ -49,5 +49,6 @@
 
                     </form>
     </div>
+</div>
 @endsection
 

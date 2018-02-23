@@ -13,3 +13,15 @@
 .margen-izquierdo-1em{
 	margin-left:1em; 
 }
+
+.searchNavBar {
+	width: 130px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100%
+input[name='search']:focus {
+	width: 100%;
+}
+*/

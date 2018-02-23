@@ -20,7 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/index/{id?}','Catalogos\CatalogosListController@index')->name('listItem');
+    Route::get('/index/{id}/','Catalogos\CatalogosListController@index')->name('listItem');
+    Route::post('/catalogo/search/','Catalogos\CatalogosListController@indexSearch')->name('listItemSearch');
     Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
     Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 

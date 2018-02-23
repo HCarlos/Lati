@@ -27,13 +27,8 @@
             </div>
 
             <div class="col-md-9">
-                <div class="panel panel-primary">
-                    @yield('styles')
                     @yield('content_catalogo')
                     @yield('content_form_permisions')
-                    @yield('scripts')
-
-                </div>
             </div>
 
         </div>

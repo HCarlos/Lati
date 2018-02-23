@@ -1,18 +1,26 @@
 @extends('home')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
-    {{--<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" type="text/css">--}}
+<link href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css" rel="stylesheet"/>
+{{--<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" type="text/css">--}}
 @endsection
 
 @section('content_catalogo')
-
+<div class="panel panel-primary" id="catalogosList0">
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs pull-right" title="Agregar nuevo registro">
-                <i class="fa fa-plus-circle "></i> Nuevo registro
-            </a>
+
+        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" title="Agregar nuevo registro" style="margin-left: 2em;">
+            <i class="fa fa-plus-circle "></i> Nuevo registro
+        </a>
+
+        <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
+            {{ csrf_field() }}
+                <input type="text" class="form-control form-control-xs" name="search" placeholder="buscar..." style="height: 2em;">
+            <input type="hidden" name="id" value="{{$id}}"/>
+            <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-filter"></i></button>
+        </form>
     </div>
 
     <div class="panel-body">
@@ -112,58 +120,58 @@
 
     </div>
 
+    {{--@include('catalogos.editorial_edit_2')--}}
+
 @endsection
 
-
 @section('scripts')
-    {{--<script src="{{ asset('js/jquery-1.12.4.js') }}"></script>--}}
-    <script src="{{ asset('assets/js/jquery-2.0.3.min.js') }}"></script>
-    {{--<script src="{{ asset('js/datatables.min.js') }}"></script>--}}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
-    <script>
-        jQuery(function($) {
-            $(document).ready(function() {
+{{--<script src="{{ asset('js/jquery-1.12.4.js') }}"></script>--}}
+<script src="{{ asset('assets/js/jquery-2.0.3.min.js') }}"></script>
+{{--<script src="{{ asset('js/datatables.min.js') }}"></script>--}}
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+<script>
+    jQuery(function($) {
+        $(document).ready(function() {
 
-                $("#preloaderLocal").hide();
-                $('#{{ $tableName}}').removeClass('hide');
+            $("#preloaderLocal").hide();
+            $('#{{ $tableName}}').removeClass('hide');
 
-                var nCols = $('#{{ $tableName}}').find("tbody > tr:first td").length;
-                var aCol = [];
+            var nCols = $('#{{ $tableName}}').find("tbody > tr:first td").length;
+            var aCol = [];
 
-                for (i = 0; i < nCols - 1; i++) {
-                    aCol[i] = {};
-                }
-                aCol[nCols - 1] = {"sortable": false};
+            for (i = 0; i < nCols - 1; i++) {
+                aCol[i] = {};
+            }
+            aCol[nCols - 1] = {"sorting": false};
 
-                var oTable = $('#{{ $tableName}}').dataTable({
-                    "pagingType": "full_numbers",
-                    "language": {
-                        "lengthMenu": "_MENU_ registros por página",
-                        "paginate": {
-                            "first": "<<",
-                            "last": ">>",
-                            "previous": "<",
-                            "next": ">"
-                        },
-                        "search": "Buscar",
-                        "processing": "Procesando...",
-                        "loadingRecords": "Cargando...",
-                        "zeroRecords": "No hay registros",
-                        "info": "_START_ - _END_ de _TOTAL_ registros",
-                        "infoEmpty": "No existen datos",
-                        "infoFiltered": ""
+            var oTable = $('#{{ $tableName}}').dataTable({
+                "language": {
+                    "lengthMenu": "_MENU_ registros por página",
+                    "paginate": {
+                        "first": "<<",
+                        "last": ">>",
+                        "previous": "<",
+                        "next": ">"
                     },
-                    "aSorting": [[0, "desc"]],
-                    "oColumns": aCol,
-                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                    "retrieve": true,
-                    "destroy": false
-                });
-
-                oTable.fnDraw();
-
-
+                    "search": "Buscar",
+                    "processing": "Procesando...",
+                    "loadingRecords": "Cargando...",
+                    "zeroRecords": "No hay registros",
+                    "info": "_START_ - _END_ de _TOTAL_ registros",
+                    "infoEmpty": "No existen datos",
+                    "infoFiltered": ""
+                },
+                "sorting": [[0, "desc"]],
+                "columns": aCol,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                "retrieve": true,
+                "destroy": false
             });
+
+            // oTable.fnDraw();
+
+            // alert(nCols);
         });
-    </script>
+    });
+</script>
 @endsection
