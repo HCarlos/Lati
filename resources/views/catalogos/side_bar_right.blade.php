@@ -1,5 +1,10 @@
 @extends('home')
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+    {{--<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" type="text/css">--}}
+@endsection
+
 @section('content_catalogo')
 
     <div class="panel-heading">
@@ -11,27 +16,32 @@
     </div>
 
     <div class="panel-body">
+
+        <div class="fa-2x" id="preloaderLocal">
+            <i class="fa fa-cog fa-spin"></i> Cargado datos...
+        </div>
         @switch($id)
 
             @case(0)
                 @if(Auth::user()->hasRole('user'))
-
-                    <table id="{{ $tableName}}"  class="table table-hover table-bordered table-striped datatable" style="width:100%" >
+                <div class="dataTables_wrapper" role="grid">
+                    @if ($items)
+                    <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
                         <thead>
-                        <tr>
-                            <th class="active">ID</th>
-                            <th class="success">EDITORIAL</th>
-                            <th class="warning">REPRESENTANTE</th>
-                            <th class="active"></th>
+                        <tr role="row">
+                            <th aria-label="id" style="width: 80px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
+                            <th aria-label="editorial" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">Editorial</th>
+                            <th aria-label="representante" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Representante</th>
+                            <th aria-label="" style="width: 200px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody aria-relevant="all" aria-live="polite" role="alert">
                         @foreach ($items as $item)
                             <tr>
-                                <td class="active">{{ $item->id }}</td>
-                                <td class="success">{{ $item->editorial }}</td>
-                                <td class="warning">{{ $item->representante }}</td>
-                                <td class="danger" width="100">
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->editorial }}</td>
+                                <td>{{ $item->representante }}</td>
+                                <td width="100">
 
                                         <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" title="Eliminar">
                                             <i class="fa fa-trash fa-lg red" ></i>
@@ -45,47 +55,55 @@
                             </tr>
                         @endforeach
                         </tbody>
-
                     </table>
+                    @else
+                        <div class="alert alert-danger" role="alert">No se encontraron datos</div>
+                    @endif
+                </div>
                 @endif
             @break;
             @case(1)
             @if(Auth::user()->hasRole('user'))
-                <table id="{{ $tableName}}" class="table table-hover table-bordered table-striped datatable" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th class="active">ID</th>
-                        <th class="success">NO</th>
-                        <th class="success">ISB</th>
-                        <th class="warning">TITULO</th>
-                        <th class="danger">AUTOR</th>
-                        <th class="active" width="100"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($items as $item)
-                        <tr>
-                            <td class="active">{{ $item->id }}</td>
-                            <td class="success">{{ $item->ficha_no }}</td>
-                            <td class="success">{{ $item->isbn }}</td>
-                            <td class="warning">{{ $item->titulo }}</td>
-                            <td class="danger">{{ $item->autor }}</td>
-                            <td class="active">
+                <div class="dataTables_wrapper" role="grid">
+                @if ($items)
+                        <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
+                            <thead>
+                            <tr role="row">
+                                <th aria-label="id" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
+                                <th aria-label="ficha_no" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">No</th>
+                                <th aria-label="isbn" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">ISBN</th>
+                                <th aria-label="titulo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">TÍTULO</th>
+                                <th aria-label="autor" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">AUTOR</th>
+                                <th aria-label="" style="width: 100px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
+                            </tr>
+                            </thead>
+                            <tbody aria-relevant="all" aria-live="polite" role="alert">
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->ficha_no }}</td>
+                                    <td>{{ $item->isbn }}</td>
+                                    <td>{{ $item->titulo }}</td>
+                                    <td>{{ $item->autor }}</td>
+                                    <td width="100">
 
-                                <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" title="Eliminar">
-                                    <i class="fa fa-trash fa-lg red" ></i>
-                                </a>
+                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" title="Eliminar">
+                                            <i class="fa fa-trash fa-lg red" ></i>
+                                        </a>
 
-                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
-                                    <i class="fas fa-pencil-alt blue"></i>
-                                </a>
+                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                            <i class="fas fa-pencil-alt blue"></i>
+                                        </a>
 
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-
-                </table>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                @else
+                    <div class="alert alert-danger" role="alert">No se encontraron datos</div>
+                @endif
+                </div>
 
             @endif
             @break;
@@ -98,42 +116,54 @@
 
 
 @section('scripts')
+    {{--<script src="{{ asset('js/jquery-1.12.4.js') }}"></script>--}}
     <script src="{{ asset('assets/js/jquery-2.0.3.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.js') }}"></script>
+    {{--<script src="{{ asset('js/datatables.min.js') }}"></script>--}}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
     <script>
         jQuery(function($) {
-            var nCols = $('#{{ $tableName}}').find("tbody > tr:first td").length;
-            var aCol = [];
+            $(document).ready(function() {
 
-            for(i=0;i<nCols-1;i++){
-                aCol[i] = {};
-            }
-            aCol[nCols-1] = { "bSortable": false };
+                $("#preloaderLocal").hide();
+                $('#{{ $tableName}}').removeClass('hide');
 
-            var oTable = $('#{{ $tableName}}').dataTable({
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ registros por página",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
+                var nCols = $('#{{ $tableName}}').find("tbody > tr:first td").length;
+                var aCol = [];
+
+                for (i = 0; i < nCols - 1; i++) {
+                    aCol[i] = {};
+                }
+                aCol[nCols - 1] = {"sortable": false};
+
+                var oTable = $('#{{ $tableName}}').dataTable({
+                    "pagingType": "full_numbers",
+                    "language": {
+                        "lengthMenu": "_MENU_ registros por página",
+                        "paginate": {
+                            "first": "<<",
+                            "last": ">>",
+                            "previous": "<",
+                            "next": ">"
+                        },
+                        "search": "Buscar",
+                        "processing": "Procesando...",
+                        "loadingRecords": "Cargando...",
+                        "zeroRecords": "No hay registros",
+                        "info": "_START_ - _END_ de _TOTAL_ registros",
+                        "infoEmpty": "No existen datos",
+                        "infoFiltered": ""
                     },
-                    "sSearch": "Buscar",
-                    "sProcessing":"Procesando...",
-                    "sLoadingRecords":"Cargando...",
-                    "sZeroRecords": "No hay registros",
-                    "sInfo": "_START_ - _END_ de _TOTAL_ registros",
-                    "sInfoEmpty": "No existen datos",
-                    "sInfoFiltered": "(De _MAX_ registros)"
-                },
-                "aaSorting": [[ 0, "desc" ]],
-                "aoColumns": aCol,
-                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                "bRetrieve": true,
-                "bDestroy": false
+                    "aSorting": [[0, "desc"]],
+                    "oColumns": aCol,
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    "retrieve": true,
+                    "destroy": false
+                });
+
+                oTable.fnDraw();
+
+
             });
-
-
         });
     </script>
 @endsection
