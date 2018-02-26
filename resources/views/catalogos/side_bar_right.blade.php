@@ -17,9 +17,9 @@
 
         <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
             {{ csrf_field() }}
-                <input type="text" class="form-control form-control-xs" name="search" placeholder="buscar..." style="height: 2em;">
+                <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="buscar..." style="height: 2em !important; line-height: 2em !important;">
             <input type="hidden" name="id" value="{{$id}}"/>
-            <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-filter"></i></button>
+            <button type="submit" class="btn btn-info btn-sm margen-izquierdo-1em "><i class="fas fa-search"></i></button>
         </form>
     </div>
 

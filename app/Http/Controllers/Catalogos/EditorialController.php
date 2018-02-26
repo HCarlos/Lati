@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Editorial;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Validation\Rule;
+use App\Http\Controllers\Funciones\FuncionesController;
 
 class EditorialController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,8 +36,12 @@ class EditorialController extends Controller
                 ->withInput();
         }
 
-        $data['editorial'] = strtoupper($data['editorial']);
-        $data['representante'] = strtoupper($data['representante']);
+        $F = (new FuncionesController);
+        $editorial = $F->convierteMayusculas($data['editorial']);
+        $representante = $F->convierteMayusculas($data['representante']);
+
+        $data['editorial'] = $editorial;
+        $data['representante'] = $representante;
         Editorial::create($data);
 
         return redirect('index/'.$cat_id);
@@ -62,8 +67,12 @@ class EditorialController extends Controller
                 ->withInput();
         }
 
-        $data['editorial'] = strtoupper($data['editorial']);
-        $data['representante'] = strtoupper($data['representante']);
+        $F = (new FuncionesController);
+        $editorial = $F->convierteMayusculas($data['editorial']);
+        $representante = $F->convierteMayusculas($data['representante']);
+
+        $data['editorial'] = $editorial;
+        $data['representante'] = $representante;
         $edi->update($data);
 
         return redirect('index/'.$cat_id);

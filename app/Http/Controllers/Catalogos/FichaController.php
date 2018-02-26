@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\Funciones\FuncionesController;
 
 class FichaController extends Controller
 {
-    private	$name  = "Fichas";
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,7 +37,10 @@ class FichaController extends Controller
                 ->withInput();
         }
 
+        $F = (new FuncionesController);
         $data["fecha_mod"] = NOW();
+        $data["titulo"] = $F->convierteMayusculas($data['titulo']);
+        $data["autor"] = $F->convierteMayusculas($data['autor']);
         Ficha::create($data);
 
         return redirect('index/'.$cat_id);
@@ -65,7 +67,11 @@ class FichaController extends Controller
                 ->withInput();
         }
 
-         $data["fecha_mod"] = NOW();
+        $F = (new FuncionesController);
+        $data["fecha_mod"] = NOW();
+        $data["titulo"] = $F->convierteMayusculas($data['titulo']);
+        $data["autor"] = $F->convierteMayusculas($data['autor']);
+
          $oFicha->update($data);
 
         return redirect('index/'.$cat_id);

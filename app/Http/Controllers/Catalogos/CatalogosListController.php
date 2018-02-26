@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
@@ -111,6 +112,7 @@ class CatalogosListController extends Controller
     }
 
     public function ajaxIndex($id=0){
+       // alert($id);
         switch ($id) {
             case 0:
                 $items = Editorial::all()->sortByDesc('id');
@@ -119,9 +121,14 @@ class CatalogosListController extends Controller
                 $items = Ficha::all()->sortByDesc('id');
                 break;
         }
+        $dataTable = Datatables::of($items)->make(true);
+       // dd($items);
+//        return Datatables::of($items)
+//            ->make(true);
 
-        return Datatables::of($items)
-            ->make(true);
+//        return $items;
+        return Response::json(['data' => $items, 'dataTable'=>$dataTable, 'status' => '200'], 200);
+
     }
 
 }
