@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use Illuminate\Http\Request;
@@ -57,8 +58,8 @@ class CatalogosListController extends Controller
         $search = trim($request->input('search'));
         $id = $request->input('id');
 
-        // dd($search);
-        //dd($id);
+        $F = (new FuncionesController);
+        $search = $F->convierteMayusculas($search);
 
         switch ($id) {
             case 0:
