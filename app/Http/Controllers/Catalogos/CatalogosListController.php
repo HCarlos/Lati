@@ -57,9 +57,8 @@ class CatalogosListController extends Controller
         $name = "nothing";
         $search = trim($request->input('search'));
         $id = $request->input('id');
-
         $F = (new FuncionesController);
-        $search = $F->convierteMayusculas($search);
+        $search = $F->toMayus($search);
 
         switch ($id) {
             case 0:
@@ -99,7 +98,6 @@ class CatalogosListController extends Controller
             $items = [];
         }
 
-
         $user = Auth::User();
         return view ('catalogos.side_bar_right',
             ['nombre' => $name,
@@ -113,7 +111,6 @@ class CatalogosListController extends Controller
     }
 
     public function ajaxIndex($id=0){
-       // alert($id);
         switch ($id) {
             case 0:
                 $items = Editorial::all()->sortByDesc('id',1);
@@ -124,7 +121,6 @@ class CatalogosListController extends Controller
         }
         $dataTable = Datatables::of($items)->make(true);
         return Response::json(['data' => $items, 'dataTable'=>$dataTable, 'status' => '200'], 200);
-
     }
 
 }

@@ -39,8 +39,8 @@ class FichaController extends Controller
 
         $F = (new FuncionesController);
         $data["fecha_mod"] = NOW();
-        $data["titulo"] = $F->convierteMayusculas($data['titulo']);
-        $data["autor"] = $F->convierteMayusculas($data['autor']);
+        $data["titulo"] = $F->toMayus($data['titulo']);
+        $data["autor"] = $F->toMayus($data['autor']);
         Ficha::create($data);
 
         return redirect('index/'.$cat_id);
@@ -69,8 +69,8 @@ class FichaController extends Controller
 
         $F = (new FuncionesController);
         $data["fecha_mod"] = NOW();
-        $data["titulo"] = $F->convierteMayusculas($data['titulo']);
-        $data["autor"] = $F->convierteMayusculas($data['autor']);
+        $data["titulo"] = $F->toMayus($data['titulo']);
+        $data["autor"] = $F->toMayus($data['autor']);
 
          $oFicha->update($data);
 

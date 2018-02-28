@@ -37,8 +37,8 @@ class EditorialController extends Controller
         }
 
         $F = (new FuncionesController);
-        $editorial = $F->convierteMayusculas($data['editorial']);
-        $representante = $F->convierteMayusculas($data['representante']);
+        $editorial = $F->toMayus($data['editorial']);
+        $representante = $F->toMayus($data['representante']);
 
         $data['editorial'] = $editorial;
         $data['representante'] = $representante;
@@ -68,8 +68,8 @@ class EditorialController extends Controller
         }
 
         $F = (new FuncionesController);
-        $editorial = $F->convierteMayusculas($data['editorial']);
-        $representante = $F->convierteMayusculas($data['representante']);
+        $editorial = $F->toMayus($data['editorial']);
+        $representante = $F->toMayus($data['representante']);
 
         $data['editorial'] = $editorial;
         $data['representante'] = $representante;

@@ -12,7 +12,7 @@ class FuncionesController extends Controller
         $this->middleware('auth');
     }
     //
-    public function convierteMayusculas($str=""){
+    public function toMayus($str=""){
         return strtr(strtoupper($str), "áéíóúñ", "ÁÉÍÓÚÑ");
     }
 }
