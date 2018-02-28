@@ -29,7 +29,7 @@ $(document).ready(function() {
             $(function() {
                 $.ajax({
                     method: "GET",
-                    url: "/catajax/"+0,
+                    url: "/catajax/"+1,
                     data: Data
                 })
                     .done(function( response ) {
