@@ -123,11 +123,6 @@ class CatalogosListController extends Controller
                 break;
         }
         $dataTable = Datatables::of($items)->make(true);
-       // dd($items);
-//        return Datatables::of($items)
-//            ->make(true);
-
-//        return $items;
         return Response::json(['data' => $items, 'dataTable'=>$dataTable, 'status' => '200'], 200);
 
     }

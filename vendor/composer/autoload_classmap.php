@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Catalogos\\EditorialController' => $baseDir . '/app/Http/Controllers/Catalogos/EditorialController.php',
     'App\\Http\\Controllers\\Catalogos\\FichaController' => $baseDir . '/app/Http/Controllers/Catalogos/FichaController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\Funciones\\FuncionesController' => $baseDir . '/app/Http/Controllers/Funciones/FuncionesController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

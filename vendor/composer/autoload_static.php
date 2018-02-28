@@ -354,6 +354,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'App\\Http\\Controllers\\Catalogos\\EditorialController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/EditorialController.php',
         'App\\Http\\Controllers\\Catalogos\\FichaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Catalogos/FichaController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Funciones\\FuncionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/FuncionesController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
