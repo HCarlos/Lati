@@ -116,10 +116,10 @@ class CatalogosListController extends Controller
        // alert($id);
         switch ($id) {
             case 0:
-                $items = Editorial::all()->sortByDesc('id');
+                $items = Editorial::all()->sortByDesc('id',1);
                 break;
             case 1:
-                $items = Ficha::all()->sortByDesc('id');
+                $items = Ficha::all()->sortByDesc('id', 1);
                 break;
         }
         $dataTable = Datatables::of($items)->make(true);
