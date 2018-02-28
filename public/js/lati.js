@@ -2,8 +2,6 @@
 $(document).ready(function() {
 
     $("#preloaderGlobal").hide();
-
-
     if ( $(".btnAction2") ){
         $('.btnAction2').on('click', function(event) {
             event.preventDefault();
@@ -35,7 +33,6 @@ $(document).ready(function() {
                     data: Data
                 })
                     .done(function( response ) {
-                        //window.location.href = '/index/'+2;
                         var dat = response.data[5];
                         alert(dat.editorial);
                         var datt = response.dataTable.original.data[5];
@@ -44,5 +41,4 @@ $(document).ready(function() {
             });
         });
     }
-
 });

@@ -127,7 +127,7 @@
 @section('scripts')
 {{--<script src="{{ asset('js/jquery-1.12.4.js') }}"></script>--}}
 <script src="{{ asset('assets/js/jquery-2.0.3.min.js') }}"></script>
-{{--<script src="{{ asset('js/datatables.min.js') }}"></script>--}}
+<script src="{{ asset('js/datatables.min.js') }}"></script>
 <script src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 <script>
     jQuery(function($) {
@@ -139,9 +139,7 @@
             var nCols = $('#{{ $tableName}}').find("tbody > tr:first td").length;
             var aCol = [];
 
-            for (i = 0; i < nCols - 1; i++) {
-                aCol[i] = {};
-            }
+            for (i = 0; i < nCols - 1; i++) {aCol[i] = {};}
             aCol[nCols - 1] = {"sorting": false};
 
             var oTable = $('#{{ $tableName}}').dataTable({
@@ -168,9 +166,6 @@
                 "destroy": false
             });
 
-            // oTable.fnDraw();
-
-            // alert(nCols);
         });
     });
 </script>

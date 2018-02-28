@@ -59,6 +59,7 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
+                    <span><i class="fa fa-refresh fa-spin fa-1x fa-fw green" id="preloaderGlobal"></i></span>
                 </button>
 
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
