@@ -34,9 +34,9 @@ $(document).ready(function() {
                 })
                     .done(function( response ) {
                         var dat = response.data[5];
-                        alert(dat.editorial);
+                        alert(dat.titulo);
                         var datt = response.dataTable.original.data[5];
-                        alert(datt.editorial);
+                        alert(datt.titulo);
                     });
             });
         });

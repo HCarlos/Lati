@@ -116,7 +116,11 @@ class CatalogosListController extends Controller
                 $items = Editorial::all()->sortByDesc('id',1);
                 break;
             case 1:
-                $items = Ficha::all()->sortByDesc('id', 1);
+                $items = Ficha::select('id','titulo', 'autor')
+                    ->orderBy('id','desc')
+                    ->get();
+//                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
+//                $items = Ficha::all()->forPage(1,10);
                 break;
         }
         $dataTable = Datatables::of($items)->make(true);
