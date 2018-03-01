@@ -30,13 +30,21 @@ class CatalogosListController extends Controller
                 $name = "Carlos Hidalgo";
                 $catit = "Catálogo de Editoriales";
                 $tableName = 'editoriales';
-                $items = Editorial::all()->sortByDesc('id')->forPage(1,100);
+//                $items = Editorial::all()->sortByDesc('id')->forPage(1,100);
+                $items = Editorial::select('id','editorial','representante')
+                    ->orderBy('id','desc')
+                    ->get()
+                    ->forPage(1,100);
                 break;
             case 1:
                 $name  = "Carlos Hidalgo";
                 $catit = "Catálogo de Fichas";
                 $tableName = 'fichas';
-                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
+//                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
+                $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
+                    ->orderBy('id','desc')
+                    ->get()
+                    ->forPage(1,100);
                 break;
         }
 
@@ -67,7 +75,8 @@ class CatalogosListController extends Controller
                 $tableName = 'editoriales';
                 $total = Editorial::all()->count();
                 if ($search !== ""){
-                    $items = Editorial::orWhere('editorial','LIKE',"%{$search}%")
+                    $items = Editorial::select('id','editorial','representante')
+                        ->orWhere('editorial','LIKE',"%{$search}%")
                         ->orWhere('representante','LIKE',"%{$search}%")
                         ->get()
                         ->sortByDesc('id');
@@ -82,7 +91,8 @@ class CatalogosListController extends Controller
                 $tableName = 'fichas';
                 $total = Ficha::all()->count();
                 if ($search !== ""){
-                    $items = Ficha::orWhere('titulo','LIKE',"%{$search}%")
+                    $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
+                        ->orWhere('titulo','LIKE',"%{$search}%")
                         ->orWhere('autor','LIKE',"%{$search}%")
                         ->orWhere('isbn','LIKE',"%{$search}%")
                         ->get()
