@@ -23,21 +23,29 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="form-group">
-                            <label for = "editorial">Editorial</label>
-                            <input type="text" name="editorial" value="" />
+                        <div class="form-group row">
+                            <label for = "editorial" class="col-md-2 col-form-label text-md-right">Editorial</label>
+                            <div class="col-md-10">
+                                <input type="text" name="editorial" value="" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "representante">Representante</label>
-                            <input type="text" name="representante"  value="" />
+                        <div class="form-group row">
+                            <label for = "representante" class="col-md-2 col-form-label text-md-right">Representante</label>
+                            <div class="col-md-10">
+                                <input type="text" name="representante"  value="" class="col-md-12"/>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            Guardar
-                        </button>
-
-                        <a class="btn btn-info pull-right" href="{{ "/index/$id" }}">
-                            Regresar
-                        </a>
+                        <div>
+                            <label class="col-md-2 col-form-label text-md-right"></label>
+                            <div class="col-md-8" >
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                            <a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">
+                                Regresar
+                            </a>
+                        </div>
 
                         <input type="hidden" name="user_id" value="{{$user->id}}" />
                         <input type="hidden" name="cat_id" value="{{$id}}" />

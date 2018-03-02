@@ -24,29 +24,41 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="form-group">
-                            <label for = "nombre_completo">Nombre Completo</label>
-                            <input type="text" name="nombre_completo" value="{{ old('nombre_completo',$items->nombre_completo) }}" required autofocus />
+                        <div class="form-group row">
+                            <label for = "nombre_completo" class="col-md-2 col-form-label text-md-right">Nombre Completo</label>
+                            <div class="col-md-10">
+                                <input type="text" name="nombre_completo" value="{{ old('nombre_completo',$items->nombre_completo) }}" class="col-md-12" required autofocus />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "twitter">Twitter</label>
-                            <input type="text" name="twitter"  value="{{ old('twitter',$items->twitter) }}"  />
+                        <div class="form-group row">
+                            <label for = "twitter" class="col-md-2 col-form-label text-md-right">Twitter</label>
+                            <div class="col-md-10">
+                                <input type="text" name="twitter"  value="{{ old('twitter',$items->twitter) }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "facebook">Facebook</label>
-                            <input type="text" name="facebook"  value="{{ old('facebook',$items->facebook) }}"  />
+                        <div class="form-group row">
+                            <label for = "facebook" class="col-md-2 col-form-label text-md-right">Facebook</label>
+                            <div class="col-md-10">
+                                <input type="text" name="facebook"  value="{{ old('facebook',$items->facebook) }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "instagram">Instagram</label>
-                            <input type="text" name="instagram"  value="{{ old('instagram',$items->instagram) }}"  />
+                        <div class="form-group row">
+                            <label for = "instagram" class="col-md-2 col-form-label text-md-right">Instagram</label>
+                            <div class="col-md-10">
+                                <input type="text" name="instagram"  value="{{ old('instagram',$items->instagram) }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            Guardar
-                        </button>
-
-                        <a class="btn btn-info pull-right" href="{{ "/index/$id" }}">
-                            Regresar
-                        </a>
+                        <div>
+                            <label class="col-md-2 col-form-label text-md-right"></label>
+                            <div class="col-md-8" >
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                            <a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">
+                                Regresar
+                            </a>
+                        </div>
 
                         <input type="hidden" name="user_id" value="{{$user->id}}" />
                         <input type="hidden" name="cat_id" value="{{$id}}" />

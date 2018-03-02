@@ -23,50 +23,72 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="form-group">
-                            <label for = "fecha">Fecha</label>
-                            {{ Form::date('fecha', \Carbon\Carbon::now(), ['id'=>'fecha']) }}
+                        <div class="form-group row">
+                            <label for = "fecha" class="col-md-2 col-form-label text-md-right">Fecha</label>
+                            <div class="col-md-10">
+                                {{ Form::date('fecha', \Carbon\Carbon::now(), ['id'=>'fecha','class'=>'col-md-3']) }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "datos_fijos">Datos fijos</label>
-                            <input type="text" name="datos_fijos" id="datos_fijos" value="{{ old('datos_fijos') }}" class="form-control" />
+                        <div class="form-group row">
+                            <label for = "datos_fijos" class="col-md-2 col-form-label text-md-right">Datos fijos</label>
+                            <div class="col-md-10">
+                                <input type="text" name="datos_fijos" id="datos_fijos" value="{{ old('datos_fijos') }}"  class="col-md-12" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "etiqueta_marc">Etiquetas</label>
-                            <textarea cols="100" rows="4" name="etiqueta_marc" id="etiqueta_marc" class="form-control">{{ old('etiqueta_marc') }}</textarea>
+                        <div class="form-group row">
+                            <label for = "etiqueta_marc" class="col-md-2 col-form-label text-md-right">Etiquetas</label>
+                            <div class="col-md-10">
+                                <textarea rows="6" name="etiqueta_marc" id="etiqueta_marc" class="col-md-12">{{ old('etiqueta_marc') }}</textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "isbn">ISBN</label>
-                            <input type="text" name="isbn" id="isbn" value="{{ old('isbn') }}" />
+                        <div class="form-group row">
+                            <label for = "isbn" class="col-md-2 col-form-label text-md-right">ISBN</label>
+                            <div class="col-md-10">
+                                <input type="text" name="isbn" id="isbn" value="{{ old('isbn') }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "titulo">Título</label>
-                            <input type="text" name="titulo" id="titulo" value="{{ old('titulo') }}" />
+                        <div class="form-group row">
+                            <label for = "titulo" class="col-md-2 col-form-label text-md-right">Título</label>
+                            <div class="col-md-10">
+                                <input type="text" name="titulo" id="titulo" value="{{ old('titulo') }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "autor">Autor</label>
-                            <input type="text" name="autor" id="autor"  value="{{ old('autor') }}" />
+                        <div class="form-group row">
+                            <label for = "autor" class="col-md-2 col-form-label text-md-right">Autor</label>
+                            <div class="col-md-10">
+                                <input type="text" name="autor" id="autor"  value="{{ old('autor') }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "clasificacion">Clasificación</label>
-                            <input type="text" name="clasificacion" id="clasificacion"  value="{{ old('clasificacion') }}" />
+                        <div class="form-group row">
+                            <label for = "clasificacion" class="col-md-2 col-form-label text-md-right">Clasificación</label>
+                            <div class="col-md-10">
+                                <input type="text" name="clasificacion" id="clasificacion"  value="{{ old('clasificacion') }}" class="col-md-12"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "status">Status</label>
-                            {{ Form::select('status', array('M'=>'M', 'A'=>'A'), old('status'), ['id' => 'status']) }}
+                        <div class="form-group row">
+                            <label for = "status" class="col-md-2 col-form-label text-md-right">Status</label>
+                            <div class="col-md-10">
+                                {{ Form::select('status', array('M'=>'M', 'A'=>'A'), old('status'), ['id' => 'status','class' => 'col-md-2']) }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for = "no_coleccion">No. Colección</label>
-                            <input type="number" name="no_coleccion" id="no_coleccion"  value="{{ old('clasificacion',0) }}" min="0" max="99" />
+                        <div class="form-group row">
+                            <label for = "no_coleccion" class="col-md-2 col-form-label text-md-right">No. Colección</label>
+                            <div class="col-md-10">
+                                <input type="number" name="no_coleccion" id="no_coleccion"  value="{{ old('clasificacion',0) }}" min="0" max="99" class="col-md-2" />
+                            </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            Guardar
-                        </button>
-
-                        <a class="btn btn-info pull-right" href="{{ "/index/$id" }}">
-                            Regresar
-                        </a>
+                        <div>
+                            <label class="col-md-2 col-form-label text-md-right"></label>
+                            <div class="col-md-8" >
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                </button>
+                            </div>
+                            <a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">
+                                Regresar
+                            </a>
+                        </div>
 
                         <input type="hidden" name="user_id" value="{{$user->id}}" />
                         <input type="hidden" name="cat_id" value="{{$id}}" />
