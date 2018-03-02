@@ -43,7 +43,6 @@
                         <input type="hidden" name="user_id" value="{{$user->id}}" />
                         <input type="hidden" name="cat_id" value="{{$id}}" />
                         <input type="hidden" name="idItem" value="{{$idItem}}" />
-                        <input type="hidden" name="nombre" value="{{$nombre}}" />
                         <input type="hidden" name="action" value="{{$action}}" />
                         <input type="hidden" name="no" value="0{{$user->no}}" />
 

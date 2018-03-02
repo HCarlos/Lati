@@ -64,33 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        /*
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-        */
-
-       // return "Proceso Cerrado";
-
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
         $role = Role::where('name', 'user')->first();
-        //$role->givePermissionTo('editar_registro');
-
-        $user
-            ->roles()
-            ->attach($role);
-
+        $user->roles()->attach($role);
         return $user;
 
-
-
     }
+
 }

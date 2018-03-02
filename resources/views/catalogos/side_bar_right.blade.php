@@ -51,7 +51,7 @@
                                 <td>{{ $item->representante }}</td>
                                 <td width="100">
 
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_editorial/" title="Eliminar">
+                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_editorial/" title="Eliminar">
                                             <i class="fa fa-trash fa-lg red" ></i>
                                         </a>
 
@@ -69,19 +69,63 @@
                     @endif
                 </div>
                 @endif
-            @break;
+                @break;
             @case(1)
-            @if(Auth::user()->hasRole('user'))
+                @if(Auth::user()->hasRole('user'))
+                    <div class="dataTables_wrapper" role="grid">
+                    @if ($items)
+                            <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
+                                <thead>
+                                <tr role="row">
+                                    <th aria-label="id" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
+                                    <th aria-label="ficha_no" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">No</th>
+                                    <th aria-label="isbn" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">ISBN</th>
+                                    <th aria-label="titulo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">TÍTULO</th>
+                                    <th aria-label="autor" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">AUTOR</th>
+                                    <th aria-label="" style="width: 100px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
+                                </tr>
+                                </thead>
+                                <tbody aria-relevant="all" aria-live="polite" role="alert">
+                                @foreach ($items as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->ficha_no }}</td>
+                                        <td>{{ $item->isbn }}</td>
+                                        <td>{{ $item->titulo }}</td>
+                                        <td>{{ $item->autor }}</td>
+                                        <td width="100">
+
+                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
+                                                <i class="fa fa-trash fa-lg red" ></i>
+                                            </a>
+
+                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                                <i class="fas fa-pencil-alt blue"></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                    @else
+                        <div class="alert alert-danger" role="alert">No se encontraron datos</div>
+                    @endif
+                    </div>
+
+                @endif
+                @break;
+            @case(10)
+            @if(Auth::user()->hasRole('administrator'))
                 <div class="dataTables_wrapper" role="grid">
-                @if ($items)
+                    @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
                             <thead>
                             <tr role="row">
                                 <th aria-label="id" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
-                                <th aria-label="ficha_no" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">No</th>
-                                <th aria-label="isbn" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">ISBN</th>
-                                <th aria-label="titulo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">TÍTULO</th>
-                                <th aria-label="autor" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">AUTOR</th>
+                                <th aria-label="name" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">Name</th>
+                                <th aria-label="nombre_completo" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Nombre Completo</th>
+                                <th aria-label="email" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Email</th>
                                 <th aria-label="" style="width: 100px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
                             </tr>
                             </thead>
@@ -89,33 +133,28 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->ficha_no }}</td>
-                                    <td>{{ $item->isbn }}</td>
-                                    <td>{{ $item->titulo }}</td>
-                                    <td>{{ $item->autor }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->nombre_completo }}</td>
+                                    <td>{{ $item->email }}</td>
                                     <td width="100">
-
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-0-/destroy_ficha/" title="Eliminar">
+                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="usuario-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_usuario/" title="Eliminar">
                                             <i class="fa fa-trash fa-lg red" ></i>
                                         </a>
-
                                         <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                             <i class="fas fa-pencil-alt blue"></i>
                                         </a>
-
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                @else
-                    <div class="alert alert-danger" role="alert">No se encontraron datos</div>
-                @endif
+                    @else
+                        <div class="alert alert-danger" role="alert">No se encontraron datos</div>
+                    @endif
                 </div>
 
             @endif
             @break;
-
         @endswitch
 
     </div>

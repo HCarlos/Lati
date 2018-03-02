@@ -4,16 +4,17 @@ $(document).ready(function() {
     $("#preloaderGlobal").hide();
     if ( $(".btnAction2") ){
         $('.btnAction2').on('click', function(event) {
-            event.preventDefault();
+            event.defaultPrevented;
             var aID = event.currentTarget.id.split('-');
             var x = confirm("Desea eliminar el registro: "+aID[1]);
             if (!x){
                 return false;
             }
+            var Url = aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4];
             $(function() {
                 $.ajax({
                     method: "GET",
-                    url: aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4]
+                    url: Url
                 })
                     .done(function( response ) {
                         window.location.href = '/index/'+aID[3];

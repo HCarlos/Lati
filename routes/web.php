@@ -40,23 +40,30 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/update_editorial/{edi}','Catalogos\EditorialController@update')->name('editorialUpdate/');
         Route::get('/destroy_editorial/{id}/{idItem}/{action}', 'Catalogos\EditorialController@destroy')->name('editorialDestroy/');
 
+        // Fichas Bibliográficas
         Route::post('/store_ficha','Catalogos\FichaController@store')->name('fichaStore/');
         Route::put('/update_ficha/{oFicha}','Catalogos\FichaController@update')->name('fichaUpdate/');
         Route::get('/destroy_ficha/{id}/{idItem}/{action}', 'Catalogos\FichaController@destroy')->name('fichaDestroy/');
 
-/*
- *
- *
-        // Lugares
-        Route::post('/store_lugar','Catalogos\LugaresController@store');
-        Route::post('/update_lugar','Catalogos\LugaresController@update');
-        Route::get('/destroy_lugar/{id}/{idItem}/{action}', 'Catalogos\LugaresController@destroy')->name('destroy_lugar/');
 
-        // Roles
-        Route::post('/store_role','Catalogos\RolesController@store');
-        Route::post('/update_role','Catalogos\RolesController@update');
-        Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RolesController@destroy')->name('destroy_role/');
-*/
+        /*
+         *
+         *
+                // Lugares
+                Route::post('/store_lugar','Catalogos\LugaresController@store');
+                Route::post('/update_lugar','Catalogos\LugaresController@update');
+                Route::get('/destroy_lugar/{id}/{idItem}/{action}', 'Catalogos\LugaresController@destroy')->name('destroy_lugar/');
+
+                // Roles
+                Route::post('/store_role','Catalogos\RolesController@store');
+                Route::post('/update_role','Catalogos\RolesController@update');
+                Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RolesController@destroy')->name('destroy_role/');
+        */
     });
+
+    // Fichas Usuarios
+    Route::post('/create_usuario','Catalogos\UsuarioController@create')->name('usuarioCreate/');
+    Route::put('/update_usuario/{usr}','Catalogos\UsuarioController@update')->name('usuarioUpdate/');
+    Route::get('/destroy_usuario/{id}/{idItem}/{action}', 'Catalogos\UsuarioController@destroy')->name('usuarioDestroy/');
 
 });

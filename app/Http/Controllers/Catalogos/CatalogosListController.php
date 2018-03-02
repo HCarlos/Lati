@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Editorial;
 use App\Models\Ficha;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
@@ -13,47 +14,43 @@ use Yajra\DataTables\DataTables;
 
 class CatalogosListController extends Controller
 {
-
+    protected $tableName = '';
     public function datatable()
-
     {
-
         return view('datatable');
-
     }
 
     public function index($id = 0)
     {
-        $name = "nothing";
         switch ($id) {
             case 0:
-                $name = "Carlos Hidalgo";
-                $catit = "Catálogo de Editoriales";
                 $tableName = 'editoriales';
-//                $items = Editorial::all()->sortByDesc('id')->forPage(1,100);
                 $items = Editorial::select('id','editorial','representante')
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
                 break;
             case 1:
-                $name  = "Carlos Hidalgo";
-                $catit = "Catálogo de Fichas";
                 $tableName = 'fichas';
-//                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
                 break;
+            case 10:
+                $tableName = 'usuarios';
+                $items = User::all()->sortByDesc('id')->forPage(1,100);
+                break;
         }
+
+        //dd($items);
 
         $user = Auth::User();
         return view ('catalogos.side_bar_right',
-            ['nombre' => $name,
+            [
                 'items' => $items,
                 'id' => $id,
-                'titulo_catalogo' => $catit,
+                'titulo_catalogo' => "Catálogo de ".ucwords($tableName),
                 'user' => $user,
                 'tableName'=>$tableName,
             ]
@@ -62,60 +59,62 @@ class CatalogosListController extends Controller
 
     public function indexSearch(Request $request)
     {
-        $name = "nothing";
         $search = trim($request->input('search'));
         $id = $request->input('id');
         $F = (new FuncionesController);
-        $search = $F->toMayus($search);
+        if ($search !== ""){
 
-        switch ($id) {
-            case 0:
-                $name = "Carlos Hidalgo";
-                $catit = "Catálogo de Editoriales";
-                $tableName = 'editoriales';
-                $total = Editorial::all()->count();
-                if ($search !== ""){
+            switch ($id) {
+                case 0:
+                    $search = $F->toMayus($search);
+                    $this->tableName = 'editoriales';
+                    $total = Editorial::all()->count();
                     $items = Editorial::select('id','editorial','representante')
                         ->orWhere('editorial','LIKE',"%{$search}%")
                         ->orWhere('representante','LIKE',"%{$search}%")
                         ->get()
                         ->sortByDesc('id');
-                        //dd($items);
-                }else{
-                    $items = [];
-                }
-                break;
-            case 1:
-                $name  = "Carlos Hidalgo";
-                $catit = "Catálogo de Fichas";
-                $tableName = 'fichas';
-                $total = Ficha::all()->count();
-                if ($search !== ""){
+                    $items = $total == count($items) ? collect(new Editorial) : $items;
+                    break;
+                case 1:
+                    $search = $F->toMayus($search);
+                    $this->tableName = 'fichas';
+                    $total = Ficha::all()->count();
                     $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
                         ->orWhere('titulo','LIKE',"%{$search}%")
                         ->orWhere('autor','LIKE',"%{$search}%")
                         ->orWhere('isbn','LIKE',"%{$search}%")
                         ->get()
                         ->sortByDesc('id');
-                }else{
-                    $items = [];
-                }
+                    $items = $total == count($items) ? collect(new Ficha) : $items;
+                    break;
+                case 10:
+                    $this->tableName = 'usuarios';
+                    $total = User::all()->count();
+                    $items = User::select('id','name','nombre_completo','email')
+                        ->orWhere('name','LIKE',"%{$search}%")
+                        ->orWhere('nombre_completo','LIKE',"%{$search}%")
+                        ->orWhere('email','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new User) : $items;
+                    break;
+            }
 
-                break;
-        }
 
-        if ($total == count($items) ){
+        }else{
             $items = [];
         }
 
+
         $user = Auth::User();
         return view ('catalogos.side_bar_right',
-            ['nombre' => $name,
+            [
                 'items' => $items,
                 'id' => $id,
-                'titulo_catalogo' => $catit,
+                'titulo_catalogo' => "Catálogo de ".ucwords($this->tableName),
                 'user' => $user,
-                'tableName'=>$tableName,
+                'tableName'=>$this->tableName,
             ]
         );
     }
@@ -129,8 +128,11 @@ class CatalogosListController extends Controller
                 $items = Ficha::select('id','titulo', 'autor')
                     ->orderBy('id','desc')
                     ->get();
-//                $items = Ficha::all()->sortByDesc('id')->forPage(1,100);
-//                $items = Ficha::all()->forPage(1,10);
+                break;
+            case 10:
+                $items = User::select('id','name', 'nombre_completo','email')
+                    ->orderBy('id','desc')
+                    ->get();
                 break;
         }
         $dataTable = Datatables::of($items)->make(true);

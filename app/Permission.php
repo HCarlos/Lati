@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+// use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User;
 
 class Permission extends Model
 {
@@ -18,4 +19,5 @@ class Permission extends Model
     public function users() {
         return $this->hasMany(User::class);
     }
+
 }

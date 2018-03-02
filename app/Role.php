@@ -3,18 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+//use App\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasPermissions;
+use Illuminate\Foundation\Auth\User;
 
 class Role extends Model
 {
     use HasPermissions;
 
+    protected $fillable = ['name',];
+
     public function permissions() {
         return $this->belongsTo(Permission::class);
     }
-    protected $fillable = ['name',];
 
     public function users() {
         return $this->belongsToMany(User::class);
