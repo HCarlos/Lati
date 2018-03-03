@@ -18,7 +18,7 @@
             </div>
             <div class="col-xs-6 col-sm-4">
                 {{ Form::select('listTarget', $listTarget, $iduser, ['id' => 'listTarget-'.$id,'size' => '1', 'class'=>'listTarget']) }}
-                {{ Form::select('lstAsigns', $lstAsigns, '', ['id' => 'lstAsigns','multiple' => 'multiple']) }}
+                {{ Form::select('lstAsigns', $lstAsigns, '', ['id' => 'lstAsigns','multiple' => 'multiple', 'class'=>'lstAsigns']) }}
             </div>
         </div>
 

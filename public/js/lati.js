@@ -78,7 +78,7 @@ $(document).ready(function() {
             }
             // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
             // var Url = '/asign_role/';
-            var Url = '/asign_role/'+y+'/'+x+'/'+Cat_Id;
+            var Url = '/asign_role_user/'+y+'/'+x+'/'+Cat_Id;
 
 
             $(function() {
@@ -100,16 +100,15 @@ $(document).ready(function() {
             event.preventDefault();
             var IdArr  = this.id.split('-');
             var Cat_Id = IdArr[1];
-            var IdUser = IdArr[2];
-            var x = $('.listEle option:selected').val();
+            var z = $('.lstAsigns option:selected').val();
             var y = $('select[name="listTarget"] option:selected').val();
-            if (isUndefined(x)){
+            if (isUndefined(z)){
                 alert("Seleccione una opción disponible");
                 return false;
             }else{
-                x='';
-                $(".listEle option:selected").each(function () {
-                    x += $(this).val() + "|";
+                z='';
+                $(".lstAsigns option:selected").each(function () {
+                    z += $(this).val() + "|";
                 });
 
             }
@@ -117,16 +116,12 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
-            // var Url = '/asign_role/';
-            var Url = '/asign_role/'+y+'/'+x+'/'+Cat_Id;
-
+            var Url = '/unasign_role_user/'+y+'/'+z+'/'+Cat_Id;
 
             $(function() {
                 $.ajax({
                     method: "GET",
                     url: Url
-                    // data:Data
                 })
                     .done(function( response ) {
                         window.location.href = '/list_left_config/'+Cat_Id+'/'+y;

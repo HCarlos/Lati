@@ -36,10 +36,10 @@ class RoleUsuarioController extends Controller
         foreach($roles AS $i=>$valor) {
             if ($roles[$i] !== "") {
                 $role = Role::where('name', $roles[$i])->first();
-                $user->roles()->remove($role);
+                $user->removeRole($role);
             }
         }
-        return redirect('index/'.$cat_id);
+        return redirect('/list_left_config/'.$cat_id.'/'.$idUser);
     }
 
 }

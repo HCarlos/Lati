@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Asignaciones
     Route::get('/list_left_config/{ida}/{iduser}/','Asignaciones\AsignacionListController@index')->name('asignItem/');
-    Route::get('/asign_role/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
-    //Route::post('/asign_role/','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
+    Route::get('/asign_role_user/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
+    Route::get('/unasign_role_user/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@desasignar')->name('unAssignRoleToUser/');
 
 });
