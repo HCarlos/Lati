@@ -22,8 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/index/{id}/','Catalogos\CatalogosListController@index')->name('listItem');
     Route::post('/catalogo/search/','Catalogos\CatalogosListController@indexSearch')->name('listItemSearch');
-    Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
-    Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
+//    Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');
+//    Route::get('edit/role/id/{user}', 'RoleController@index')->name('edit/role/id/');
 
     Route::group(['middleware' => ['role:user']], function () {
 
@@ -54,10 +54,6 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('/update_lugar','Catalogos\LugaresController@update');
                 Route::get('/destroy_lugar/{id}/{idItem}/{action}', 'Catalogos\LugaresController@destroy')->name('destroy_lugar/');
 
-                // Roles
-                Route::post('/store_role','Catalogos\RolesController@store');
-                Route::post('/update_role','Catalogos\RolesController@update');
-                Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RolesController@destroy')->name('destroy_role/');
         */
     });
 
@@ -65,5 +61,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/create_usuario','Catalogos\UsuarioController@create')->name('usuarioCreate/');
     Route::put('/update_usuario/{usr}','Catalogos\UsuarioController@update')->name('usuarioUpdate/');
     Route::get('/destroy_usuario/{id}/{idItem}/{action}', 'Catalogos\UsuarioController@destroy')->name('usuarioDestroy/');
+
+    // Fichas Usuarios
+    Route::post('/create_role','Catalogos\RoleController@create')->name('roleCreate/');
+    Route::put('/update_role/{rol}','Catalogos\RoleController@update')->name('roleUpdate/');
+    Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RoleController@destroy')->name('roleDestroy/');
+
+    // Asignaciones
+    Route::get('/list_left_config/{ida}/','Asignaciones\AsignacionListController@index')->name('asignItem/');
+    Route::post('/create_role','Asignaciones\RoleUsuarioController@asignar')->name('roleToUserAsignar/');
 
 });

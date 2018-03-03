@@ -5,19 +5,22 @@ namespace App\Http\Controllers\Catalogos;
 use App\Http\Controllers\Controller;
 use App\Models\Editorial;
 use App\Models\Ficha;
+use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
 
 class CatalogosController extends Controller
 {
+    protected $otrosDatos;
+
     public function index($id=0,$idItem=0,$action=0)
     {
-        $tables = ['editoriales','fichas','2','3','4','5','6','7','8','9','users'];
+        $tables = ['editoriales','fichas','2','3','4','5','6','7','8','9','users','roles'];
         if ($action == 0){
-            $views  = ['editorial_new','ficha_new','2','3','4','5','6','7','8','9','usuario_new'];
+            $views  = ['editorial_new','ficha_new','2','3','4','5','6','7','8','9','usuario_new','role_new'];
         }else{
-            $views  = ['editorial_edit','ficha_edit','2','3','4','5','6','7','8','9','usuario_edit'];
+            $views  = ['editorial_edit','ficha_edit','2','3','4','5','6','7','8','9','usuario_edit','role_edit'];
         }
 
         if ($action == 1) {
@@ -30,10 +33,21 @@ class CatalogosController extends Controller
                     break;
                 case 10;
                     $items = User::findOrFail($idItem);
+                    foreach ($items->roles as $role) {
+                        $this->otrosDatos .= $role->name . ', ';
+                    }
+                    break;
+                case 11;
+                    $items = Role::findOrFail($idItem);
                     break;
             }
         }elseif ($action == 0){
             $items = [];
+            switch ($id) {
+                case 10;
+                    $this->otrosDatos = Role::all()->sortByDesc('name')->pluck('name', 'name');
+                    break;
+            }
         }
 
         $user = Auth::User();
@@ -48,7 +62,8 @@ class CatalogosController extends Controller
                 'titulo' => $tables[$id],
                 'action' => $action,
                 'items' => $items,
-                'user' => $user
+                'user' => $user,
+                'otrosDatos' => $this->otrosDatos,
             ]
         );
 

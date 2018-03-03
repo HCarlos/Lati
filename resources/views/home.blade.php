@@ -18,6 +18,19 @@
 
                     </div>
                 </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Configuracioes</div>
+
+                    <div class="panel-body list-group">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @include('catalogos.side_bl_config')
+
+                    </div>
+                </div>
                 @role('administrator')
                     <div>Acceso como Administrador</div>
                 @else

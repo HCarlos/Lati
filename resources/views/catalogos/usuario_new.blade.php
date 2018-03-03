@@ -32,7 +32,7 @@
             <div class="form-group row">
                 <label for = "email" class="col-md-2 col-form-label text-md-right">Email</label>
                 <div class="col-md-10">
-                    <input type="email" name="email"  value="{{ old('email') }}" class="col-md-12"required />
+                    <input type="email" name="email"  value="{{ old('email') }}" class="col-md-12" required />
                 </div>
             </div>
             <div class="form-group row">
@@ -45,6 +45,12 @@
                 <label for = "password_confirmation" class="col-md-2 col-form-label text-md-right">Re-password</label>
                 <div class="col-md-10">
                     <input type="password" name="password_confirmation"  value="" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for = "role" class="col-md-2 col-form-label text-md-right">Role</label>
+                <div class="col-md-10">
+                    {{ Form::select('role', $otrosDatos, old('role'), ['id' => 'role','class' => 'col-md-2']) }}
                 </div>
             </div>
             <div>

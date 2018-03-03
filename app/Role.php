@@ -12,6 +12,8 @@ class Role extends Model
 {
     use HasPermissions;
 
+    protected $guard_name = 'web'; // or whatever guard you want to use
+    protected $table = 'roles';
     protected $fillable = ['name',];
 
     public function permissions() {

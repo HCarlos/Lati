@@ -48,6 +48,12 @@
                                 <input type="text" name="instagram"  value="{{ old('instagram',$items->instagram) }}" class="col-md-12"/>
                             </div>
                         </div>
+                        <div class="form-group row disabled">
+                            <label class="col-md-2 col-form-label text-md-right disabled">Roles</label>
+                            <div class="col-md-10 disabled">
+                                <input type="text" value="{{ $otrosDatos }}" class="col-md-12 text-muted" disabled/>
+                            </div>
+                        </div>
                         <div>
                             <label class="col-md-2 col-form-label text-md-right"></label>
                             <div class="col-md-8" >

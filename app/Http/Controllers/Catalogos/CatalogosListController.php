@@ -10,11 +10,18 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class CatalogosListController extends Controller
 {
     protected $tableName = '';
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function datatable()
     {
         return view('datatable');
@@ -40,6 +47,10 @@ class CatalogosListController extends Controller
             case 10:
                 $tableName = 'usuarios';
                 $items = User::all()->sortByDesc('id')->forPage(1,100);
+                break;
+            case 11:
+                $tableName = 'roles';
+                $items = Role::all()->sortByDesc('id')->forPage(1,100);
                 break;
         }
 
@@ -99,6 +110,15 @@ class CatalogosListController extends Controller
                         ->sortByDesc('id');
                     $items = $total == count($items) ? collect(new User) : $items;
                     break;
+                case 11:
+                    $this->tableName = 'usuarios';
+                    $total = Role::all()->count();
+                    $items = Role::select('id','name')
+                        ->orWhere('name','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new Role) : $items;
+                    break;
             }
 
 
@@ -131,6 +151,11 @@ class CatalogosListController extends Controller
                 break;
             case 10:
                 $items = User::select('id','name', 'nombre_completo','email')
+                    ->orderBy('id','desc')
+                    ->get();
+                break;
+            case 11:
+                $items = Role::select('id','name')
                     ->orderBy('id','desc')
                     ->get();
                 break;

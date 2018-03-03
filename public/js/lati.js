@@ -4,13 +4,14 @@ $(document).ready(function() {
     $("#preloaderGlobal").hide();
     if ( $(".btnAction2") ){
         $('.btnAction2').on('click', function(event) {
-            event.defaultPrevented;
+            event.preventDefault();
             var aID = event.currentTarget.id.split('-');
             var x = confirm("Desea eliminar el registro: "+aID[1]);
             if (!x){
                 return false;
             }
             var Url = aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4];
+            // alert(Url);
             $(function() {
                 $.ajax({
                     method: "GET",
@@ -25,7 +26,7 @@ $(document).ready(function() {
 
     if ( $("#btnPrueba") ){
         $("#btnPrueba").on('click', function(event) {
-            event.defaultPrevented;
+            event.preventDefault();
             var Data = {'id':1};
             $(function() {
                 $.ajax({
@@ -42,4 +43,43 @@ $(document).ready(function() {
             });
         });
     }
+
+    if ( $("#btnAsign0") ){
+        $("#btnAsign0").on('click', function(event) {
+            event.preventDefault();
+
+            var x = $('.lstEleToAsign option:selected').val();
+            var y = $('select[name="selTarget"] option:selected').val();
+
+            if (isDefined(x)){
+                alert("Seleccione una opción disponible");
+                return false;
+            }else{
+                x='';
+                $(".lstAlumnos option:selected").each(function () {
+                    x += $(this).val() + "|";
+                });
+
+            }
+            if (isDefined(parseInt(y)) || y <= 0){
+                // $("#preloaderPrincipal").hide();
+                alert("Seleccione un elemento");
+                return false;
+            }
+
+            var Url = aID[5]+y+"/"+x+"/"+aID[3];
+            // alert(Url);
+            $(function() {
+                $.ajax({
+                    method: "GET",
+                    url: Url
+                })
+                    .done(function( response ) {
+                        window.location.href = '/index/'+aID[3];
+                    });
+            });
+
+        });
+    }
+
 });
