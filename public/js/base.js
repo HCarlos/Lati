@@ -1,3 +1,3 @@
-function isDefined(variable) {
-    return (typeof(window[variable]) != "undefined");
+function isUndefined(variable) {
+    return typeof(variable) === "undefined";
 }

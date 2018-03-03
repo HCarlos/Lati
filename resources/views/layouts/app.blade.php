@@ -111,6 +111,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-dialog.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/base.js') }}"></script>
     <script src="{{ asset('js/lati.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() { init(); });

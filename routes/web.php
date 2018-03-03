@@ -68,7 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RoleController@destroy')->name('roleDestroy/');
 
     // Asignaciones
-    Route::get('/list_left_config/{ida}/','Asignaciones\AsignacionListController@index')->name('asignItem/');
-    Route::post('/create_role','Asignaciones\RoleUsuarioController@asignar')->name('roleToUserAsignar/');
+    Route::get('/list_left_config/{ida}/{iduser}/','Asignaciones\AsignacionListController@index')->name('asignItem/');
+    Route::get('/asign_role/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
+    //Route::post('/asign_role/','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
 
 });

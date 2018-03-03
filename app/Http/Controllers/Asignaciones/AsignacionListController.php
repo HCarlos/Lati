@@ -22,7 +22,7 @@ class AsignacionListController extends Controller
         return view('datatable');
     }
 
-    public function index($ida = 0)
+    public function index($ida = 0,$iduser = 0)
     {
         $tables = ['Roles a Usuarios'];
         switch ($ida) {
@@ -30,7 +30,12 @@ class AsignacionListController extends Controller
                 $view = 'roles_usuario';
                 $listEle     = Role::all()->sortByDesc('name')->pluck('name','name');
                 $listTarget  = User::all()->sortByDesc('name')->pluck('name','id');
-                $users       = User::all()->first();
+                if ($iduser == 0){
+                    $iduser = 1;
+                    $users       = User::findOrFail($iduser);
+                }else{
+                    $users       = User::findOrFail($iduser);
+                }
                 foreach ($users->roles as $role) {
                     $this->lstAsigns .= $role->name . ', ';
                 }
@@ -48,6 +53,7 @@ class AsignacionListController extends Controller
                 'id' => $ida,
                 'titulo' => "Asignación de ".$tables[$ida],
                 'user' => $user,
+                'iduser' => $iduser,
             ]
         );
     }

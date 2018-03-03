@@ -44,38 +44,92 @@ $(document).ready(function() {
         });
     }
 
-    if ( $("#btnAsign0") ){
-        $("#btnAsign0").on('click', function(event) {
+    if ( $(".listTarget") ){
+        $(".listTarget").on('change', function(event) {
             event.preventDefault();
+            var IdArr  = this.id.split('-');
+            var Ida    = IdArr[1];
+            var IdUser = $(this).val();
+            window.location.href = '/list_left_config/'+Ida+'/'+IdUser+'/';
+        });
+    }
 
-            var x = $('.lstEleToAsign option:selected').val();
-            var y = $('select[name="selTarget"] option:selected').val();
-
-            if (isDefined(x)){
+    if ( $(".btnAsign0") ){
+        $(".btnAsign0").on('click', function(event) {
+            event.preventDefault();
+            var IdArr  = this.id.split('-');
+            var Cat_Id = IdArr[1];
+            var IdUser = IdArr[2];
+            var x = $('.listEle option:selected').val();
+            var y = $('select[name="listTarget"] option:selected').val();
+            if (isUndefined(x)){
                 alert("Seleccione una opción disponible");
                 return false;
             }else{
                 x='';
-                $(".lstAlumnos option:selected").each(function () {
+                $(".listEle option:selected").each(function () {
                     x += $(this).val() + "|";
                 });
 
             }
-            if (isDefined(parseInt(y)) || y <= 0){
-                // $("#preloaderPrincipal").hide();
+            if (isUndefined(y) || y <= 0){
                 alert("Seleccione un elemento");
                 return false;
             }
+            // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
+            // var Url = '/asign_role/';
+            var Url = '/asign_role/'+y+'/'+x+'/'+Cat_Id;
 
-            var Url = aID[5]+y+"/"+x+"/"+aID[3];
-            // alert(Url);
+
             $(function() {
                 $.ajax({
                     method: "GET",
                     url: Url
+                    // data:Data
                 })
                     .done(function( response ) {
-                        window.location.href = '/index/'+aID[3];
+                        window.location.href = '/list_left_config/'+Cat_Id+'/'+y;
+                    });
+            });
+
+        });
+    }
+
+    if ( $(".btnUnasign0") ){
+        $(".btnUnasign0").on('click', function(event) {
+            event.preventDefault();
+            var IdArr  = this.id.split('-');
+            var Cat_Id = IdArr[1];
+            var IdUser = IdArr[2];
+            var x = $('.listEle option:selected').val();
+            var y = $('select[name="listTarget"] option:selected').val();
+            if (isUndefined(x)){
+                alert("Seleccione una opción disponible");
+                return false;
+            }else{
+                x='';
+                $(".listEle option:selected").each(function () {
+                    x += $(this).val() + "|";
+                });
+
+            }
+            if (isUndefined(y) || y <= 0){
+                alert("Seleccione un elemento");
+                return false;
+            }
+            // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
+            // var Url = '/asign_role/';
+            var Url = '/asign_role/'+y+'/'+x+'/'+Cat_Id;
+
+
+            $(function() {
+                $.ajax({
+                    method: "GET",
+                    url: Url
+                    // data:Data
+                })
+                    .done(function( response ) {
+                        window.location.href = '/list_left_config/'+Cat_Id+'/'+y;
                     });
             });
 
