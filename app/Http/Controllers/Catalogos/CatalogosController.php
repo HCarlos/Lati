@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Catalogos;
 use App\Http\Controllers\Controller;
 use App\Models\Editorial;
 use App\Models\Ficha;
-use App\Role;
 use App\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -39,6 +39,9 @@ class CatalogosController extends Controller
                     break;
                 case 11;
                     $items = Role::findOrFail($idItem);
+                    foreach ($items->permissions as $permision) {
+                        $this->otrosDatos .= $permision->name . ', ';
+                    }
                     break;
             }
         }elseif ($action == 0){

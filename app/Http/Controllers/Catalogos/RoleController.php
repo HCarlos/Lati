@@ -33,6 +33,7 @@ class RoleController extends Controller
                 ->withInput();
         }
         $role = Role::create(['name' => $data['name'],]);
+        $role->givePermissionTo('editar_registro');
         return redirect('index/'.$cat_id);
     }
 

@@ -8,7 +8,6 @@
     @php
         $xTit = explode(' ',$titlePanels)
     @endphp
-
     <div class="panel-body panel-fill">
 
         <div class="row panel-fill">

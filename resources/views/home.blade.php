@@ -18,6 +18,7 @@
 
                     </div>
                 </div>
+                @if(Auth::user()->hasRole('administrator'))
                 <div class="panel panel-primary">
                     <div class="panel-heading">Configuracioes</div>
 
@@ -31,6 +32,7 @@
 
                     </div>
                 </div>
+                @endif
                 @role('administrator')
                     <div>Acceso como Administrador</div>
                 @else

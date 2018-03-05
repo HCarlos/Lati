@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
 
+    var pathAssign   = ['/asign_role_user/','/asign_permission_role/'];
+    var pathUnAssign = ['/unasign_role_user/','/unasign_permission_role/'];
+
     $("#preloaderGlobal").hide();
     if ( $(".btnAction2") ){
         $('.btnAction2').on('click', function(event) {
@@ -78,7 +81,7 @@ $(document).ready(function() {
             }
             // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
             // var Url = '/asign_role/';
-            var Url = '/asign_role_user/'+y+'/'+x+'/'+Cat_Id;
+            var Url = pathAssign[Cat_Id]+y+'/'+x+'/'+Cat_Id;
 
 
             $(function() {
@@ -116,7 +119,7 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            var Url = '/unasign_role_user/'+y+'/'+z+'/'+Cat_Id;
+            var Url = pathUnAssign[Cat_Id]+y+'/'+z+'/'+Cat_Id;
 
             $(function() {
                 $.ajax({

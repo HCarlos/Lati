@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Asignaciones;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\User;
 
 class AsignacionListController extends Controller
@@ -24,7 +25,8 @@ class AsignacionListController extends Controller
 
     public function index($ida = 0,$iduser = 0)
     {
-        $tables = ['Roles a Usuarios'];
+        $tables = ['Roles a Usuario','Permissions to Role'];
+        $titlePanels = ['Roles Usuarios','Permissions Roles'];
         switch ($ida) {
             case 0:
                 $view = 'roles_usuario';
@@ -32,13 +34,25 @@ class AsignacionListController extends Controller
                 $listTarget  = User::all()->sortByDesc('name')->pluck('name','id');
                 if ($iduser == 0){
                     $iduser = 1;
-                    $users       = User::findOrFail($iduser);
-                }else{
-                    $users       = User::findOrFail($iduser);
                 }
-                foreach ($users->roles as $role) {
-                    $this->lstAsigns .= $role->name . ', ';
+                $users = User::findOrFail($iduser);
+                $this->lstAsigns = $users->roles->pluck('name','name');
+//                foreach ($users->roles as $role) {
+//                    $this->lstAsigns .= $role->name . ', ';
+//                }
+                break;
+            case 1:
+                $view = 'permisos_role';
+                $listEle     = Permission::all()->sortByDesc('name')->pluck('name','name');
+                $listTarget  = Role::all()->sortByDesc('name')->pluck('name','id');
+                if ($iduser == 0){
+                    $iduser = 1;
                 }
+                $roles = Role::findOrFail($iduser);
+                $this->lstAsigns = $roles->permissions->pluck('name','name');
+//                foreach ($roles->permissions as $permision) {
+//                    $this->lstAsigns .= $permision->name . ', ';
+//                }
                 break;
         }
 
@@ -49,11 +63,12 @@ class AsignacionListController extends Controller
             [
                 'listEle' => $listEle,
                 'listTarget' => $listTarget,
-                'lstAsigns' => $users->roles->pluck('name','name'),
+                'lstAsigns' => $this->lstAsigns,
                 'id' => $ida,
                 'titulo' => "Asignación de ".$tables[$ida],
                 'user' => $user,
                 'iduser' => $iduser,
+                'titlePanels' => $titlePanels[$ida],
             ]
         );
     }
