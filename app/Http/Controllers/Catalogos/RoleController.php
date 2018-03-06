@@ -37,7 +37,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $data['name'],]);
         try {
             $perm = Permission::findByName('editar_registro')->first();
-            $role->givePermissionTo($perm);
+            // $role->givePermissionTo($perm);
         } catch (Exception $e) {
             report($e);
             return false;
