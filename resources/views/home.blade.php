@@ -18,7 +18,7 @@
 
                     </div>
                 </div>
-                @if(Auth::user()->hasRole('administrator'))
+                @if(Auth::user()->hasRole('administrator|System_Operator'))
                 <div class="panel panel-primary">
                     <div class="panel-heading">Configuracioes</div>
 
