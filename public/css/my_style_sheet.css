@@ -29,3 +29,12 @@
 	max-height: 86% !important;
 	height: 100% !important;
 }
+
+.height05em{
+    min-height: 0.5em !important;
+    height: 0.5em !important;
+    max-height: 0.5em !important;
+}
+.todoloAncho{
+    width: 100% !important;
+}
