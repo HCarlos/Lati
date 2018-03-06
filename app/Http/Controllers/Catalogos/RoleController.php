@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -33,7 +34,8 @@ class RoleController extends Controller
                 ->withInput();
         }
         $role = Role::create(['name' => $data['name'],]);
-        $role->givePermissionTo('editar_registro');
+        $perm = Permission::findByName('editar_registro')->first();
+        $role->givePermissionTo($perm);
         return redirect('index/'.$cat_id);
     }
 
