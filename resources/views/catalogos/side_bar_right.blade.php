@@ -126,7 +126,7 @@
                                 <th aria-label="id" style="width: 80px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
                                 <th aria-label="idmid" style="width: 80px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting" >IdMig</th>
                                 <th aria-label="codigo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Código</th>
-                                <th aria-label="lenguaje" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="3" role="columnheader" class="sorting">Lenguaje</th>
+                                <th aria-label="Descripcion" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="3" role="columnheader" class="sorting">Descripción</th>
                                 <th aria-label="tipo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="4" role="columnheader" class="sorting">Tipo</th>
                                 <th aria-label="" style="width: 200px;" colspan="1" rowspan="1" role="columnheader" tabindex="5" class="sorting_disabled"></th>
                             </tr>

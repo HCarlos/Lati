@@ -31,13 +31,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for = "lenguaje" class="col-md-2 col-form-label text-md-right">Lengüaje</label>
+                            <label for = "lenguaje" class="col-md-2 col-form-label text-md-right">Descripción</label>
                             <div class="col-md-10">
                                 <input type="text" name="lenguaje"  value="{{ old('lenguaje',$items->lenguaje) }}" class="col-md-12"/>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for = "tipo" class="col-md-2 col-form-label text-md-right">Status</label>
+                            <label for = "tipo" class="col-md-2 col-form-label text-md-right">Tipo</label>
                             <div class="col-md-10">
                                 {{ Form::select('tipo', array(''=>'Seleccione una opción', 'L'=>'Lenguaje', 'P'=>'Pais'), trim($items->tipo), ['id' => 'tipo','class' => 'col-md-2']) }}
                             </div>

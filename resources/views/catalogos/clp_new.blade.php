@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for = "lenguaje" class="col-md-2 col-form-label text-md-right">Lengüaje</label>
+                            <label for = "lenguaje" class="col-md-2 col-form-label text-md-right">Descripción</label>
                             <div class="col-md-10">
                                 <input type="text" name="lenguaje"  value="{{ old('lenguaje') }}" class="col-md-12"/>
                             </div>
