@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Catalogos;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -34,8 +35,14 @@ class RoleController extends Controller
                 ->withInput();
         }
         $role = Role::create(['name' => $data['name'],]);
+        try {
         $perm = Permission::findByName('editar_registro')->first();
         $role->givePermissionTo($perm);
+        } catch (Exception $e) {
+            report($e);
+
+            return false;
+        }
         return redirect('index/'.$cat_id);
     }
 
