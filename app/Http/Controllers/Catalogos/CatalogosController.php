@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Codigo_Lenguaje_Pais;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
@@ -17,11 +18,11 @@ class CatalogosController extends Controller
 
     public function index($id=0,$idItem=0,$action=0)
     {
-        $tables = ['editoriales','fichas','2','3','4','5','6','7','8','9','users','roles','permissions'];
+        $tables = ['editoriales','fichas','codigo_lenguaje_paises','3','4','5','6','7','8','9','users','roles','permissions'];
         if ($action == 0){
-            $views  = ['editorial_new','ficha_new','2','3','4','5','6','7','8','9','usuario_new','role_new','permission_new'];
+            $views  = ['editorial_new','ficha_new','clp_new','3','4','5','6','7','8','9','usuario_new','role_new','permission_new'];
         }else{
-            $views  = ['editorial_edit','ficha_edit','2','3','4','5','6','7','8','9','usuario_edit','role_edit','permission_edit'];
+            $views  = ['editorial_edit','ficha_edit','clp_edit','3','4','5','6','7','8','9','usuario_edit','role_edit','permission_edit'];
         }
 
         if ($action == 1) {
@@ -31,6 +32,9 @@ class CatalogosController extends Controller
                     break;
                 case 1;
                     $items = Ficha::findOrFail($idItem);
+                    break;
+                case 2;
+                    $items = Codigo_Lenguaje_Pais::findOrFail($idItem);
                     break;
                 case 10;
                     $items = User::findOrFail($idItem);

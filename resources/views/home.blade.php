@@ -16,7 +16,7 @@
                     @include('catalogos.side_bar_left')
 
                 </div>
-                @if(Auth::user()->hasRole('administrator|System_Operator'))
+                @if(Auth::user()->hasRole('administrator|system_operator'))
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span>Configuraciones</span>

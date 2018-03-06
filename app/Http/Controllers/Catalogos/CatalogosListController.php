@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones\FuncionesController;
+use App\Models\Codigo_Lenguaje_Pais;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
@@ -32,29 +33,36 @@ class CatalogosListController extends Controller
     {
         switch ($id) {
             case 0:
-                $tableName = 'editoriales';
+                $this->tableName = 'editoriales';
                 $items = Editorial::select('id','editorial','representante')
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
                 break;
             case 1:
-                $tableName = 'fichas';
+                $this->tableName = 'fichas';
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
                 break;
+            case 2:
+                $this->tableName = 'codigo_lenguaje_paises';
+                $items = Codigo_Lenguaje_Pais::select('id','idmig','codigo','lenguaje', 'tipo')
+                    ->orderBy('id','desc')
+                    ->get()
+                    ->forPage(1,100);
+                break;
             case 10:
-                $tableName = 'usuarios';
+                $this->tableName = 'usuarios';
                 $items = User::all()->sortByDesc('id')->forPage(1,100);
                 break;
             case 11:
-                $tableName = 'roles';
+                $this->tableName = 'roles';
                 $items = Role::all()->sortByDesc('id')->forPage(1,100);
                 break;
             case 12:
-                $tableName = 'permissions';
+                $this->tableName = 'permissions';
                 $items = Permission::all()->sortByDesc('id')->forPage(1,100);
                 break;
         }
@@ -66,9 +74,9 @@ class CatalogosListController extends Controller
             [
                 'items' => $items,
                 'id' => $id,
-                'titulo_catalogo' => "Catálogo de ".ucwords($tableName),
+                'titulo_catalogo' => "Catálogo de ".ucwords($this->tableName),
                 'user' => $user,
-                'tableName'=>$tableName,
+                'tableName'=>$this->tableName,
             ]
         );
     }
@@ -100,6 +108,18 @@ class CatalogosListController extends Controller
                         ->orWhere('titulo','LIKE',"%{$search}%")
                         ->orWhere('autor','LIKE',"%{$search}%")
                         ->orWhere('isbn','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new Ficha) : $items;
+                    break;
+                case 2:
+                    //$search = $F->toMayus($search);
+                    $this->tableName = 'codigo_lenguaje_paises';
+                    $total = Codigo_Lenguaje_Pais::all()->count();
+                    $items = Codigo_Lenguaje_Pais::select('id','idmig','codigo','lenguaje', 'tipo')
+                        ->orWhere('codigo','LIKE',"%{$search}%")
+                        ->orWhere('lenguaje','LIKE',"%{$search}%")
+                        ->orWhere('tipo','LIKE',"%{$search}%")
                         ->get()
                         ->sortByDesc('id');
                     $items = $total == count($items) ? collect(new Ficha) : $items;
@@ -159,6 +179,11 @@ class CatalogosListController extends Controller
                 break;
             case 1:
                 $items = Ficha::select('id','titulo', 'autor')
+                    ->orderBy('id','desc')
+                    ->get();
+                break;
+            case 2:
+                $items = Codigo_Lenguaje_Pais::select('id','idmig','codigo','lenguaje', 'tipo')
                     ->orderBy('id','desc')
                     ->get();
                 break;

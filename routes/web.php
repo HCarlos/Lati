@@ -30,11 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('catalogos/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@index')->name('catalogos/');
         Route::get('/catajax/{id}', 'Catalogos\CatalogosListController@ajaxIndex')->name('ajaxIndexCatList');
 
-        /*
-                Route::get('show/role/form/{id}', 'RoleController@showRoleNewForm')->name('show/role/form/');
-                Route::post('admin/home/role/create', 'RoleController@create')->name('admin/home/role/create');
-        */
-
         // Editoriales
         Route::post('/store_editorial','Catalogos\EditorialController@store')->name('editorialStore/');
         Route::put('/update_editorial/{edi}','Catalogos\EditorialController@update')->name('editorialUpdate/');
@@ -45,16 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/update_ficha/{oFicha}','Catalogos\FichaController@update')->name('fichaUpdate/');
         Route::get('/destroy_ficha/{id}/{idItem}/{action}', 'Catalogos\FichaController@destroy')->name('fichaDestroy/');
 
+        // Codigo de Lenguaje de Paises
+        Route::post('/store_clp','Catalogos\CodigoLenguajePaisController@store')->name('clpStore/');
+        Route::put('/update_clp/{clp}','Catalogos\CodigoLenguajePaisController@update')->name('clpUpdate/');
+        Route::get('/destroy_clp/{id}/{idItem}/{action}', 'Catalogos\CodigoLenguajePaisController@destroy')->name('clpDestroy/');
 
-        /*
-         *
-         *
-                // Lugares
-                Route::post('/store_lugar','Catalogos\LugaresController@store');
-                Route::post('/update_lugar','Catalogos\LugaresController@update');
-                Route::get('/destroy_lugar/{id}/{idItem}/{action}', 'Catalogos\LugaresController@destroy')->name('destroy_lugar/');
-
-        */
     });
 
     // Fichas Usuarios

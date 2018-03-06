@@ -7,6 +7,7 @@
 
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 0)) }}">Editoriales</a>
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 1)) }}">Fichas</a>
+    <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 2)) }}">Códigos de lenguaje de paises</a>
     <a></a>
     <a class="button list-group-item form-control" href="#" id="btnPrueba">Prueba</a>
 

@@ -1,4 +1,4 @@
-    @role('administrator|System_Operator')
+    @role('administrator|system_operator')
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
