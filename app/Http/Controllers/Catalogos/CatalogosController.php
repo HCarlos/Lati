@@ -7,6 +7,7 @@ use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -16,11 +17,11 @@ class CatalogosController extends Controller
 
     public function index($id=0,$idItem=0,$action=0)
     {
-        $tables = ['editoriales','fichas','2','3','4','5','6','7','8','9','users','roles'];
+        $tables = ['editoriales','fichas','2','3','4','5','6','7','8','9','users','roles','permissions'];
         if ($action == 0){
-            $views  = ['editorial_new','ficha_new','2','3','4','5','6','7','8','9','usuario_new','role_new'];
+            $views  = ['editorial_new','ficha_new','2','3','4','5','6','7','8','9','usuario_new','role_new','permission_new'];
         }else{
-            $views  = ['editorial_edit','ficha_edit','2','3','4','5','6','7','8','9','usuario_edit','role_edit'];
+            $views  = ['editorial_edit','ficha_edit','2','3','4','5','6','7','8','9','usuario_edit','role_edit','permission_edit'];
         }
 
         if ($action == 1) {
@@ -42,6 +43,9 @@ class CatalogosController extends Controller
                     foreach ($items->permissions as $permision) {
                         $this->otrosDatos .= $permision->name . ', ';
                     }
+                    break;
+                case 12;
+                    $items = Permission::findOrFail($idItem);
                     break;
             }
         }elseif ($action == 0){

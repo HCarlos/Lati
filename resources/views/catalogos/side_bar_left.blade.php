@@ -6,6 +6,7 @@
     @role('administrator')
     <a class="button list-group-item" href="{{ route('listItem', array('id' => 10)) }}">Usuarios</a>
     <a class="button list-group-item" href="{{ route('listItem', array('id' => 11)) }}">Roles</a>
+    <a class="button list-group-item" href="{{ route('listItem', array('id' => 12)) }}">Permisos</a>
     @endrole
 
     {{--<a class="button list-group-item" href="{{ route('ajaxIndexCatList', array('id' => 0)) }}">Prueba</a>--}}

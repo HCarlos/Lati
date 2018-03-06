@@ -62,17 +62,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update_usuario/{usr}','Catalogos\UsuarioController@update')->name('usuarioUpdate/');
     Route::get('/destroy_usuario/{id}/{idItem}/{action}', 'Catalogos\UsuarioController@destroy')->name('usuarioDestroy/');
 
-    // Fichas Usuarios
+    // Fichas Roles
     Route::post('/create_role','Catalogos\RoleController@create')->name('roleCreate/');
     Route::put('/update_role/{rol}','Catalogos\RoleController@update')->name('roleUpdate/');
     Route::get('/destroy_role/{id}/{idItem}/{action}', 'Catalogos\RoleController@destroy')->name('roleDestroy/');
 
-    // Asignaciones
+    // Fichas Permissions
+    Route::post('/create_permission','Catalogos\PermissionController@create')->name('permissionCreate/');
+    Route::put('/update_permission/{perm}','Catalogos\PermissionController@update')->name('permissionUpdate/');
+    Route::get('/destroy_permission/{id}/{idItem}/{action}', 'Catalogos\PermissionController@destroy')->name('permissionDestroy/');
+
+    // Asignaciones Roles -> Usuarios
     Route::get('/list_left_config/{ida}/{iduser}/','Asignaciones\AsignacionListController@index')->name('asignItem/');
     Route::get('/asign_role_user/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@asignar')->name('assignRoleToUser/');
     Route::get('/unasign_role_user/{idUser}/{nameRoles}/{cat_id}','Asignaciones\RoleUsuarioController@desasignar')->name('unAssignRoleToUser/');
 
-    // Asignaciones
+    // Asignaciones Permissions -> Roles
     Route::get('/asign_permission_role/{idRole}/{namePermissions}/{cat_id}','Asignaciones\PermisoRoleController@asignar')->name('assignPermissionToRole/');
     Route::get('/unasign_permission_role/{idRole}/{namePermissions}/{cat_id}','Asignaciones\PermisoRoleController@desasignar')->name('unAssignPermissionToRole/');
 

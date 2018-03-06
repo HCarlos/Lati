@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
@@ -51,6 +52,10 @@ class CatalogosListController extends Controller
             case 11:
                 $tableName = 'roles';
                 $items = Role::all()->sortByDesc('id')->forPage(1,100);
+                break;
+            case 12:
+                $tableName = 'permissions';
+                $items = Permission::all()->sortByDesc('id')->forPage(1,100);
                 break;
         }
 
@@ -111,7 +116,7 @@ class CatalogosListController extends Controller
                     $items = $total == count($items) ? collect(new User) : $items;
                     break;
                 case 11:
-                    $this->tableName = 'usuarios';
+                    $this->tableName = 'roles';
                     $total = Role::all()->count();
                     $items = Role::select('id','name')
                         ->orWhere('name','LIKE',"%{$search}%")
@@ -119,13 +124,21 @@ class CatalogosListController extends Controller
                         ->sortByDesc('id');
                     $items = $total == count($items) ? collect(new Role) : $items;
                     break;
+                case 12:
+                    $this->tableName = 'permissions';
+                    $total = Permissions::all()->count();
+                    $items = Permissions::select('id','name')
+                        ->orWhere('name','LIKE',"%{$search}%")
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new Permission) : $items;
+                    break;
             }
 
 
         }else{
             $items = [];
         }
-
 
         $user = Auth::User();
         return view ('catalogos.side_bar_right',
@@ -156,6 +169,11 @@ class CatalogosListController extends Controller
                 break;
             case 11:
                 $items = Role::select('id','name')
+                    ->orderBy('id','desc')
+                    ->get();
+                break;
+            case 12:
+                $items = Permissions::select('id','name')
                     ->orderBy('id','desc')
                     ->get();
                 break;
