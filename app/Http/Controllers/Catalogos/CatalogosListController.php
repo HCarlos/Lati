@@ -53,9 +53,6 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
-                $user = Auth::User()->with('roles.permissions')->whereName('Admin')->get();
-                // $user = User::permission('editar_registro')->get();
-                // dd( $user->givePermissionTo('editar_registro') );
                 break;
             case 10:
                 $this->tableName = 'usuarios';
