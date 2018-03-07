@@ -23,8 +23,12 @@
             <div class="col-xs-6 col-sm-4  panel-fill  vertical-center">
                 <div class="panel panel-fill  jumbotron vertical-center">
                     <div class="panel-body panel-fill ">
-                        <a class="btn btn-default btnAsign0 form-control" id="{{ 'btnAsign0-'.$id.'-'.$iduser }}" href="#" role="button">Asignar <i class="fas fa-angle-right"></i></a><br/><br/>
-                        <a class="btn btn-default btnUnasign0 form-control" id="{{ 'btnUnasign0-'.$id.'-'.$iduser }}" href="#" role="button"><i class="fas fa-angle-left"></i> Quitar</a>
+                        @if ($user->hasAnyPermission(['asignar_permisos_role','all']))
+                            <a class="btn btn-default btnAsign0 form-control" id="{{ 'btnAsign0-'.$id.'-'.$iduser }}" href="#" role="button">Asignar <i class="fas fa-angle-right"></i></a><br/><br/>
+                        @endif
+                        @if ($user->hasAnyPermission(['eliminar_permisos_role','all']))
+                            <a class="btn btn-default btnUnasign0 form-control" id="{{ 'btnUnasign0-'.$id.'-'.$iduser }}" href="#" role="button"><i class="fas fa-angle-left"></i> Quitar</a>
+                        @endif
                     </div>
                 </div>
             </div>
