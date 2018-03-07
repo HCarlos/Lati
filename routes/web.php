@@ -20,6 +20,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
+    // Edita Registro Routes...
+//    $this->get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
+//    $this->put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
+
+    Route::get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
+    Route::put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
+
     Route::get('/index/{id}/','Catalogos\CatalogosListController@index')->name('listItem');
     Route::post('/catalogo/search/','Catalogos\CatalogosListController@indexSearch')->name('listItemSearch');
 //    Route::post('admin/home/role', 'RoleController@store')->name('admin/home/role/post');

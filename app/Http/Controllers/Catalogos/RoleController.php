@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Catalogos;
 
 use Exception;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -13,6 +14,7 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+    use Authorizable;
 
     public function __construct()
     {

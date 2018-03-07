@@ -1137,10 +1137,6 @@ class Router implements RegistrarContract, BindingRegistrar
         $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
-        // Edita Registro Routes...
-        $this->get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
-        $this->put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
-
 
     }
 

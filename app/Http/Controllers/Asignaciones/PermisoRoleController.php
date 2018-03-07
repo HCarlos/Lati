@@ -24,7 +24,10 @@ class PermisoRoleController extends Controller
         foreach($perms AS $i=>$valor) {
             if ($perms[$i] !== ""){
                 $perm = Permission::where('name', $perms[$i])->first();
-                $role->givePermissionTo($perm);
+                $rl = $role->hasPermissionTo($perms[$i]); // Role::where('name',$perm)->count();
+                if (!$rl) {
+                    $role->givePermissionTo($perm);
+                }
             }
         }
         return redirect('/list_left_config/'.$cat_id.'/'.$idRole);

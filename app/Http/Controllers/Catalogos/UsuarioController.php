@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\User;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 class UsuarioController extends Controller
 {
     use RegistersUsers;
+    use Authorizable;
 
     public function __construct()
     {

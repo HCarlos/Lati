@@ -8,6 +8,7 @@ use App\Models\Codigo_Lenguaje_Pais;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
+// use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,9 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage(1,100);
+                $user = Auth::User()->with('roles.permissions')->whereName('Admin')->get();
+                // $user = User::permission('editar_registro')->get();
+                // dd( $user->givePermissionTo('editar_registro') );
                 break;
             case 10:
                 $this->tableName = 'usuarios';

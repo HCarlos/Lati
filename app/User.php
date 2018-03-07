@@ -14,6 +14,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+
 //    use HasPermissions;
 
     protected $guard_name = 'web'; // or whatever guard you want to use
@@ -23,7 +24,8 @@ class User extends Authenticatable
     protected $hidden = ['password', 'remember_token',];
 
     public function permissions() {
-        return $this->hasAnyPermission(Permission::class);
+//        return $this->hasAnyPermission(Permission::class);
+        return $this->belongsToMany(Permission::class);
     }
 
     public function roles(){

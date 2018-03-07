@@ -23,7 +23,10 @@ class RoleUsuarioController extends Controller
         foreach($roles AS $i=>$valor) {
             if ($roles[$i] !== ""){
                 $role = Role::where('name', $roles[$i])->first();
-                $user->roles()->attach($role);
+                $rl = $user->hasRole($roles[$i]); // Role::where('name',$perm)->count();
+                if (!$rl) {
+                    $user->roles()->attach($role);
+                }
             }
         }
         return redirect('/list_left_config/'.$cat_id.'/'.$idUser);

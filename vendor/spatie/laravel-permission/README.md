@@ -366,10 +366,24 @@ You can test if a user has a permission:
 $user->hasPermissionTo('edit articles');
 ```
 
+Or you may pass an integer representing the permission id
+
+```php
+$user->hasPermissionTo('1');
+$user->hasPermissionTo(Permission::find(1)->id);
+$user->hasPermissionTo($somePermission->id);
+```
+
 ...or if a user has multiple permissions:
 
 ```php
 $user->hasAnyPermission(['edit articles', 'publish articles', 'unpublish articles']);
+```
+
+You may also pass integers to lookup by permission id
+
+```php
+$user->hasAnyPermission(['edit articles', 1, 5]);
 ```
 
 Saved permissions will be registered with the `Illuminate\Auth\Access\Gate` class for the default guard. So you can
@@ -727,11 +741,9 @@ Two notes about Database Seeding:
 	        // create roles and assign existing permissions
 	        $role = Role::create(['name' => 'writer']);
 	        $role->givePermissionTo('edit articles');
-	        $role->givePermissionTo('delete articles');
 
 	        $role = Role::create(['name' => 'admin']);
-	        $role->givePermissionTo('publish articles');
-	        $role->givePermissionTo('unpublish articles');
+            $role->givePermissionTo(['publish articles', 'unpublish articles']);
 	    }
 	}
 

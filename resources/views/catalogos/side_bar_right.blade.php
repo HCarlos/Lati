@@ -10,11 +10,11 @@
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-
+        @if ($user->hasAnyPermission(['crear_registro','crear_usuarios','crear_roles','crear_permisos','all']))
         <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" title="Agregar nuevo registro" style="margin-left: 2em;">
             <i class="fa fa-plus-circle "></i> Nuevo registro
         </a>
-
+        @endif
         <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
             {{ csrf_field() }}
                 <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="buscar..." style="height: 2em !important; line-height: 2em !important;">
@@ -31,7 +31,7 @@
         @switch($id)
 
             @case(0)
-                @if(Auth::user()->hasRole('user'))
+                @if($user->hasRole('user'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                     <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -50,14 +50,16 @@
                                 <td>{{ $item->editorial }}</td>
                                 <td>{{ $item->representante }}</td>
                                 <td width="100">
-
+                                    @if ($user->hasAnyPermission(['eliminar_registro','all']))
                                         <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_editorial/" title="Eliminar">
                                             <i class="fa fa-trash fa-lg red" ></i>
                                         </a>
-
-                                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar" >
-                                        <i class="fas fa-pencil-alt blue"></i>
-                                    </a>
+                                    @endif
+                                    @if ($user->hasAnyPermission(['editar_registro','all']))
+                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar" >
+                                            <i class="fas fa-pencil-alt blue"></i>
+                                        </a>
+                                    @endif
 
                                 </td>
                             </tr>
@@ -71,7 +73,7 @@
                 @endif
                 @break;
             @case(1)
-                @if(Auth::user()->hasRole('user'))
+                @if($user->hasRole('user'))
                     <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                             <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -94,15 +96,16 @@
                                         <td>{{ $item->titulo }}</td>
                                         <td>{{ $item->autor }}</td>
                                         <td width="100">
-
-                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
-                                                <i class="fa fa-trash fa-lg red" ></i>
-                                            </a>
-
-                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
-                                                <i class="fas fa-pencil-alt blue"></i>
-                                            </a>
-
+                                            @if ($user->hasAnyPermission(['eliminar_registro','all']))
+                                                <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
+                                                    <i class="fa fa-trash fa-lg red" ></i>
+                                                </a>
+                                            @endif
+                                            @if ($user->hasAnyPermission(['editar_registro','all']))
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                                    <i class="fas fa-pencil-alt blue"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -117,7 +120,7 @@
                 @break;
 
             @case(2)
-            @if(Auth::user()->hasRole('user'))
+            @if($user->hasRole('user'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -137,17 +140,19 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->idmig }}</td>
                                     <td>{{ $item->codigo }}</td>
-                                    <td>{{ $item->lenguaje }}</td>
+                                    <td>{{ trim($item->lenguaje) }}</td>
                                     <td>{{ trim($item->tipo)=='L'?'Lengüaje':'Pais' }}</td>
                                     <td width="100">
-
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_clp/" title="Eliminar">
-                                            <i class="fa fa-trash fa-lg red" ></i>
-                                        </a>
-
-                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar" >
-                                            <i class="fas fa-pencil-alt blue"></i>
-                                        </a>
+                                        @if ($user->hasAnyPermission(['eliminar_registro','all']))
+                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_clp/" title="Eliminar">
+                                                <i class="fa fa-trash fa-lg red" ></i>
+                                            </a>
+                                        @endif
+                                        @if ($user->hasAnyPermission(['editar_registro','all']))
+                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar" >
+                                                <i class="fas fa-pencil-alt blue"></i>
+                                            </a>
+                                        @endif
 
                                     </td>
                                 </tr>
@@ -162,7 +167,7 @@
             @break;
 
             @case(10)
-            @if(Auth::user()->hasRole('administrator'))
+            @if($user->hasRole('administrator'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -183,12 +188,16 @@
                                     <td>{{ $item->nombre_completo }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td width="100">
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="usuario-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_usuario/" title="Eliminar">
-                                            <i class="fa fa-trash fa-lg red" ></i>
-                                        </a>
-                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
-                                            <i class="fas fa-pencil-alt blue"></i>
-                                        </a>
+                                        @if ($user->hasAnyPermission(['eliminar_usuarios','all']))
+                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="usuario-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_usuario/" title="Eliminar">
+                                                <i class="fa fa-trash fa-lg red" ></i>
+                                            </a>
+                                        @endif
+                                        @if ($user->hasAnyPermission(['editar_usuarios','all']))
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                                    <i class="fas fa-pencil-alt blue"></i>
+                                                </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -201,7 +210,7 @@
             @endif
             @break;
             @case(11)
-            @if(Auth::user()->hasRole('administrator'))
+            @if($user->hasRole('administrator'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -218,13 +227,17 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td width="100">
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="role-{{$item->id.'-'.$item->id.'-'.$id}}-2-/destroy_role/" title="Eliminar">
-                                        {{--<a href="{{ route('roleDestroy/', array('id' => $item->id,'idItem' => $item->id,'action' => 2)) }}" class="btn btn-link btn-xs pull-right" title="Eliminar">--}}
-                                            <i class="fa fa-trash fa-lg red" ></i>
-                                        </a>
-                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
-                                            <i class="fas fa-pencil-alt blue"></i>
-                                        </a>
+                                        @if ($user->hasAnyPermission(['eliminar_roles','all']))
+                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="role-{{$item->id.'-'.$item->id.'-'.$id}}-2-/destroy_role/" title="Eliminar">
+                                                {{--<a href="{{ route('roleDestroy/', array('id' => $item->id,'idItem' => $item->id,'action' => 2)) }}" class="btn btn-link btn-xs pull-right" title="Eliminar">--}}
+                                                <i class="fa fa-trash fa-lg red" ></i>
+                                            </a>
+                                        @endif
+                                        @if ($user->hasAnyPermission(['editar_roles','all']))
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                                    <i class="fas fa-pencil-alt blue"></i>
+                                                </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -238,7 +251,7 @@
             @break;
 
             @case(12)
-            @if(Auth::user()->hasRole('administrator'))
+            @if($user->hasRole('administrator'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >
@@ -255,13 +268,17 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td width="100">
-                                        <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="role-{{$item->id.'-'.$item->id.'-'.$id}}-2-/destroy_permission/" title="Eliminar">
-                                            {{--<a href="{{ route('roleDestroy/', array('id' => $item->id,'idItem' => $item->id,'action' => 2)) }}" class="btn btn-link btn-xs pull-right" title="Eliminar">--}}
-                                            <i class="fa fa-trash fa-lg red" ></i>
-                                        </a>
-                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
-                                            <i class="fas fa-pencil-alt blue"></i>
-                                        </a>
+                                        @if ($user->hasAnyPermission(['eliminar_permisos','all']))
+                                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="role-{{$item->id.'-'.$item->id.'-'.$id}}-2-/destroy_permission/" title="Eliminar">
+                                                {{--<a href="{{ route('roleDestroy/', array('id' => $item->id,'idItem' => $item->id,'action' => 2)) }}" class="btn btn-link btn-xs pull-right" title="Eliminar">--}}
+                                                <i class="fa fa-trash fa-lg red" ></i>
+                                            </a>
+                                        @endif
+                                        @if ($user->hasAnyPermission(['editar_permisos','all']))
+                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
+                                                <i class="fas fa-pencil-alt blue"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
