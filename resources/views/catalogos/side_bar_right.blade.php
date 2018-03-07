@@ -10,11 +10,11 @@
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-        {{--@if ($user->hasAnyPermission(['crear_registro','crear_usuarios','crear_roles','crear_permisos','all']))--}}
+        @if ($user->hasAnyPermission(['crear_registro','crear_usuarios','crear_roles','crear_permisos','all']))
             <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" title="Agregar nuevo registro" style="margin-left: 2em;">
                 <i class="fa fa-plus-circle "></i> Nuevo registro
             </a>
-        {{--@endif--}}
+        @endif
         <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
             {{ csrf_field() }}
                 <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="buscar..." style="height: 2em !important; line-height: 2em !important;">
