@@ -51,14 +51,14 @@ return [
 
         'devch' => [
             'driver' => 'local',
-            'root' => public_path().'/storage/devch',
+            'root' => storage_path().'/storage/devch',
             'url' => env('APP_URL').'/storage/devch',
             'visibility' => 'public',
         ],
 
         'isbn' => [
             'driver' => 'local',
-            'root' => public_path().'/storage/isbn',
+            'root' => storage_path().'/storage/isbn',
             'url' => env('APP_URL').'/storage/isbn',
             'visibility' => 'public',
         ],
