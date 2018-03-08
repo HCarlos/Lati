@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AgregarEditorialesSeeder::class);
         $this->call(AgregarFichasSeeder::class);
         $this->call(InitializeCodigoLenguajePaisesSeeder::class);
+        $this->call(InitializePermissionsSeeder::class);
+
     }
 }

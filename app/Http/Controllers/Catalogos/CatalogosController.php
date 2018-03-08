@@ -78,5 +78,45 @@ class CatalogosController extends Controller
             ]
         );
 
+    }
 
-    }}
+    public function clone($id=0,$idItem=0,$action=0)
+    {
+        $items = Ficha::findOrFail($idItem);
+        $user = Auth::User();
+
+        return view ('bridge.catalogos_ficha_clone',
+            [
+                'id'   => $id,
+                'idItem' => $idItem,
+                'titulo' => 'Clonar Ficha: ',
+                'action' => $action,
+                'items' => $items,
+                'user' => $user,
+                'otrosDatos' => '',
+            ]
+        );
+
+    }
+
+    public function subirImagen($id=0,$idItem=0,$action=0)
+    {
+        $items = Ficha::findOrFail($idItem);
+        $user = Auth::User();
+
+        return view ('storage.catalogos_subir_imagen_ficha',
+            [
+                'id'   => $id,
+                'idItem' => $idItem,
+                'titulo' => 'Subir imagen a ficha: ',
+                'action' => $action,
+                'items' => $items,
+                'user' => $user,
+                'otrosDatos' => '',
+                'archivo' => ''
+            ]
+        );
+
+    }
+
+}

@@ -80,7 +80,7 @@ class EditorialController extends Controller
 
     public function destroy($id=0,$idItem=0,$action=0){
         Editorial::findOrFail($id)->delete();
-        return Response::json(['validar_correo' => 'false', 'data' => 'OK', 'status' => '200'], 200);
+        return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 

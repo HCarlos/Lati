@@ -18,6 +18,4 @@ class Ficha extends Model
         'autor','clasificacion','status','no_coleccion',
         ];
 
-//    protected $hidden = ['etiqueta_marc',];
-
 }

@@ -45,12 +45,27 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+//            'root' => storage_path(public_path().'/storage'),
+            'root' => public_path().'/storage',
+        ],
+
+        'devch' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage/devch',
+            'url' => env('APP_URL').'/storage/devch',
+            'visibility' => 'public',
+        ],
+
+        'isbn' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage/isbn',
+            'url' => env('APP_URL').'/storage/isbn',
+            'visibility' => 'public',
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('public/storage'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

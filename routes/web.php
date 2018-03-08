@@ -35,7 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['role:user']], function () {
 
         Route::get('catalogos/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@index')->name('catalogos/');
-        Route::get('/catajax/{id}', 'Catalogos\CatalogosListController@ajaxIndex')->name('ajaxIndexCatList');
+        Route::get('catalogos/ficha-clone/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@clone')->name('catalogosFichasClone/');
+        Route::get('catalogos/subir-imagen-ficha/{id}/{idItem}/{action}', 'Catalogos\CatalogosController@subirImagen')->name('catalogosSubirImagenFichas/');
+
+//        Route::get('/catajax/{id}', 'Catalogos\CatalogosListController@ajaxIndex')->name('ajaxIndexCatList');
 
         // Editoriales
         Route::post('/store_editorial','Catalogos\EditorialController@store')->name('editorialStore/');
@@ -46,6 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store_ficha','Catalogos\FichaController@store')->name('fichaStore/');
         Route::put('/update_ficha/{oFicha}','Catalogos\FichaController@update')->name('fichaUpdate/');
         Route::get('/destroy_ficha/{id}/{idItem}/{action}', 'Catalogos\FichaController@destroy')->name('fichaDestroy/');
+        Route::put('/clone_ficha/{oFicha}','Catalogos\FichaController@clone')->name('fichaClone/');
+        Route::post('/subir_imagen_ficha/{oFicha}','Storage\StorageFichaController@subirArchivoFicha')->name('storageFicha/');
 
         // Codigo de Lenguaje de Paises
         Route::post('/store_clp','Catalogos\CodigoLenguajePaisController@store')->name('clpStore/');

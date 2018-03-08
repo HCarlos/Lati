@@ -77,9 +77,35 @@ class FichaController extends Controller
         return redirect('index/'.$cat_id);
     }
 
+    public function clone(Request $request, Ficha $oFicha)
+    {
+        $data = $request->all();
+        $cantidad              = $data['cantidad'];
+        $cat_id                = $data['cat_id'];
+
+        $data['ficha_no']      = $oFicha['ficha_no'];
+        $data['fecha']         = $oFicha['fecha'];
+        $data['fecha_mod']     = $oFicha['fecha_mod'];
+        $data['datos_fijos']   = $oFicha['datos_fijos'];
+        $data['etiqueta_marc'] = $oFicha['etiqueta_marc'];
+        $data['tipo_material'] = $oFicha['tipo_material'];
+        $data['isbn']          = $oFicha['isbn'];
+        $data['titulo']        = $oFicha['titulo'];
+        $data['autor']         = $oFicha['autor'];
+        $data['clasificacion'] = $oFicha['clasificacion'];
+        $data['status']        = $oFicha['status'];
+        $data['no_coleccion']  = $oFicha['no_coleccion'];
+
+        for ($i=0;$i<$cantidad;$i++){
+            Ficha::create($data);
+        }
+
+        return redirect('index/'.$cat_id);
+    }
+
     public function destroy($id=0,$idItem=0,$action=0){
         Ficha::findOrFail($id)->delete();
-        return Response::json(['validar_correo' => 'false', 'data' => 'OK', 'status' => '200'], 200);
+        return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
 
