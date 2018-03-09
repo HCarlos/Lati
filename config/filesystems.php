@@ -49,18 +49,11 @@ return [
             'root' => public_path().'/storage',
         ],
 
-        'devch' => [
-            'driver' => 'local',
-            'root' => public_path().'/storage/devch',
-            'url' => env('APP_URL').'/storage/devch',
-            'visibility' => 'public',
-        ],
-
         'isbn' => [
-            'driver' => 'local',
-            'root' => public_path().'/storage/isbn',
-            'url' => env('APP_URL').'/storage/isbn',
-            'visibility' => 'public',
+            'driver' => env('ISBN_DRIVER'),
+            'root' => public_path().env('ISBN_ROOT'),
+            'url' => env('APP_URL').env('ISBN_URL'),
+            'visibility' => env('ISBN_VISIBILITY'),
         ],
 
         'public' => [
