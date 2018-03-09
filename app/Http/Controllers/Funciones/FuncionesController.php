@@ -19,7 +19,7 @@ class FuncionesController extends Controller
 
     public function showFile($root="/storage/",$archivo=""){
         $public_path = public_path();
-        $url = $public_path.$root.$archivo;
+        $url = $public_path."/storage/".$root.$archivo;
         if (Storage::exists($archivo))
         {
             return response()->download($url);

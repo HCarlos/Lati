@@ -30,7 +30,10 @@
                 </div>
             </div>
             <div class="form-group row">
-                <img src="{{ public_path().'/storage/'.$archivo  }}" alt="Imagen">
+                <label class="col-md-4 control-label">Última Imagen</label>
+                <div class="col-md-6">
+                    <img src="{{ asset('storage/isbn/'.$archivo->filename)  }}" width="100" height="100" alt="Imagen">
+                </div>
             </div>
             <div>
                 <label class="col-md-2 col-form-label text-md-right"></label>

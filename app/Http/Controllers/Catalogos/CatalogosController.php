@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Codigo_Lenguaje_Pais;
 use App\Models\Editorial;
 use App\Models\Ficha;
+use App\Models\Fichafile;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -103,6 +104,7 @@ class CatalogosController extends Controller
     {
         $items = Ficha::findOrFail($idItem);
         $user = Auth::User();
+        $filename = Fichafile::all()->where('ficha_id',$idItem)->last();
 
         return view ('storage.catalogos_subir_imagen_ficha',
             [
@@ -113,7 +115,7 @@ class CatalogosController extends Controller
                 'items' => $items,
                 'user' => $user,
                 'otrosDatos' => '',
-                'archivo' => ''
+                'archivo' => $filename,
             ]
         );
 
