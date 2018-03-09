@@ -26,13 +26,17 @@
             <div class="form-group row">
                 <label class="col-md-4 control-label">Nuevo Archivo</label>
                 <div class="col-md-6">
-                    <input type="file" class="form-control" name="file" >
+                    <input type="file" name="file" >
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-4 control-label">Última Imagen</label>
                 <div class="col-md-6">
-                    <img src="{{ asset('storage/isbn/'.$archivo->filename)  }}" width="100" height="100" alt="Imagen">
+                    @foreach($archivo as $item)
+                        <a href="{{ asset('storage/'.$item->root.$item->filename)  }}" target="_blank">
+                            <img src="{{ asset('storage/'.$item->root.$item->filename)  }}" width="100" height="100" title="{{$item->filename}}">
+                        </a>
+                    @endforeach
                 </div>
             </div>
             <div>
