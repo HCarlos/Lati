@@ -34,7 +34,7 @@ class StorageFichaController extends Controller
                     'ficha_id'=>$idItem,
                     'isbn'=>$isbn,
                     'filename'=>$fileName,
-                    'root'=>'storage/isbn/',
+                    'root'=>'isbn/',
                     'num'=>$num,]);
 //            }else{
 //                Storage::disk('isbn')->put($fileName, File::get($file));
