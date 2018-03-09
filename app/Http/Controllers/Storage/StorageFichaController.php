@@ -29,7 +29,7 @@ class StorageFichaController extends Controller
             $ext = $file->extension();
             $fileName = $isbn.'_'.$num.'.'.$ext;
 //            if (!Storage::disk('isbn')->exists($fileName)){
-                Storage::disk('public')->put($fileName, File::get($file));
+                Storage::disk('isbn')->put($fileName, File::get($file));
                 Fichafile::create([
                     'ficha_id'=>$idItem,
                     'isbn'=>$isbn,
