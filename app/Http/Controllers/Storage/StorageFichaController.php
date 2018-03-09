@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use League\Flysystem\Exception;
 
 class StorageFichaController extends Controller
@@ -17,11 +18,28 @@ class StorageFichaController extends Controller
 
     public function subirArchivoFicha(Request $request, Ficha $oFicha)
     {
+//        $fl = $request->file('file');
+//        $mime = $fl->getClientSize();
+//        dd($mime);
+
         $data    = $request->all();
         $action  = $data['action'];
         $cat_id  = $data['cat_id'];
         $idItem  = $data['idItem'];
         $isbn    = trim($oFicha['isbn']);
+
+
+        $validator = Validator::make($data, [
+            'file' => "required|mimes:jpg,jpeg,gif,png,video/mp4,pdf,zip,rar,xz|max:20000",
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect("catalogos/subir-imagen-ficha/$cat_id/$idItem/$action")
+                ->withErrors($validator)
+                ->withInput();
+
+        }
 
         try {
             $file = $request->file('file');

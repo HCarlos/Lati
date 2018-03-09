@@ -14,19 +14,15 @@
         <form method="post" action="{{ action('Storage\StorageFichaController@subirArchivoFicha',['oFicha'=>$items]) }}" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="form-group row">
                 <label class="col-md-4 control-label">Nuevo Archivo</label>
                 <div class="col-md-6">
-                    <input type="file" name="file" >
+                    <input type="file" name="file" class="form-control {{ $errors->has('file') ? ' is-invalid' : '' }} altMoz" style="padding-top: 0px;" >
+                    @if ($errors->has('file'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('file') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
 
