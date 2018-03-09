@@ -21,7 +21,7 @@ class CreateFichafilesTable extends Migration
             $table->string('filename',100);
             $table->unsignedInteger('num')->deault(0);
             $table->timestamps();
-//            $table->foreign('ficha_id')->references('id')->on('fichas');
+
             $table->foreign('ficha_id')
                 ->references('id')->on('fichas')
                 ->onDelete('cascade');

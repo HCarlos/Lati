@@ -104,7 +104,8 @@ class CatalogosController extends Controller
     {
         $items = Ficha::findOrFail($idItem);
         $user = Auth::User();
-        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
+//        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
+        $filename = Fichafile::all()->where('isbn',$items->isbn)->sortBy('id');
 
         return view ('storage.catalogos_subir_imagen_ficha',
             [

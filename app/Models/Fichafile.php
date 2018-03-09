@@ -18,7 +18,7 @@ class Fichafile extends Model
     ];
 
     public function fichas(){
-        return $this->belongsToMany(Ficha::class);
+        return $this->belongsToMany(Ficha::class,'fichafiles','ficha_id');
     }
 
 

@@ -21,15 +21,16 @@ class StorageFichaController extends Controller
         $action  = $data['action'];
         $cat_id  = $data['cat_id'];
         $idItem  = $data['idItem'];
-        $isbn    = $oFicha['isbn'];
+        $isbn    = trim($oFicha['isbn']);
 
         try {
             $file = $request->file('file');
             $ff = Fichafile::all()->where('isbn',$isbn)->last();
-            $num = $ff->num + 1;
+            $num = $ff === null ? 1 : $ff->num + 1;
+
             $ext = $file->extension();
             $fileName = $isbn.'_'.$num.'.'.$ext;
-            if (!Storage::disk('isbn')->exists($fileName)){
+//            if (!Storage::disk('isbn')->exists($fileName)){
                 Storage::disk('isbn')->put($fileName, File::get($file));
                 Fichafile::create([
                     'ficha_id'=>$idItem,
@@ -37,9 +38,9 @@ class StorageFichaController extends Controller
                     'filename'=>$fileName,
                     'root'=>'isbn/',
                     'num'=>$num,]);
-            }else{
-                Storage::disk('isbn')->put($fileName, File::get($file));
-            }
+//            }else{
+//                Storage::disk('isbn')->put($fileName, File::get($file));
+//            }
 
         }catch (Exception $e){
             dd($e);
@@ -47,7 +48,7 @@ class StorageFichaController extends Controller
 
         $items = Ficha::findOrFail($idItem);
         $user = Auth::User();
-        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
+        $filename = Fichafile::all()->where('isbn',$items->isbn)->sortBy('id');
 
         return view ('storage.catalogos_subir_imagen_ficha',
             [
@@ -71,7 +72,7 @@ class StorageFichaController extends Controller
         Fichafile::findOrFail($idFF)->delete();
         $items = Ficha::findOrFail($idItem);
         $user = Auth::User();
-        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
+        $filename = Fichafile::all()->where('isbn',$items->isbn)->sortBy('id');
 
         return view ('storage.catalogos_subir_imagen_ficha',
             [
