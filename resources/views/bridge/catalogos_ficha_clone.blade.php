@@ -34,7 +34,7 @@
                             <label class="col-md-2 col-form-label text-md-right"></label>
                             <div class="col-md-8" >
                                 <button type="submit" class="btn btn-primary">
-                                    Guardar
+                                    Clonar
                                 </button>
                             </div>
                             <a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">
