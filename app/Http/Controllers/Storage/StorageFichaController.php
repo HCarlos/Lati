@@ -25,10 +25,11 @@ class StorageFichaController extends Controller
 
         try {
             $file = $request->file('file');
-            $num = Fichafile::all()->where('isbn',$isbn)->count() + 1;
+            $ff = Fichafile::all()->where('isbn',$isbn)->last();
+            $num = $ff->num + 1;
             $ext = $file->extension();
             $fileName = $isbn.'_'.$num.'.'.$ext;
-//            if (!Storage::disk('isbn')->exists($fileName)){
+            if (!Storage::disk('isbn')->exists($fileName)){
                 Storage::disk('isbn')->put($fileName, File::get($file));
                 Fichafile::create([
                     'ficha_id'=>$idItem,
@@ -36,9 +37,9 @@ class StorageFichaController extends Controller
                     'filename'=>$fileName,
                     'root'=>'isbn/',
                     'num'=>$num,]);
-//            }else{
-//                Storage::disk('isbn')->put($fileName, File::get($file));
-//            }
+            }else{
+                Storage::disk('isbn')->put($fileName, File::get($file));
+            }
 
         }catch (Exception $e){
             dd($e);
@@ -62,5 +63,29 @@ class StorageFichaController extends Controller
         );
     }
 
+    public function quitarArchivoFicha($cat_id=0,$idItem=0,$action=0,$idFF=0)
+    {
+        $oFF = Fichafile::findOrFail($idFF);
+//        Storage::delete('storage/'.$oFF->root.$oFF->filename);
+        Storage::disk('isbn')->delete($oFF->filename);
+        Fichafile::findOrFail($idFF)->delete();
+        $items = Ficha::findOrFail($idItem);
+        $user = Auth::User();
+        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
+
+        return view ('storage.catalogos_subir_imagen_ficha',
+            [
+                'id'   => $cat_id,
+                'idItem' => $idItem,
+                'titulo' => 'Subir imagen a ficha: ',
+                'action' => $action,
+                'items' => $items,
+                'user' => $user,
+                'otrosDatos' => '',
+                'archivo' => $filename,
+            ]
+        );
+
+    }
 
 }

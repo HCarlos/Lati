@@ -44,3 +44,12 @@
 .todoloAncho{
     width: 100% !important;
 }
+
+.contenedor-div{
+	position:relative;
+}
+.mi-imagen-arriba-derecha{
+	position:absolute;
+	top:5px;
+	right:10px;
+}

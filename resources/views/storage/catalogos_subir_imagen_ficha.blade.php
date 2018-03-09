@@ -33,11 +33,19 @@
             <div class="form-group row">
                 <label class="col-md-4 control-label">Última Imagen</label>
                 <div class="col-md-6">
+
+                    <div class="row">
                     @foreach($archivo as $item)
-                        <a href="{{ asset('storage/'.$item->root.$item->filename)  }}" target="_blank">
-                            <img src="{{ asset('storage/'.$item->root.$item->filename)  }}" width="100" height="100" title="{{$item->filename}}">
-                        </a>
+                        <div class="list-group-item col-md-3" >
+                            <a href="{{ asset('storage/'.$item->root.$item->filename)  }}" target="_blank" >
+                                <img src="{{ asset('storage/'.$item->root.$item->filename)  }}" width="100" height="100" title="{{$item->filename}}">
+                                <a href="{{ route('storageFichaRemove/',['cat_id'=>$id,'idItem'=>$idItem,'action'=>$action,'idFF'=>$item->id])  }}"  class="mi-imagen-arriba-derecha icon-trash bigger-150" >
+                                    <i class="fas fa-trash-alt red"></i>
+                                </a>
+                            </a>
+                        </div>
                     @endforeach
+                        </div>
                 </div>
             </div>
             <div>
