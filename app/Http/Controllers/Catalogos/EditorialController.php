@@ -12,8 +12,8 @@ use App\Http\Controllers\Funciones\FuncionesController;
 class EditorialController extends Controller
 {
 
-    public function __construct()
-    {
+    protected $redirectTo = '/home';
+    public function __construct(){
         $this->middleware('auth');
     }
 

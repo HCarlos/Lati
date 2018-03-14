@@ -8,14 +8,21 @@ use App\Models\Editorial;
 use App\Models\Ficha;
 use App\Models\Fichafile;
 use App\User;
+use Illuminate\Auth\Access\AuthorizationException as AuthorizationException;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class CatalogosController extends Controller
 {
     protected $otrosDatos;
+    protected $redirectTo = '/home';
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index($id=0,$idItem=0,$action=0)
     {
@@ -38,26 +45,48 @@ class CatalogosController extends Controller
                     $items = Codigo_Lenguaje_Pais::findOrFail($idItem);
                     break;
                 case 10;
-                    $items = User::findOrFail($idItem);
-                    foreach ($items->roles as $role) {
-                        $this->otrosDatos .= $role->name . ', ';
+                    if ( Auth::user()->isAdmin() ){
+                        $items = User::findOrFail($idItem);
+                        foreach ($items->roles as $role) {
+                            $this->otrosDatos .= $role->name . ', ';
+                        }
+                    }else{
+                        throw new AuthorizationException();
                     }
                     break;
                 case 11;
-                    $items = Role::findOrFail($idItem);
-                    foreach ($items->permissions as $permision) {
-                        $this->otrosDatos .= $permision->name . ', ';
+                    if ( Auth::user()->isAdmin() ){
+                        $items = Role::findOrFail($idItem);
+                        foreach ($items->permissions as $permision) {
+                            $this->otrosDatos .= $permision->name . ', ';
+                        }
+                    }else{
+                        throw new AuthorizationException();
                     }
                     break;
                 case 12;
-                    $items = Permission::findOrFail($idItem);
+                    if ( Auth::user()->isAdmin() ){
+                        $items = Permission::findOrFail($idItem);
+                    }else{
+                        throw new AuthorizationException();
+                    }
+                    break;
+                default:
+                    throw new NotFoundHttpException();
                     break;
             }
         }elseif ($action == 0){
             $items = [];
             switch ($id) {
                 case 10;
-                    $this->otrosDatos = Role::all()->sortByDesc('name')->pluck('name', 'name');
+                    if ( Auth::user()->isAdmin() ){
+                        $this->otrosDatos = Role::all()->sortByDesc('name')->pluck('name', 'name');
+                    }else{
+                        throw new AuthorizationException();
+                    }
+                    break;
+                default:
+                    throw new NotFoundHttpException();
                     break;
             }
         }
@@ -104,7 +133,6 @@ class CatalogosController extends Controller
     {
         $items = Ficha::findOrFail($idItem);
         $user = Auth::User();
-//        $filename = Fichafile::all()->where('ficha_id',$idItem)->sortBy('id');
         $filename = Fichafile::all()->where('isbn',$items->isbn)->sortBy('id');
 
         return view ('storage.catalogos_subir_imagen_ficha',

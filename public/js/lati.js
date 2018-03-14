@@ -13,8 +13,12 @@ $(document).ready(function() {
             if (!x){
                 return false;
             }
-            var Url = aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4];
-            // alert(Url);
+            if (aID.length == 7){
+                var Url = aID[6]+aID[1]+"/"+aID[2]+"/"+aID[3]+"/"+aID[4];
+            }else{
+                var Url = aID[5]+aID[1]+"/"+aID[1]+"/"+aID[4];
+            }
+            alert(Url);
             $(function() {
                 $.ajax({
                     method: "GET",
@@ -79,8 +83,6 @@ $(document).ready(function() {
                 alert("Seleccione un elemento");
                 return false;
             }
-            // var Data = {'idUser':y,'nameRoles':x,'cat_id':Cat_Id};
-            // var Url = '/asign_role/';
             var Url = pathAssign[Cat_Id]+y+'/'+x+'/'+Cat_Id;
 
 
@@ -88,7 +90,6 @@ $(document).ready(function() {
                 $.ajax({
                     method: "GET",
                     url: Url
-                    // data:Data
                 })
                     .done(function( response ) {
                         window.location.href = '/list_left_config/'+Cat_Id+'/'+y;

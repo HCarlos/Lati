@@ -54,6 +54,14 @@
                                 <input type="text" value="{{ $otrosDatos }}" class="col-md-12 text-muted" disabled/>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for = "admin" class="col-md-2 col-form-label text-md-right">Is Admin</label>
+                            <div class="col-md-10">
+                                    <label>
+                                        {{ Form::checkbox('admin', null, trim($items->admin), ['id' => 'admin','class' => 'col-md-2','disabled' => 'disabled']) }}
+                                    </label>
+                            </div>
+                        </div>
                         <div>
                             <label class="col-md-2 col-form-label text-md-right"></label>
                             <div class="col-md-8" >

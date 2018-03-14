@@ -18,8 +18,8 @@ class UsuarioController extends Controller
     use RegistersUsers;
     use Authorizable;
 
-    public function __construct()
-    {
+    protected $redirectTo = '/home';
+    public function __construct(){
         $this->middleware('auth');
     }
 
@@ -75,6 +75,7 @@ class UsuarioController extends Controller
         $usr->twitter = $data['twitter'];
         $usr->facebook = $data['facebook'];
         $usr->instagram = $data['instagram'];
+        $usr->admin = $usr->hasRole('administrator');
         $usr->save();
 
         return redirect('index/'.$cat_id);

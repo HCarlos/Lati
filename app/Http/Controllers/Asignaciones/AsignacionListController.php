@@ -54,6 +54,9 @@ class AsignacionListController extends Controller
 //                    $this->lstAsigns .= $permision->name . ', ';
 //                }
                 break;
+            default:
+                throw new NotFoundHttpException();
+                break;
         }
 
         // dd($ida);

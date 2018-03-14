@@ -16,8 +16,8 @@ class RoleController extends Controller
 {
     use Authorizable;
 
-    public function __construct()
-    {
+    protected $redirectTo = '/home';
+    public function __construct(){
         $this->middleware('auth');
     }
 

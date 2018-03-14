@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/storage/{root}/{archivo}', 'Funciones\FuncionesController@showFile')->name('callFile/');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/update_clp/{clp}','Catalogos\CodigoLenguajePaisController@update')->name('clpUpdate/');
         Route::get('/destroy_clp/{id}/{idItem}/{action}', 'Catalogos\CodigoLenguajePaisController@destroy')->name('clpDestroy/');
 
+
     });
 
     // Fichas Usuarios
@@ -80,5 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Asignaciones Permissions -> Roles
     Route::get('/asign_permission_role/{idRole}/{namePermissions}/{cat_id}','Asignaciones\PermisoRoleController@asignar')->name('assignPermissionToRole/');
     Route::get('/unasign_permission_role/{idRole}/{namePermissions}/{cat_id}','Asignaciones\PermisoRoleController@desasignar')->name('unAssignPermissionToRole/');
+
+
 
 });

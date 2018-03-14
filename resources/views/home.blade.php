@@ -11,10 +11,8 @@
                         <a class="btn btn-link pull-right white" role="button" data-toggle="collapse" href="#dvCatalogos0" aria-expanded="false" aria-controls="dvCatalogos0">
                             <i class="fas fa-angle-down text-white"></i>
                         </a>
-
                     </div>
                     @include('catalogos.side_bar_left')
-
                 </div>
                 @if(Auth::user()->hasRole('administrator|system_operator'))
                 <div class="panel panel-primary">
@@ -27,6 +25,10 @@
                     @include('catalogos.side_bl_config')
                 </div>
                 @endif
+                {{Auth::user()->admin?"Es Admin":'No es Admin'}}
+                @admin
+                <a href="{{ route('admin_dashboard') }}">Dashboard</a>
+                @endadmin
                 {{--@role('administrator')--}}
                     {{--<div>Acceso como Administrador</div>--}}
                 {{--@else--}}
@@ -36,8 +38,8 @@
             </div>
 
             <div class="col-md-9">
-                    @yield('content_catalogo')
-                    @yield('content_form_permisions')
+                @yield('content_catalogo')
+                @yield('content_form_permisions')
             </div>
 
         </div>

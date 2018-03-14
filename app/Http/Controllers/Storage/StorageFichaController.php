@@ -15,6 +15,10 @@ use League\Flysystem\Exception;
 
 class StorageFichaController extends Controller
 {
+    protected $redirectTo = '/home';
+    public function __construct(){
+        $this->middleware('auth');
+    }
 
     public function subirArchivoFicha(Request $request, Ficha $oFicha)
     {

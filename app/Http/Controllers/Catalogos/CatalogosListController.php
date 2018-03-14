@@ -9,17 +9,20 @@ use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
 // use Illuminate\Foundation\Auth\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Yajra\DataTables\DataTables;
 
 class CatalogosListController extends Controller
 {
     protected $tableName = '';
 
+    protected $redirectTo = '/home';
     public function __construct()
     {
         $this->middleware('auth');
@@ -32,6 +35,7 @@ class CatalogosListController extends Controller
 
     public function index($id = 0)
     {
+
         switch ($id) {
             case 0:
                 $this->tableName = 'editoriales';
@@ -55,16 +59,31 @@ class CatalogosListController extends Controller
                     ->forPage(1,100);
                 break;
             case 10:
-                $this->tableName = 'usuarios';
-                $items = User::all()->sortByDesc('id')->forPage(1,100);
+                if ( Auth::user()->isAdmin() ){
+                    $this->tableName = 'usuarios';
+                    $items = User::all()->sortByDesc('id')->forPage(1,100);
+                }else{
+                    throw new AuthorizationException();
+                }
                 break;
             case 11:
-                $this->tableName = 'roles';
-                $items = Role::all()->sortByDesc('id')->forPage(1,100);
+                if ( Auth::user()->isAdmin() ){
+                    $this->tableName = 'roles';
+                    $items = Role::all()->sortByDesc('id')->forPage(1,100);
+                }else{
+                    throw new AuthorizationException();
+                }
                 break;
             case 12:
-                $this->tableName = 'permissions';
-                $items = Permission::all()->sortByDesc('id')->forPage(1,100);
+                if ( Auth::user()->isAdmin() ){
+                    $this->tableName = 'permissions';
+                    $items = Permission::all()->sortByDesc('id')->forPage(1,100);
+                }else{
+                    throw new AuthorizationException();
+                }
+                break;
+            default:
+                throw new NotFoundHttpException();
                 break;
         }
 
@@ -126,33 +145,48 @@ class CatalogosListController extends Controller
                     $items = $total == count($items) ? collect(new Ficha) : $items;
                     break;
                 case 10:
-                    $this->tableName = 'usuarios';
-                    $total = User::all()->count();
-                    $items = User::select('id','name','nombre_completo','email')
-                        ->orWhere('name','LIKE',"%{$search}%")
-                        ->orWhere('nombre_completo','LIKE',"%{$search}%")
-                        ->orWhere('email','LIKE',"%{$search}%")
-                        ->get()
-                        ->sortByDesc('id');
-                    $items = $total == count($items) ? collect(new User) : $items;
+                    if ( Auth::user()->isAdmin() ){
+                        $this->tableName = 'usuarios';
+                        $total = User::all()->count();
+                        $items = User::select('id','name','nombre_completo','email')
+                            ->orWhere('name','LIKE',"%{$search}%")
+                            ->orWhere('nombre_completo','LIKE',"%{$search}%")
+                            ->orWhere('email','LIKE',"%{$search}%")
+                            ->get()
+                            ->sortByDesc('id');
+                        $items = $total == count($items) ? collect(new User) : $items;
+                    }else{
+                        throw new AuthorizationException();
+                    }
                     break;
                 case 11:
-                    $this->tableName = 'roles';
-                    $total = Role::all()->count();
-                    $items = Role::select('id','name')
-                        ->orWhere('name','LIKE',"%{$search}%")
-                        ->get()
-                        ->sortByDesc('id');
-                    $items = $total == count($items) ? collect(new Role) : $items;
+                    if ( Auth::user()->isAdmin() ){
+                        $this->tableName = 'roles';
+                        $total = Role::all()->count();
+                        $items = Role::select('id','name')
+                            ->orWhere('name','LIKE',"%{$search}%")
+                            ->get()
+                            ->sortByDesc('id');
+                        $items = $total == count($items) ? collect(new Role) : $items;
+                    }else{
+                        throw new AuthorizationException();
+                    }
                     break;
                 case 12:
-                    $this->tableName = 'permissions';
-                    $total = Permissions::all()->count();
-                    $items = Permissions::select('id','name')
-                        ->orWhere('name','LIKE',"%{$search}%")
-                        ->get()
-                        ->sortByDesc('id');
-                    $items = $total == count($items) ? collect(new Permission) : $items;
+                    if ( Auth::user()->isAdmin() ){
+                        $this->tableName = 'permissions';
+                        $total = Permissions::all()->count();
+                        $items = Permissions::select('id','name')
+                            ->orWhere('name','LIKE',"%{$search}%")
+                            ->get()
+                            ->sortByDesc('id');
+                        $items = $total == count($items) ? collect(new Permission) : $items;
+                    }else{
+                        throw new AuthorizationException();
+                    }
+                    break;
+                default:
+                    throw new NotFoundHttpException();
                     break;
             }
 
@@ -189,19 +223,34 @@ class CatalogosListController extends Controller
                     ->get();
                 break;
             case 10:
-                $items = User::select('id','name', 'nombre_completo','email')
-                    ->orderBy('id','desc')
-                    ->get();
+                if ( Auth::user()->isAdmin() ){
+                    $items = User::select('id','name', 'nombre_completo','email')
+                        ->orderBy('id','desc')
+                        ->get();
+                }else{
+                    throw new AuthorizationException();
+                }
                 break;
             case 11:
-                $items = Role::select('id','name')
-                    ->orderBy('id','desc')
-                    ->get();
+                if ( Auth::user()->isAdmin() ){
+                    $items = Role::select('id','name')
+                        ->orderBy('id','desc')
+                        ->get();
+                }else{
+                    throw new AuthorizationException();
+                }
                 break;
             case 12:
-                $items = Permissions::select('id','name')
-                    ->orderBy('id','desc')
-                    ->get();
+                if ( Auth::user()->isAdmin() ){
+                    $items = Permissions::select('id','name')
+                        ->orderBy('id','desc')
+                        ->get();
+                }else{
+                    throw new AuthorizationException();
+                }
+                break;
+            default:
+                throw new NotFoundHttpException();
                 break;
         }
         $dataTable = Datatables::of($items)->make(true);
