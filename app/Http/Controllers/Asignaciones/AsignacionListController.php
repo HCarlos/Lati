@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AsignacionListController extends Controller
 {
@@ -31,7 +32,8 @@ class AsignacionListController extends Controller
             case 0:
                 $view = 'roles_usuario';
                 $listEle     = Role::all()->sortByDesc('name')->pluck('name','name');
-                $listTarget  = User::all()->sortByDesc('name')->pluck('name','id');
+                $listTarget  = User::all()->sortByDesc('username')->pluck('username','id');
+                //dd($listTarget);
                 if ($iduser == 0){
                     $iduser = 1;
                 }

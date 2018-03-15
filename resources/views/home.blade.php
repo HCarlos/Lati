@@ -25,7 +25,6 @@
                     @include('catalogos.side_bl_config')
                 </div>
                 @endif
-                {{Auth::user()->admin?"Es Admin":'No es Admin'}}
                 @admin
                 <a href="{{ route('admin_dashboard') }}">Dashboard</a>
                 @endadmin

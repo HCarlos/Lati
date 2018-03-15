@@ -148,8 +148,8 @@ class CatalogosListController extends Controller
                     if ( Auth::user()->isAdmin() ){
                         $this->tableName = 'usuarios';
                         $total = User::all()->count();
-                        $items = User::select('id','name','nombre_completo','email')
-                            ->orWhere('name','LIKE',"%{$search}%")
+                        $items = User::select('id','username','nombre_completo','email')
+                            ->orWhere('username','LIKE',"%{$search}%")
                             ->orWhere('nombre_completo','LIKE',"%{$search}%")
                             ->orWhere('email','LIKE',"%{$search}%")
                             ->get()
@@ -224,7 +224,7 @@ class CatalogosListController extends Controller
                 break;
             case 10:
                 if ( Auth::user()->isAdmin() ){
-                    $items = User::select('id','name', 'nombre_completo','email')
+                    $items = User::select('id','username', 'nombre_completo','email')
                         ->orderBy('id','desc')
                         ->get();
                 }else{

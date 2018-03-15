@@ -16,7 +16,6 @@ class RoleUsuarioController extends Controller
 
     public function asignar($idUser, $nameRoles,$cat_id)
     {
-
         $user = User::findOrFail($idUser);
         //dd($user->name);
         $roles = explode('|',$nameRoles);

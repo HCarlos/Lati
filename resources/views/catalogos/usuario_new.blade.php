@@ -24,9 +24,9 @@
                 </div>
             @endif
             <div class="form-group row">
-                <label for = "name" class="col-md-2 col-form-label text-md-right">Username</label>
+                <label for = "username" class="col-md-2 col-form-label text-md-right">Username</label>
                 <div class="col-md-10">
-                    <input type="text" name="name" value="{{ old('name') }}" required autofocus />
+                    <input type="text" name="username" value="{{ old('username') }}" required autofocus />
                 </div>
             </div>
             <div class="form-group row">
