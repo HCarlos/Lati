@@ -34,6 +34,9 @@ class EditUserDataController extends Controller
 
     protected function update(Request $request)
     {
+        $ip     = $_SERVER['REMOTE_ADDR'];
+        $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp  = 1;
 
         $validator = Validator::make($request->all(), [
             'nombre_completo' => 'required|string|max:255',
@@ -51,6 +54,9 @@ class EditUserDataController extends Controller
             $user->twitter = $request->input('twitter');
             $user->facebook = $request->input('facebook');
             $user->instagram = $request->input('instagram');
+            $user->idemp = $idemp;
+            $user->ip = $ip;
+            $user->host = $host;
             $user->save();
             return redirect($this->redirectTo);
         }

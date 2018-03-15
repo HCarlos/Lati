@@ -26,11 +26,14 @@ class UsuarioController extends Controller
     public function create(Request $request)
     {
 
-        $data = $request->all();
-        $cat_id     = $data['cat_id'];
-        $idItem     = $data['idItem'];
-        $action     = $data['action'];
-        $rol        = $data['role'];
+        $data   = $request->all();
+        $cat_id = $data['cat_id'];
+        $idItem = $data['idItem'];
+        $action = $data['action'];
+        $rol    = $data['role'];
+        $ip     = $_SERVER['REMOTE_ADDR'];
+        $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp  = 1;
 
         $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
@@ -45,6 +48,9 @@ class UsuarioController extends Controller
         }
 
         $data['password'] = bcrypt($data['password']);
+        $data['ip'] = $ip;
+        $data['host'] = $host;
+        $data['idemp'] = $idemp;
         $user = User::create($data);
         $role = Role::where('name', $rol)->first();
         $user->roles()->attach($role);
@@ -56,11 +62,13 @@ class UsuarioController extends Controller
     public function update(Request $request, User $usr)
     {
 
-        $data = $request->all();
-        $cat_id     = $data['cat_id'];
-        $idItem     = $data['idItem'];
-        $action     = $data['action'];
-
+        $data   = $request->all();
+        $cat_id = $data['cat_id'];
+        $idItem = $data['idItem'];
+        $action = $data['action'];
+        $ip     = $_SERVER['REMOTE_ADDR'];
+        $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp  = 1;
         $validator = Validator::make($data, [
             'nombre_completo' => 'required|string|max:255',
         ]);
@@ -76,6 +84,9 @@ class UsuarioController extends Controller
         $usr->facebook = $data['facebook'];
         $usr->instagram = $data['instagram'];
         $usr->admin = $usr->hasRole('administrator');
+        $usr->idemp = $idemp;
+        $usr->ip = $ip;
+        $usr->host = $host;
         $usr->save();
 
         return redirect('index/'.$cat_id);

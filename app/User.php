@@ -20,7 +20,11 @@ class User extends Authenticatable
     protected $guard_name = 'web'; // or whatever guard you want to use
     protected $table = 'users';
  
-    protected $fillable = ['username', 'email', 'password','admin','filename','root'];
+    protected $fillable = [
+        'username', 'email', 'password','admin',
+        'filename','root','idemp','ip','host',
+    ];
+    
     protected $hidden = ['password', 'remember_token',];
     protected $casts = ['admin'=>'boolean'];
 

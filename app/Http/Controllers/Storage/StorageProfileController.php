@@ -20,7 +20,9 @@ class StorageProfileController extends Controller
 
     public function subirArchivoProfile(Request $request)
     {
-
+        $ip     = $_SERVER['REMOTE_ADDR'];
+        $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp  = 1;
         $data    = $request->all();
 
         try {
@@ -40,6 +42,9 @@ class StorageProfileController extends Controller
             Storage::disk('profile')->put($fileName, File::get($file));
             $user->root = 'profile/';
             $user->filename = $fileName;
+            $user->ip = $ip;
+            $user->host = $host;
+            $user->idemp = $idemp;
             $user->save();
 
         }catch (Exception $e){

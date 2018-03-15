@@ -64,11 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        $ip   = $_SERVER['REMOTE_ADDR'];
+        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $idemp = 1;
         $user = User::create([
             'username' => strtolower($data['username']),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'idemp' => $idemp,
+            'ip' => $ip,
+            'host' => $host
         ]);
         $role = Role::where('name', 'user')->first();
         $user->roles()->attach($role);
