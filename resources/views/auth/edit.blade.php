@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Perfil | {{$user->name}}</div>
+                    <div class="panel-heading">Perfil | {{$user->username}}</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('Edit') }}">

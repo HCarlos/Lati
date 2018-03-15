@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Controllers\\Funciones\\FuncionesController' => $baseDir . '/app/Http/Controllers/Funciones/FuncionesController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Storage\\StorageFichaController' => $baseDir . '/app/Http/Controllers/Storage/StorageFichaController.php',
+    'App\\Http\\Controllers\\Storage\\StorageProfileController' => $baseDir . '/app/Http/Controllers/Storage/StorageProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

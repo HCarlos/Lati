@@ -186,8 +186,9 @@
                             <tr role="row">
                                 <th aria-label="id" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="0" role="columnheader" class="sorting" >ID</th>
                                 <th aria-label="username" style="width: 50px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="1" role="columnheader" class="sorting">Username</th>
-                                <th aria-label="nombre_completo" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Nombre Completo</th>
-                                <th aria-label="email" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Email</th>
+                                <th aria-label="nombre_completo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Nombre Completo</th>
+                                <th aria-label="email" style="width: 150px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Email</th>
+                                <th aria-label="admin" style="width: 20px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">Admin</th>
                                 <th aria-label="" style="width: 100px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
                             </tr>
                             </thead>
@@ -198,6 +199,11 @@
                                     <td>{{ $item->username }}</td>
                                     <td>{{ $item->nombre_completo }}</td>
                                     <td>{{ $item->email }}</td>
+                                    @if($item->isAdmin())
+                                        <td class="text-center"><i class="fas fa-check-circle green"></i></td>
+                                    @else
+                                        <td> &nbsp; </td>
+                                    @endif
                                     <td width="100">
                                         @if ($user->hasAnyPermission(['eliminar_usuarios','all']))
                                             <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="usuario-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_usuario/" title="Eliminar">

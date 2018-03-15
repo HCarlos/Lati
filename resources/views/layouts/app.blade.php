@@ -77,10 +77,16 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if( Auth::user()->IsEmptyPhoto() )
+                                        <img src="{{ asset('assets/img/empty_user.png')  }}" width="32" height="32" class="img-circle">
+                                    @else
+                                        <img src="{{ asset('storage/'.Auth::user()->root.Auth::user()->filename)  }}" width="32" height="32" class="img-circle">
+                                    @endif
                                     {{ Auth::user()->username }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a  class="dropdown-item" href="{{ route('edit') }}"><i class="far fa-address-card"></i> Perfil</a>
+                                    <a  class="dropdown-item" href="{{ route('showEditProfilePhoto/') }}"><i class="fas fa-user-circle"></i> Foto</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

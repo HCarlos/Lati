@@ -388,6 +388,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'App\\Http\\Controllers\\Funciones\\FuncionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Funciones/FuncionesController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Storage\\StorageFichaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Storage/StorageFichaController.php',
+        'App\\Http\\Controllers\\Storage\\StorageProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Storage/StorageProfileController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

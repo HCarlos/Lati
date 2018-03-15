@@ -56,6 +56,13 @@ return [
             'visibility' => env('ISBN_VISIBILITY'),
         ],
 
+        'profile' => [
+            'driver' => env('PROFILE_DRIVER'),
+            'root' => public_path().env('PROFILE_ROOT'),
+            'url' => env('APP_URL').env('PROFILE_URL'),
+            'visibility' => env('PROFILE_VISIBILITY'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('public/storage'),

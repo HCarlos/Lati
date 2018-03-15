@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $guard_name = 'web'; // or whatever guard you want to use
     protected $table = 'users';
  
-    protected $fillable = ['username', 'email', 'password','admin'];
+    protected $fillable = ['username', 'email', 'password','admin','filename','root'];
     protected $hidden = ['password', 'remember_token',];
     protected $casts = ['admin'=>'boolean'];
 
@@ -33,16 +33,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-//    public function getUsernameAttribute($value) {
-//        return strtolower($value);
-//    }
-//
-//    public function setUsernameAttribute($value){
-//        $this->attributes['username'] = strtolower($value);
-//    }
-
     public function isAdmin(){
         return $this->admin;
     }
+
+    public function IsEmptyPhoto(){
+        return $this->filename == '' ? true : false;
+    }
+
 
 }
