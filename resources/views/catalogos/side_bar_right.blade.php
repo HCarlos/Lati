@@ -17,7 +17,7 @@
         @endif
         <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
             {{ csrf_field() }}
-                <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="buscar..." style="height: 2em !important; line-height: 2em !important;">
+                <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="Buscar en la base de datos..." style="height: 2em !important; line-height: 2em !important;">
             <input type="hidden" name="id" value="{{$id}}"/>
             <button type="submit" class="btn btn-info btn-sm margen-izquierdo-1em "><i class="fas fa-search"></i></button>
         </form>
@@ -344,7 +344,7 @@
                         "previous": "<",
                         "next": ">"
                     },
-                    "search": "Buscar",
+                    "search": "Buscar en esta tabla",
                     "processing": "Procesando...",
                     "loadingRecords": "Cargando...",
                     "zeroRecords": "No hay registros",

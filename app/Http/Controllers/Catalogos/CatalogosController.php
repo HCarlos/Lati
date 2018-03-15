@@ -86,7 +86,7 @@ class CatalogosController extends Controller
                     }
                     break;
                 default:
-                    throw new NotFoundHttpException();
+                    //throw new NotFoundHttpException();
                     break;
             }
         }
