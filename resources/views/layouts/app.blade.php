@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-default navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-dark text-white navbar-lati">
             <div class="container">
                 <a class="navbar-brand " href="{{ url('/') }}">
                     <i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}
@@ -32,7 +32,7 @@
                     <span><i class="fa fa-refresh fa-spin fa-1x fa-fw green" id="preloaderGlobal"></i></span>
                 </button>
 
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent" >
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -45,12 +45,12 @@
                             <li><a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">Regístrate</a></li>
                         @else
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown" >
+                                <a class="nav-link dropdown-toggle menu-principal-lati" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @if( Auth::user()->IsEmptyPhoto() )
-                                        <img src="{{ asset('assets/img/empty_user.png')  }}" width="32" height="32" class="img-circle">
+                                        <img src="{{ asset('assets/img/empty_user.png')  }}" width="40" height="40" class="img-circle border border-white">
                                     @else
-                                        <img src="{{ asset('storage/'.Auth::user()->root.Auth::user()->filename)  }}" width="32" height="32" class="img-circle">
+                                        <img src="{{ asset('storage/'.Auth::user()->root.Auth::user()->filename)  }}" width="40" height="40" class="img-circle border border-white">
                                     @endif
                                     {{ Auth::user()->username }}
                                 </a>

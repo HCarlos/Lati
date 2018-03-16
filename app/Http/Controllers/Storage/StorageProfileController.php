@@ -27,7 +27,7 @@ class StorageProfileController extends Controller
 
         try {
             $validator = Validator::make($data, [
-                'photo' => "required|mimes:jpg,jpeg,gif,png|max:10000",
+                'photo' => "required|mimes:jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG|max:10000",
             ]);
             if ($validator->fails()){
                 return redirect('showEditProfilePhoto/')

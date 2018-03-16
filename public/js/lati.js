@@ -114,14 +114,12 @@ $(document).ready(function() {
                 $(".lstAsigns option:selected").each(function () {
                     z += $(this).val() + "|";
                 });
-
             }
             if (isUndefined(y) || y <= 0){
                 alert("Seleccione un elemento");
                 return false;
             }
             var Url = pathUnAssign[Cat_Id]+y+'/'+z+'/'+Cat_Id;
-
             $(function() {
                 $.ajax({
                     method: "GET",

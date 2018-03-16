@@ -28,15 +28,17 @@
                 @admin
                 <a href="{{ route('admin_dashboard') }}">Dashboard</a>
                 @endadmin
-                {{--@role('administrator')--}}
-                    {{--<div>Acceso como Administrador</div>--}}
-                {{--@else--}}
-                    {{--<div>Acceso usuario</div>--}}
-                {{--@endrole--}}
 
             </div>
 
             <div class="col-md-9">
+                @if( Request::path() === 'home')
+                    <div class="row col-md-12" id="divWelcomeDashboard0">
+                        <div class="center-block">
+                            <img src="{{asset('assets/img/welcome.png')}}" />
+                        </div>
+                    </div>
+                @endif
                 @yield('content_catalogo')
                 @yield('content_form_permisions')
             </div>
