@@ -313,6 +313,7 @@
 
     </div>
 
+</div>
     {{--@include('catalogos.editorial_edit_2')--}}
 
 @endsection

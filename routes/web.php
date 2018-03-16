@@ -88,5 +88,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/unasign_permission_role/{idRole}/{namePermissions}/{cat_id}','Asignaciones\PermisoRoleController@desasignar')->name('unAssignPermissionToRole/');
 
 
+//    Route::get('/image',function(){
+//        $img = Image::make('https://upload-assets.vice.com/files/2016/09/01/1472761701GIPHY.gif')->resize(300,300);
+//        return $img->response('jpg');
+//    });
 
 });

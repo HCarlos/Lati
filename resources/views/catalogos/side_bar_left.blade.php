@@ -1,8 +1,3 @@
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
 <div class="list-group todoloAncho" id="dvCatalogos0">
     @role('user|administrator')
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 0)) }}">Editoriales</a>

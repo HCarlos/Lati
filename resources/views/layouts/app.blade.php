@@ -9,8 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link href="{{ asset('assets/css_/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/css_/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-dialog.css') }}" rel="stylesheet">
@@ -24,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark text-white navbar-lati">
             <div class="container">
-                <a class="navbar-brand " href="{{ url('/') }}">
+                <a class="navbar-brand bolder-lati " href="{{ url('/') }}">
                     <i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,16 +35,16 @@
 
                 <div class="collapse navbar-collapse " id="navbarSupportedContent" >
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav ml-auto">
+                        <li><a class="nav-link bolder-lati" href="/home">Home</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto pull-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Regístrate</a></li>
+                            <li><a class="nav-link bolder-lati" href="{{ route('login') }}">Iniciar sesión</a></li>
+                            <li><a class="nav-link bolder-lati" href="{{ route('register') }}">Regístrate</a></li>
                         @else
                             <li class="nav-item dropdown" >
                                 <a class="nav-link dropdown-toggle menu-principal-lati" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
