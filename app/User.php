@@ -2,17 +2,20 @@
 
 namespace App;
 
+//use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
-
+use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
     use Notifiable;
+//    use ResetsPasswords;
+    use \Illuminate\Auth\Passwords\CanResetPassword;
     use HasRoles;
 
 //    use HasPermissions;
