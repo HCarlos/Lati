@@ -20,6 +20,8 @@ Route::get('/', function () {
 // INIT
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home_alumno');
+Route::get('/home_alumno', 'HomeController@index')->name('home_alumno');
 Route::get('/storage/{root}/{archivo}', 'Funciones\FuncionesController@showFile')->name('callFile/');
 
 Route::group(['middleware' => 'auth'], function () {

@@ -2,7 +2,6 @@
 
 namespace App;
 
-//use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Models\Permission;
@@ -15,11 +14,8 @@ use App\Notifications\MyResetPassword;
 class User extends Authenticatable
 {
     use Notifiable;
-//    use ResetsPasswords;
     use \Illuminate\Auth\Passwords\CanResetPassword;
     use HasRoles;
-
-//    use HasPermissions;
 
     protected $guard_name = 'web'; // or whatever guard you want to use
     protected $table = 'users';

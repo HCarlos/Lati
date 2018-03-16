@@ -36,7 +36,11 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent" >
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="nav-link bolder-lati" href="/home">Home</a></li>
+                        @role('alumno')
+                            <li><a class="nav-link bolder-lati" href="/home_alumno">Home</a></li>
+                        @else
+                            <li><a class="nav-link bolder-lati" href="/home">Home</a></li>
+                        @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
