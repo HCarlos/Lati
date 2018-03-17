@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
     Route::get('showEditProfilePhoto/', 'Auth\EditUserDataController@showEditProfilePhoto')->name('showEditProfilePhoto/');
 
-    Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile');
+    Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');
 
     Route::get('/index/{id}/','Catalogos\CatalogosListController@index')->name('listItem');

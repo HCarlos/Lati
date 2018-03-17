@@ -50,7 +50,7 @@ class StorageProfileController extends Controller
         }catch (Exception $e){
             dd($e);
         }
-        if ($user->hasRole('user') || $user->hasRole('administrator') ) {
+        if ($user->hasRole('user') || $user->hasRole('administrator') || $user->hasRole('alumno') ) {
             return redirect($this->redirectTo);
         }
 
@@ -64,7 +64,7 @@ class StorageProfileController extends Controller
         $user->root = '';
         $user->save();
 
-        if ($user->hasRole('user') || $user->hasRole('administrator') ) {
+        if ($user->hasRole('user') || $user->hasRole('administrator') || $user->hasRole('alumno') ) {
             return redirect($this->redirectTo);
         }
 
