@@ -56,7 +56,7 @@
                                         </a>
                                     @endif
                                     @if ($user->hasAnyPermission(['editar_registro','all']))
-                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank"  >
+                                        <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                             <i class="fas fa-pencil-alt blue"></i>
                                         </a>
                                     @endif
@@ -113,7 +113,7 @@
                                                 </a>
                                             @endif
                                             @if ($user->hasAnyPermission(['editar_registro','all']))
-                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank" >
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                                     <i class="fas fa-pencil-alt blue"></i>
                                                 </a>
                                             @endif
@@ -160,7 +160,7 @@
                                             </a>
                                         @endif
                                         @if ($user->hasAnyPermission(['editar_registro','all']))
-                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank"  >
+                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                                 <i class="fas fa-pencil-alt blue"></i>
                                             </a>
                                         @endif
@@ -211,7 +211,7 @@
                                             </a>
                                         @endif
                                         @if ($user->hasAnyPermission(['editar_usuarios','all']))
-                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank" >
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                                     <i class="fas fa-pencil-alt blue"></i>
                                                 </a>
                                         @endif
@@ -251,7 +251,7 @@
                                             </a>
                                         @endif
                                         @if ($user->hasAnyPermission(['editar_roles','all']))
-                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank" >
+                                                <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                                     <i class="fas fa-pencil-alt blue"></i>
                                                 </a>
                                         @endif
@@ -292,7 +292,7 @@
                                             </a>
                                         @endif
                                         @if ($user->hasAnyPermission(['editar_permisos','all']))
-                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right"  title="Editar" target="_blank" >
+                                            <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">
                                                 <i class="fas fa-pencil-alt blue"></i>
                                             </a>
                                         @endif

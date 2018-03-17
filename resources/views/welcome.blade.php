@@ -80,11 +80,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Lati<br>
-                    <small class="subtitle">Biblioteca Virtual</small>
-                </div>
-
+                <img src="{{asset('assets/img/biblioteca_virtual_logo_1.png')}}" /><br/>
             </div>
         </div>
     </body>
