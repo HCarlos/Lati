@@ -27,10 +27,12 @@ class HomeController extends Controller
         $usr = Auth::user();
         $usr->admin = $usr->hasRole('administrator');
         $usr->save();
-        if ( $usr->hasRole('alumno') ){
-            return view('home_alumno');
-        }else{
-            return view('home');
-        }
+        return view('home');
     }
+
+    public function index_alumno()
+    {
+        return view('home_alumno');
+    }
+
 }

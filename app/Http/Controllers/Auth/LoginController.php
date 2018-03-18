@@ -43,17 +43,22 @@ class LoginController extends Controller
         return 'username';
     }
 
-    protected function credentials(){
-        $username = $this->username();
-        $credentials = request()->only($username, 'password');
-        if (isset($credentials[$username])) {
-            //$credentials[$username] = strtolower($credentials[$username]);
-//            $user = Auth::user();
-//            dd($user);
-//            $user->admin = $user->hasRole('administrator');
-
+    public function redirectPath()
+    {
+        $user = Auth::user();
+        if ( $user->hasRole('user') ){
+            $this->redirectTo = '/home';
+            return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        }elseif( $user->hasRole('alumno') ){
+            $this->redirectTo = '/home_alumno';
+            return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home_alumno';
         }
-        return $credentials;
+
+//        if (method_exists($this, 'redirectTo')) {
+//            dd(0);
+//            return $this->redirectTo();
+//        }
+
     }
 
 

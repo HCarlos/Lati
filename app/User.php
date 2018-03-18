@@ -50,4 +50,20 @@ class User extends Authenticatable
         $this->notify(new MyResetPassword($token));
     }
 
+    public static function findOrCreateUserWithRole(string $username, string $nombre_completo, string $email, string $password, int $iduser_ps, int $idemp, Role $role){
+        $user = static::all()->where('username', $username)->where('email', $email)->first();
+        if (!$user) {
+            return static::create([
+                'username'=>$username,
+                'nombre_completo'=>$nombre_completo,
+                'email'=>$email,
+                'password' => bcrypt($password),
+                'iduser_ps' => 0,
+                'idemp' => $idemp,
+            ])->roles()->attach($role);
+        }
+        return $user;
+    }
+
+
 }

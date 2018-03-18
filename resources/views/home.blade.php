@@ -38,9 +38,13 @@
                     </div>
                 @endif
                 @if( Request::path() === 'home')
-                    <div class="row col-md-12" id="divWelcomeDashboard0">
-                        <div class="center-block">
-                            <img src="{{asset('assets/img/biblioteca_virtual_logo_1.png')}}" />
+                    <div class="content">
+                        <div class="flex-center position-ref">
+                            <div class="row col-md-12" id="divWelcomeDashboard0">
+                                <div class="center-block">
+                                    <img src="{{asset('assets/img/biblioteca_virtual_logo_1.png')}}" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif

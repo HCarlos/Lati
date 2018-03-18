@@ -34,15 +34,8 @@ class InitUserAlumnosSeeder extends Seeder
         if ( !$role->hasPermissionTo($perm) ){
             $role->givePermissionTo($perm);
         }
-
-        User::create([
-                    'username'=>'username_platsource',
-                    'nombre_completo'=>'aqui debe ir el nombre completo',
-                    'email'=>'el_email@nosedebe.repetir',
-                    'password' => bcrypt('username_platsource'),
-                    'iduser_ps' => 0,
-                    'idemp' => $idemp,
-                ])->roles()->attach($role);
+        User::findOrCreateUserWithRole('username_platsource', 'aqui debe ir el nombre completo', 'el_email@nosedebe.repetir', 'username_platsource', 0, $idemp, $role);
+        User::findOrCreateUserWithRole('alu0001','aqui debe ir el nombre completo alu0001','el_email@nosedebe.repetir.alu0001','alu0001',0,$idemp,$role);
 
 
     }
