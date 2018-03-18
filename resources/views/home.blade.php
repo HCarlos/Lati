@@ -40,7 +40,7 @@
                 @if( Request::path() === 'home')
                     <div class="row col-md-12" id="divWelcomeDashboard0">
                         <div class="center-block">
-                            <img src="{{asset('assets/img/welcome.png')}}" />
+                            <img src="{{asset('assets/img/biblioteca_virtual_logo_1.png')}}" />
                         </div>
                     </div>
                 @endif
