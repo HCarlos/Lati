@@ -18,17 +18,6 @@ class InitUserAlumnosSeeder extends Seeder
     public function run()
     {
         $idemp  = 1;
-/*
-        $role = Role::where('name', 'alumno')->first();
-        if (!$role){
-            $perm = Permission::where('name', 'alumno_consulta')->first();
-            if (!$perm){
-                $perm = Permission::findOrCreate(['name' => 'alumno_consulta',]);
-            }
-            $role = Role::findOrCreate(['name' => 'alumno',]);
-            $role->givePermissionTo($perm);
-        }
-*/
         $perm = Permission::findOrCreate('alumno_consulta','web');
         $role = Role::findOrCreate('alumno','web');
         if ( !$role->hasPermissionTo($perm) ){

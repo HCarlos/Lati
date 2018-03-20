@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
 
 class FuncionesController extends Controller
 {
@@ -27,6 +28,25 @@ class FuncionesController extends Controller
             return response()->download($url);
         }
         abort(404);
+    }
+
+    public function string_to_tsQuery(String $string, String $type){
+        $str = explode(' ',$string);
+        //dd($str);
+        $string = '';
+        $i = 1;
+        foreach ($str as $value){
+            if ( strlen($value) >= 4 ){
+                $vector = '';
+                if ($string!=''){
+                    $vector = $type;
+                }
+                $string = $string.$vector.$value;
+            }
+            ++$i;
+        }
+//        dd($string);
+        return $string;
     }
 
 }

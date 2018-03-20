@@ -37,7 +37,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @role('alumno')
-                            <li><a class="nav-link bolder-lati" href="/home_alumno">Home</a></li>
+                            <li><a class="nav-link bolder-lati" href="/home_alumno">Realizar búsqueda</a></li>
                         @else
                             <li><a class="nav-link bolder-lati" href="/home">Home</a></li>
                         @endrole

@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home_alumno', 'HomeController@index_alumno')->name('home_alumno');
 Route::get('/storage/{root}/{archivo}', 'Funciones\FuncionesController@showFile')->name('callFile/');
 
+Route::post('/search/','Multimedia\BusquedaMultimediaController@busquedaMultimedia')->name('busquedaMultimedia/');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');

@@ -158,3 +158,9 @@ ul.role-list-hrz li a {
 	color: white !important;
 	font-weight: bolder !important;
 }
+
+.separator-lati-2em{
+	display:inline-block !important;
+	height: 2em !important;
+	width: 100% !important;
+}
