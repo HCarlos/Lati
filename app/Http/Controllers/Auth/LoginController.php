@@ -36,6 +36,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+//        $this->middleware('guest');
     }
 
     public function username()
@@ -54,13 +55,8 @@ class LoginController extends Controller
             return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home_alumno';
         }
 
-//        if (method_exists($this, 'redirectTo')) {
-//            dd(0);
-//            return $this->redirectTo();
-//        }
 
     }
-
 
 
 }

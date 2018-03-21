@@ -164,3 +164,17 @@ ul.role-list-hrz li a {
 	height: 2em !important;
 	width: 100% !important;
 }
+
+.links-lati > a {
+	color: #ffffff !important;
+	font-size: 12px !important;
+	font-weight: 600 !important;
+	letter-spacing: .1rem !important;
+	text-decoration: none !important;
+	text-transform: uppercase !important;
+}
+
+.ancho-busqueda-Lati{
+	width: 460px !important;
+	margin-top: 1em !important;
+}

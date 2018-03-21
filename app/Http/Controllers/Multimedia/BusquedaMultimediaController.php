@@ -21,9 +21,9 @@ class BusquedaMultimediaController extends Controller
         $F        = new FuncionesController();
         $data     = $request->all();
         $tsString = $F->string_to_tsQuery( strtoupper($data['searchWords']),' & ');
-        // dd($tsString);
+        //dd($tsString);
 
-        $libros = DB::select("SELECT DISTINCT titulo, autor, isbn FROM fichas
+        $libros = DB::select("SELECT DISTINCT isbn FROM fichas
                               WHERE to_tsvector(coalesce(titulo,'') || ' ' || 
                                     coalesce(autor,'') || ' ' || 
                                     coalesce(isbn,''))
@@ -33,14 +33,24 @@ class BusquedaMultimediaController extends Controller
         );
 
         foreach ($libros as $lib){
-            $ff  = Fichafile::all()->where('isbn',$lib->isbn);
-            $ficha = count($ff) > 0 ? Ficha::findOrFail($ff[0]->ficha_id) : Ficha::whereIsbn($lib->isbn)->first();
-            $eti = explode('|',$ficha->etiqueta_marc);
+            $ff  = Fichafile::select('root','filename','ficha_id')->where('isbn',$lib->isbn)->get();
+            //dd($ff);
+            if ( $ff->count() > 0 ) {
+                $ficha = Ficha::findOrFail($ff[0]->ficha_id);
+            }else {
+                $ficha = Ficha::whereIsbn($lib->isbn)->first();
+            }
+            $eti = explode('|', $ficha->etiqueta_marc);
+            $lib->titulo = $ficha->titulo;
+            $lib->autor = $ficha->autor;
             $lib->imagenes = $ff;
             $lib->etiquetas = $eti;
             $lib->tipo_material = $ficha->tipo_material == 1 ? 'LIBRO' : 'REVISTA';
             $lib->clasificacion = $ficha->clasificacion;
+            $lib->existencia = $ficha->getExistencia();
         }
+
+        // dd($libros);
 
         $user = Auth::User();
         return view ('multimedia.busqueda_multimedia_alumno',
@@ -48,6 +58,7 @@ class BusquedaMultimediaController extends Controller
                 'items' => $libros,
                 'user' => $user,
                 'stringBusqueda' => $data['searchWords'],
+                'tsString' => $tsString,
             ]
         );
 

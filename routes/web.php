@@ -23,13 +23,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home_alumno', 'HomeController@index_alumno')->name('home_alumno');
 Route::get('/storage/{root}/{archivo}', 'Funciones\FuncionesController@showFile')->name('callFile/');
 
-Route::post('/search/','Multimedia\BusquedaMultimediaController@busquedaMultimedia')->name('busquedaMultimedia/');
+Route::post('busquedaMultimedia','Multimedia\BusquedaMultimediaController@busquedaMultimedia')->name('busquedaMultimedia/');
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('edit', 'Auth\EditUserDataController@showEditUserData')->name('edit');
     Route::put('Edit', 'Auth\EditUserDataController@update')->name('Edit');
     Route::get('showEditProfilePhoto/', 'Auth\EditUserDataController@showEditProfilePhoto')->name('showEditProfilePhoto/');
+    Route::get('showEditProfileEmail/', 'Auth\EditUserDataController@showEditProfileEmail')->name('showEditProfileEmail/');
+    Route::put('changeEmailUser/', 'Auth\EditUserDataController@changeEmailUser')->name('changeEmailUser/');
 
     Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');

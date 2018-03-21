@@ -30,6 +30,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Funciones\\FuncionesController' => $baseDir . '/app/Http/Controllers/Funciones/FuncionesController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\Multimedia\\BusquedaMultimediaController' => $baseDir . '/app/Http/Controllers/Multimedia/BusquedaMultimediaController.php',
     'App\\Http\\Controllers\\Storage\\StorageFichaController' => $baseDir . '/app/Http/Controllers/Storage/StorageFichaController.php',
     'App\\Http\\Controllers\\Storage\\StorageProfileController' => $baseDir . '/app/Http/Controllers/Storage/StorageProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

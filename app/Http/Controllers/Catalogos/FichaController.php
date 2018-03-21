@@ -12,6 +12,7 @@ use App\Http\Controllers\Funciones\FuncionesController;
 class FichaController extends Controller
 {
     protected $redirectTo = '/home';
+
     public function __construct(){
         $this->middleware('auth');
     }
@@ -19,10 +20,10 @@ class FichaController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->all();
-        $cat_id     = $data['cat_id'];
-        $idItem     = $data['idItem'];
-        $action     = $data['action'];
+        $data   = $request->all();
+        $cat_id = $data['cat_id'];
+        $idItem = $data['idItem'];
+        $action = $data['action'];
 
         $validator = Validator::make($data, [
             'datos_fijos' => "required|max:100",
@@ -39,8 +40,11 @@ class FichaController extends Controller
 
         $F = (new FuncionesController);
         $data["fecha_mod"] = NOW();
-        $data["titulo"] = $F->toMayus($data['titulo']);
-        $data["autor"] = $F->toMayus($data['autor']);
+        $data["titulo"]    = $F->toMayus($data['titulo']);
+        $data["autor"]     = $F->toMayus($data['autor']);
+        $data["idemp"]     = $F->getIHE(0);
+        $data["ip"]        = $F->getIHE(1);
+        $data["host"]      = $F->getIHE(2);
         Ficha::create($data);
 
         return redirect('index/'.$cat_id);
@@ -49,10 +53,10 @@ class FichaController extends Controller
 
     public function update(Request $request, Ficha $oFicha)
     {
-        $data = $request->all();
-        $cat_id     = $data['cat_id'];
-        $idItem     = $data['idItem'];
-        $action     = $data['action'];
+        $data   = $request->all();
+        $cat_id = $data['cat_id'];
+        $idItem = $data['idItem'];
+        $action = $data['action'];
 
         $validator = Validator::make($data, [
             'datos_fijos' => "required|max:100",
@@ -69,16 +73,20 @@ class FichaController extends Controller
 
         $F = (new FuncionesController);
         $data["fecha_mod"] = NOW();
-        $data["titulo"] = $F->toMayus($data['titulo']);
-        $data["autor"] = $F->toMayus($data['autor']);
+        $data["titulo"]    = $F->toMayus($data['titulo']);
+        $data["autor"]     = $F->toMayus($data['autor']);
+        $data["idemp"]     = $F->getIHE(0);
+        $data["ip"]        = $F->getIHE(1);
+        $data["host"]      = $F->getIHE(2);
 
-         $oFicha->update($data);
+        $oFicha->update($data);
 
         return redirect('index/'.$cat_id);
     }
 
     public function clone(Request $request, Ficha $oFicha)
     {
+        $F = (new FuncionesController);
         $data = $request->all();
         $cantidad              = $data['cantidad'];
         $cat_id                = $data['cat_id'];
@@ -95,6 +103,9 @@ class FichaController extends Controller
         $data['clasificacion'] = $oFicha['clasificacion'];
         $data['status']        = $oFicha['status'];
         $data['no_coleccion']  = $oFicha['no_coleccion'];
+        $data["idemp"]         = $F->getIHE(0);
+        $data["ip"]            = $F->getIHE(1);
+        $data["host"]          = $F->getIHE(2);
 
         for ($i=0;$i<$cantidad;$i++){
             Ficha::create($data);

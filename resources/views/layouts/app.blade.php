@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css_/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,11 +23,15 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark text-white navbar-lati">
-            <div class="container">
-                <a class="navbar-brand bolder-lati " href="{{ url('/') }}">
-                    <i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}
+        <nav class="navbar navbar-expand-md navbar-lati text-white">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand " href="{{ url('/') }}">
+                    {{--<i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}--}}
+                    <img alt="Brand" src="{{asset('assets/img/biblioteca_virtual_logo_2.png')}}" width="100" height="25">
+                    <i class="icon-refresh icon-spin white bigger-150" id="preloaderPrincipal" style="display: none;"></i>
                 </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     <span><i class="fa fa-refresh fa-spin fa-1x fa-fw green" id="preloaderGlobal"></i></span>
@@ -35,11 +39,11 @@
 
                 <div class="collapse navbar-collapse " id="navbarSupportedContent" >
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto links-lati">
                         @role('alumno')
-                            <li><a class="nav-link bolder-lati" href="/home_alumno">Realizar búsqueda</a></li>
+                            <li class="links-lati"><a class="nav-link bolder-lati" href="/home_alumno">Realizar Búsqueda</a></li>
                         @else
-                            <li><a class="nav-link bolder-lati" href="/home">Home</a></li>
+                            <li class="links-lati"><a class="nav-link bolder-lati" href="/home">Home</a></li>
                         @endrole
                     </ul>
 
@@ -50,7 +54,7 @@
                             <li><a class="nav-link bolder-lati" href="{{ route('login') }}">Iniciar sesión</a></li>
                             <li><a class="nav-link bolder-lati" href="{{ route('register') }}">Regístrate</a></li>
                         @else
-                            <li class="nav-item dropdown" >
+                            <li class="nav-item dropdown links-lati" >
                                 <a class="nav-link dropdown-toggle menu-principal-lati" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @if( Auth::user()->IsEmptyPhoto() )
                                         <img src="{{ asset('assets/img/empty_user.png')  }}" width="40" height="40" class="img-circle border border-white">
@@ -60,8 +64,9 @@
                                     {{ Auth::user()->username }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a  class="dropdown-item" href="{{ route('edit') }}"><i class="far fa-address-card"></i> Perfil</a>
-                                    <a  class="dropdown-item" href="{{ route('showEditProfilePhoto/') }}"><i class="fas fa-user-circle"></i> Foto</a>
+                                    <a  class="dropdown-item" href="{{ route('edit') }}"><i class="far fa-address-card"></i> Ver Perfil</a>
+                                    <a  class="dropdown-item" href="{{ route('showEditProfilePhoto/') }}"><i class="fas fa-user-circle"></i> Cambiar Foto</a>
+                                    <a  class="dropdown-item" href="{{ route('showEditProfileEmail/') }}"><i class="fas fa-at"></i> Cambiar Email</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -69,7 +74,7 @@
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
+                                        {{ csrf_field() }}
                                     </form>
                                 </div>
                             </li>
@@ -99,9 +104,9 @@
         function init() {
             $("#preloaderGlobal").hide();
             if ( $("#titulo_catalogo") ){
-                        @if ( isset($titulo_catalogo) )
-                var titulo = "{{ $titulo_catalogo}}";
-                $("#titulo_catalogo").html(titulo);
+                @if ( isset($titulo_catalogo) )
+                    var titulo = "{{ $titulo_catalogo}}";
+                    $("#titulo_catalogo").html(titulo);
                 @endif
             }
 

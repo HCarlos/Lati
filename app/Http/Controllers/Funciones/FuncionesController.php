@@ -45,8 +45,21 @@ class FuncionesController extends Controller
             }
             ++$i;
         }
-//        dd($string);
         return $string;
+    }
+    // get IP, Host or IdEmp
+    public function getIHE($type=0){
+        switch ($type){
+            case 0:
+                return 1;
+                beark;
+            case 1:
+                return $_SERVER['REMOTE_ADDR'];
+                beark;
+            case 2:
+                return gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                beark;
+        }
     }
 
 }

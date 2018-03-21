@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Funciones\FuncionesController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -19,8 +20,10 @@ class EditUserDataController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-    protected $redirectToError = '/edit';
+    protected $redirectTo            = '/home';
+    protected $redirectToAlumno      = '/home_alumno';
+    protected $redirectToError       = '/edit';
+    protected $redirectToChangeEmail = '/showEditProfileEmail/';
 
     /**
      * Create a new controller instance.
@@ -58,7 +61,40 @@ class EditUserDataController extends Controller
             $user->ip = $ip;
             $user->host = $host;
             $user->save();
-            return redirect($this->redirectTo);
+            return redirect(
+                $user->hasRole('alumno') ?
+                    $this->redirectToAlumno :
+                    $this->redirectTo
+            );
+        }
+
+    }
+
+    protected function changeEmailUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect($this->redirectToChangeEmail)
+                ->withErrors($validator)
+                ->withInput();
+        }else{
+            $user = Auth::user();
+            // $input = $request->only('nombre_completo', 'twitter', 'facebook', 'instagram');
+            $F = new FuncionesController();
+            $input = $request->all();
+            $user->email = $request->input('email');
+            $user->idemp = $F->getIHE(0);
+            $user->ip = $F->getIHE(1);
+            $user->host = $F->getIHE(2);
+            $user->save();
+            return redirect(
+                $user->hasRole('alumno') ?
+                    $this->redirectToAlumno :
+                    $this->redirectTo
+            );
         }
 
     }
@@ -73,6 +109,10 @@ class EditUserDataController extends Controller
         return view('storage.profile_photo',compact("user"));
     }
 
+    protected function showEditProfileEmail(){
+        $user = Auth::user();
+        return view('storage.profile_email',compact("user"));
+    }
 
 
 }
