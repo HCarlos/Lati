@@ -59,7 +59,7 @@ class CatalogosListController extends Controller
                     ->forPage(1,100);
                 break;
             case 10:
-                if ( Auth::user()->isAdmin() ){
+                if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $this->tableName = 'usuarios';
                     $items = User::all()->sortByDesc('id')->forPage(1,100);
                 }else{
@@ -145,7 +145,7 @@ class CatalogosListController extends Controller
                     $items = $total == count($items) ? collect(new Ficha) : $items;
                     break;
                 case 10:
-                    if ( Auth::user()->isAdmin() ){
+                    if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                         $this->tableName = 'usuarios';
                         $total = User::all()->count();
                         $items = User::select('id','username','nombre_completo','email')
@@ -223,7 +223,7 @@ class CatalogosListController extends Controller
                     ->get();
                 break;
             case 10:
-                if ( Auth::user()->isAdmin() ){
+                if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $items = User::select('id','username', 'nombre_completo','email')
                         ->orderBy('id','desc')
                         ->get();

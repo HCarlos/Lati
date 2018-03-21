@@ -7,8 +7,10 @@
     {{--<a class="button list-group-item form-control" href="#" id="btnPrueba">Prueba</a>--}}
     @endrole
 
-    @role('administrator')
+    @role('administrator|system_operator')
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 10)) }}">Usuarios</a>
+    @endrole
+    @role('administrator')
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 11)) }}">Roles</a>
     <a class="button list-group-item form-control" href="{{ route('listItem', array('id' => 12)) }}">Permisos</a>
     @endrole

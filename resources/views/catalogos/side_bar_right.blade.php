@@ -178,7 +178,7 @@
             @break;
 
             @case(10)
-            @if($user->hasRole('administrator'))
+            @if($user->hasRole('administrator|system_operator'))
                 <div class="dataTables_wrapper" role="grid">
                     @if ($items)
                         <table id="{{ $tableName}}" aria-describedby="sample-table-2_info"  class="table table-striped table-bordered table-hover dataTable hide" >

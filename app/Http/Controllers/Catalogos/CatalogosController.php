@@ -45,7 +45,7 @@ class CatalogosController extends Controller
                     $items = Codigo_Lenguaje_Pais::findOrFail($idItem);
                     break;
                 case 10;
-                    if ( Auth::user()->isAdmin() ){
+                    if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                         $items = User::findOrFail($idItem);
                         foreach ($items->roles as $role) {
                             $this->otrosDatos .= $role->name . ', ';
@@ -79,7 +79,7 @@ class CatalogosController extends Controller
             $items = [];
             switch ($id) {
                 case 10;
-                    if ( Auth::user()->isAdmin() ){
+                    if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                         $this->otrosDatos = Role::all()->sortByDesc('name')->pluck('name', 'name');
                     }else{
                         throw new AuthorizationException();
