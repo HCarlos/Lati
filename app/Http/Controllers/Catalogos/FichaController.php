@@ -81,7 +81,8 @@ class FichaController extends Controller
 
         $oFicha->update($data);
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
     }
 
     public function clone(Request $request, Ficha $oFicha)
@@ -111,7 +112,8 @@ class FichaController extends Controller
             Ficha::create($data);
         }
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
     }
 
     public function destroy($id=0,$idItem=0,$action=0){

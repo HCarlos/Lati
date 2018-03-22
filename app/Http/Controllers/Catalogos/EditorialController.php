@@ -44,8 +44,7 @@ class EditorialController extends Controller
         $data['representante'] = $representante;
         Editorial::create($data);
 
-        return redirect('index/'.$cat_id);
-
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
     }
 
     public function update(Request $request, Editorial $edi)
@@ -74,8 +73,9 @@ class EditorialController extends Controller
         $data['editorial'] = $editorial;
         $data['representante'] = $representante;
         $edi->update($data);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
 
-        return redirect('index/'.$cat_id);
     }
 
     public function destroy($id=0,$idItem=0,$action=0){

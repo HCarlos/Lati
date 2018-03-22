@@ -33,13 +33,14 @@ class BusquedaMultimediaController extends Controller
         );
 
         foreach ($libros as $lib){
-            $ff  = Fichafile::select('root','filename','ficha_id')->where('isbn',$lib->isbn)->get();
+            $ff  = Ficha::hasIsbnWithImages($lib->isbn);
             //dd($ff);
             if ( $ff->count() > 0 ) {
                 $ficha = Ficha::findOrFail($ff[0]->ficha_id);
             }else {
                 $ficha = Ficha::whereIsbn($lib->isbn)->first();
             }
+
             $eti = explode('|', $ficha->etiqueta_marc);
             $lib->titulo = $ficha->titulo;
             $lib->autor = $ficha->autor;

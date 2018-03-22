@@ -43,7 +43,8 @@ class CodigoLenguajePaisController extends Controller
         $data['lenguaje'] = $lenguaje;
         Codigo_Lenguaje_Pais::create($data);
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
 
     }
 
@@ -74,7 +75,8 @@ class CodigoLenguajePaisController extends Controller
         $data['lenguaje'] = $lenguaje;
         $clp->update($data);
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
     }
 
     public function destroy($id=0,$idItem=0,$action=0){

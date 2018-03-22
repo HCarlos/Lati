@@ -55,7 +55,8 @@ class UsuarioController extends Controller
         $role = Role::where('name', $rol)->first();
         $user->roles()->attach($role);
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
 
     }
 
@@ -89,7 +90,8 @@ class UsuarioController extends Controller
         $usr->host = $host;
         $usr->save();
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
     }
 
     public function destroy($id=0,$idItem=0,$action=0)

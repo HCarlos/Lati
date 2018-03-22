@@ -4,8 +4,8 @@
 <div class="panel panel-primary" id="frmEdit0">
     <div class="panel-heading">
             <span><strong>{{ ucwords($titulo) }}</strong> | Editando registro {{$idItem}}
-                <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id" }}">
-                    Regresar
+                <a class="btn btn-info btn-xs pull-right" href="#" onclick="javascript:window.close();">
+                   Cerrar
                 </a>
             </span>
     </div>
@@ -43,8 +43,9 @@
                                     Guardar
                                 </button>
                             </div>
-                            <a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">
-                                Regresar
+                            {{--<a class="btn btn-info float-md-right " href="{{ "/index/$id" }}">--}}
+                            <a class="btn btn-info float-md-right " href="#" onclick="javascript:window.close();">
+                                Cerrar
                             </a>
                         </div>
 

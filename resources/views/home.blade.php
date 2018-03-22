@@ -26,7 +26,9 @@
                 </div>
                 @endif
                 @admin
-                <a href="{{ route('admin_dashboard') }}">Dashboard</a>
+                {{--<a href="{{ route('admin_dashboard') }}">Dashboard</a>--}}
+                {{--@include('modal')--}}
+                <a data-toggle="modal" href=" route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" data-target="#myModal">Dashboard</a>
                 @endadmin
 
             </div>
@@ -52,6 +54,13 @@
                 @yield('content_form_permisions')
             </div>
 
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{--@include('catalogos.editorial_edit')--}}
+            </div>
         </div>
     </div>
 @endsection

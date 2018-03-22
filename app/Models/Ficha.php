@@ -41,4 +41,20 @@ class Ficha extends Model
         return $this::whereIsbn($this->isbn)->where('prestado',false)->count();
     }
 
+    public function hasImages(){
+        return Fichafile::all()->where('isbn',$this->isbn)->get();
+    }
+
+    public function isImages(){
+        return Fichafile::all()->where('isbn',$this->isbn)->count() > 0 ? true : false;
+    }
+
+    public function cuantasImages(){
+        return Fichafile::all()->where('isbn',$this->isbn)->count();
+    }
+
+    public static function hasIsbnWithImages($isbn=''){
+        return Fichafile::select('root','filename','ficha_id')->where('isbn',$isbn)->get();
+    }
+
 }
