@@ -72,6 +72,7 @@ class UsuarioController extends Controller
         $idemp  = 1;
         $validator = Validator::make($data, [
             'nombre_completo' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$idItem,
         ]);
 
         if ($validator->fails()) {

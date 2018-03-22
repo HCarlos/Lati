@@ -30,6 +30,14 @@
                         <input type="text" name="nombre_completo" value="{{ old('nombre_completo',$items->nombre_completo) }}" class="col-md-12" required autofocus />
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for = "email" class="col-md-3 col-form-label text-md-right">Email</label>
+                    <div class="col-md-9">
+                        <input type="text" name="email" value="{{ old('email',$items->email) }}" class="col-md-12" />
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <label for = "twitter" class="col-md-3 col-form-label text-md-right">Twitter</label>
                     <div class="col-md-9">

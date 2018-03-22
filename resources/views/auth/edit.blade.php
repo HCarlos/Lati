@@ -24,6 +24,13 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="email_old" class="col-md-4 control-label">Email</label>
+                                <div class="col-md-6">
+                                    <input id="email_old" type="text" class="form-control" name="email_old" value="{{ old('email',$user->email) }}" disabled>
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
                                 <label for="twitter" class="col-md-4 control-label">Twitter</label>
                                 <div class="col-md-6">
