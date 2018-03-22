@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css_/font-awesome.min.css') }}" rel="stylesheet">
@@ -27,7 +27,6 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                 <a class="navbar-brand " href="{{ url('/') }}">
-                    {{--<i class="fas fa-book blue"></i>  {{ config('app.name', 'Laravel') }}--}}
                     <img alt="Brand" src="{{asset('assets/img/biblioteca_virtual_logo_2.png')}}" width="100" height="25">
                     <i class="icon-refresh icon-spin white bigger-150" id="preloaderPrincipal" style="display: none;"></i>
                 </a>
