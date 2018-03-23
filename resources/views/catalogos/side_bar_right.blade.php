@@ -24,15 +24,19 @@
                 <i class="fa fa-plus-circle "></i> Nuevo registro
             </a>
         @endif
+        {{--<form method="get" action="{{ route('listItem',['id'=>$id,'npage'=>$npage,'tpaginas'=>$tpaginas]) }}" class="form-inline pull-right ">--}}
+            {{--{{ Form::select('listEle', $listEle, $npage, ['id' => 'listEle','multiple' => 'multiple','class'=>' listEle form-control  panel-fill','onclick'=>'javascript::this.submit()']) }}--}}
+        {{--</form>--}}
         <form method="post" action="{{ action('Catalogos\CatalogosListController@indexSearch') }}" class="form-inline pull-right ">
             {{ csrf_field() }}
                 <input type="text" class="form-control form-control-xs altoMoz" name="search" placeholder="Buscar en la base de datos..." style="height: 2em !important; line-height: 2em !important;">
             <input type="hidden" name="id" value="{{$id}}"/>
-            <button type="submit" class="btn btn-info btn-sm margen-izquierdo-1em "><i class="fas fa-search"></i></button>
+            <button type="submit" class="btn btn-info btn-sm margen-izquierdo-03em "><i class="fas fa-search"></i></button>
         </form>
     </div>
 
     <div class="panel-body">
+        @include('catalogos.listados.paginate_list')
 
         <div class="fa-2x" id="preloaderLocal">
             <i class="fa fa-cog fa-spin"></i> Cargado datos...

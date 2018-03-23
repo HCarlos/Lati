@@ -1,5 +1,5 @@
-![Picture](https://platsource.mx/images/web/plataforma-gestion-0-logo.png)
-## Qué es Platsource.mx?
+![Picture](http://lati.mx/assets/img/biblioteca_virtual_logo_1.png)
+## Qué es Lati.mx?
 Es una plataforma educativa que permite gestionar todos los  `recursos` de uns institución educativa. Los niveles que soporta Platsource.mx son:
 * **Preescolar** - Nivel Preeescolar
 * **Primaria** - Nivel Primaria
@@ -16,5 +16,5 @@ Permite gestionar control de pases se salida, tareas, kardex, tarjetas de reinsc
 ## Author
 Esta plataforma fue desarrollada por:
 * [@DevCH](https://twitter.com/devch) - Carlos Hidalgo.
-* [Platsource.mx](https://platsource.mx) - Sitio web Platsource.mx
+* [Platsource.mx](http://lati.mx) - Sitio web Platsource.mx
 ###### © 2017

@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('subirFotoProfile/', 'Storage\StorageProfileController@subirArchivoProfile')->name('subirArchivoProfile/');
     Route::get('quitarFotoProfile/', 'Storage\StorageProfileController@quitarArchivoProfile')->name('quitarArchivoProfile/');
 
-    Route::get('/index/{id}/','Catalogos\CatalogosListController@index')->name('listItem');
+    Route::get('/index/{id}/{npage}/{tpaginas}/','Catalogos\CatalogosListController@index')->name('listItem');
     Route::post('/catalogo/search/','Catalogos\CatalogosListController@indexSearch')->name('listItemSearch');
 
     Route::group(['middleware' => ['role:user']], function () {

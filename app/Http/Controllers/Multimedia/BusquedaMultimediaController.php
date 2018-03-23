@@ -24,9 +24,9 @@ class BusquedaMultimediaController extends Controller
         //dd($tsString);
 
         $libros = DB::select("SELECT DISTINCT isbn FROM fichas
-                              WHERE to_tsvector(coalesce(titulo,'') || ' ' || 
-                                    coalesce(autor,'') || ' ' || 
-                                    coalesce(isbn,''))
+                              WHERE to_tsvector(coalesce(trim(titulo),'') || ' ' || 
+                                    coalesce(trim(autor),'') || ' ' || 
+                                    coalesce(trim(isbn),''))
                                     @@
                                     to_tsquery(?)",
             [$tsString]

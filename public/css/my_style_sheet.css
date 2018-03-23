@@ -86,16 +86,16 @@ ul.role-list-hrz li a {
 }
 
 .green{
-	color:#2D8B2D;
+	color: #0b2e13;
 }
 .lemon{
-	color:#11B113;
+	color: #5eb95e;
 }
 .blue{
-	color:#312FCC;
+	color: #1a67bd;
 }
 .red{
-	color:#C64727;
+	color: #ee5f5b;
 }
 .orange{
 	color: #c67f10;
@@ -103,8 +103,8 @@ ul.role-list-hrz li a {
 .purple{
 	color: #7c41c6;
 }
-.margen-izquierdo-1em{
-	margin-left:1em; 
+.margen-izquierdo-03em{
+	margin-left:0.3em;
 }
 
 .searchNavBar {
@@ -177,4 +177,9 @@ ul.role-list-hrz li a {
 .ancho-busqueda-Lati{
 	width: 460px !important;
 	margin-top: 1em !important;
+}
+
+.paginas-lati{
+	background-color: lightcoral !important;
+	color: white;
 }

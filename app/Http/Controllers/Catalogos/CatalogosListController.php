@@ -21,6 +21,7 @@ use Yajra\DataTables\DataTables;
 class CatalogosListController extends Controller
 {
     protected $tableName = '';
+    protected $itemPorPagina = 100;
 
     protected $redirectTo = '/home';
     public function __construct()
@@ -33,7 +34,7 @@ class CatalogosListController extends Controller
         return view('datatable');
     }
 
-    public function index($id = 0)
+    public function index($id = 0, $npage = 1, $tpaginas = 0)
     {
 
         switch ($id) {
@@ -42,26 +43,30 @@ class CatalogosListController extends Controller
                 $items = Editorial::select('id','editorial','representante')
                     ->orderBy('id','desc')
                     ->get()
-                    ->forPage(1,100);
+                    ->forPage($npage,$this->itemPorPagina);
+                $tpaginas = $tpaginas == 0 ? Editorial::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 break;
             case 1:
                 $this->tableName = 'fichas';
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor')
                     ->orderBy('id','desc')
                     ->get()
-                    ->forPage(1,100);
+                    ->forPage($npage,$this->itemPorPagina);
+                $tpaginas = $tpaginas == 0 ? Ficha::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 break;
             case 2:
                 $this->tableName = 'codigo_lenguaje_paises';
                 $items = Codigo_Lenguaje_Pais::select('id','idmig','codigo','lenguaje', 'tipo')
                     ->orderBy('id','desc')
                     ->get()
-                    ->forPage(1,100);
+                    ->forPage($npage,$this->itemPorPagina);
+                $tpaginas = $tpaginas == 0 ? Codigo_Lenguaje_Pais::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 break;
             case 10:
                 if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $this->tableName = 'usuarios';
-                    $items = User::all()->sortByDesc('id')->forPage(1,100);
+                    $items = User::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
+                    $tpaginas = $tpaginas == 0 ? User::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 }else{
                     throw new AuthorizationException();
                 }
@@ -69,7 +74,8 @@ class CatalogosListController extends Controller
             case 11:
                 if ( Auth::user()->isAdmin() ){
                     $this->tableName = 'roles';
-                    $items = Role::all()->sortByDesc('id')->forPage(1,100);
+                    $items = Role::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
+                    $tpaginas = $tpaginas == 0 ? Role::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 }else{
                     throw new AuthorizationException();
                 }
@@ -77,7 +83,8 @@ class CatalogosListController extends Controller
             case 12:
                 if ( Auth::user()->isAdmin() ){
                     $this->tableName = 'permissions';
-                    $items = Permission::all()->sortByDesc('id')->forPage(1,100);
+                    $items = Permission::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
+                    $tpaginas = $tpaginas == 0 ? Permission::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
                 }else{
                     throw new AuthorizationException();
                 }
@@ -86,9 +93,6 @@ class CatalogosListController extends Controller
                 throw new NotFoundHttpException();
                 break;
         }
-
-        //dd($items);
-
         $user = Auth::User();
         return view ('catalogos.side_bar_right',
             [
@@ -97,6 +101,8 @@ class CatalogosListController extends Controller
                 'titulo_catalogo' => "Catálogo de ".ucwords($this->tableName),
                 'user' => $user,
                 'tableName'=>$this->tableName,
+                'npage'=> $npage,
+                'tpaginas' => $tpaginas,
             ]
         );
     }

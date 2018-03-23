@@ -22,17 +22,17 @@
                     <td width="100">
 
                         @if ($user->hasAnyPermission(['subir_imagen_fichas','all']))
-                            <a href="{{ route('catalogosSubirImagenFichas/', array('id' => $id,'idItem' => $item->id,'action' => 4)) }}" class="btn btn-link btn-xs  margen-izquierdo-1em pull-right" target="_blank" title="Subir imagen" >
+                            <a href="{{ route('catalogosSubirImagenFichas/', array('id' => $id,'idItem' => $item->id,'action' => 4)) }}" class="btn btn-link btn-xs  margen-izquierdo-03em pull-right" target="_blank" title="Subir imagen" >
                                 <i class="fas fa-image orange"></i>
                             </a>
                         @endif
                         @if ($user->hasAnyPermission(['clonar_fichas','all']))
-                            <a href="{{ route('catalogosFichasClone/', array('id' => $id,'idItem' => $item->id,'action' => 3)) }}" class="btn btn-link btn-xs  margen-izquierdo-1em pull-right" target="_blank" title="Clonar" >
+                            <a href="{{ route('catalogosFichasClone/', array('id' => $id,'idItem' => $item->id,'action' => 3)) }}" class="btn btn-link btn-xs  margen-izquierdo-03em pull-right" target="_blank" title="Clonar" >
                                 <i class="far fa-clone purple"></i>
                             </a>
                         @endif
                         @if ($user->hasAnyPermission(['eliminar_registro','all']))
-                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-1em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
+                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-03em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
                                 <i class="fa fa-trash fa-lg red" ></i>
                             </a>
                         @endif
