@@ -57,4 +57,12 @@ class Ficha extends Model
         return Fichafile::select('root','filename','ficha_id')->where('isbn',$isbn)->get();
     }
 
+    public function scopeSearch($query, $search){
+        if (!$search) {
+            return $query;
+        }
+        return $query->whereRaw("searchtext @@ to_tsquery('english', ?)", [$search])
+            ->orderByRaw("ts_rank(searchtext, to_tsquery('english', ?)) DESC", [$search]);
+    }
+
 }

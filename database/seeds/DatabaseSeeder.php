@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
         $this->call(InitializePermissionsSeeder::class);
         $this->call(InitUserAlumnosSeeder::class);
         $this->call(InitUserProfesoresSeeder::class);
+        $this->call(InitUserDirectoresSeeder::class);
+        $this->call(InitUserCoordinadoresSeeder::class);
+        $this->call(InitUserAsesoresSeeder::class);
+        $this->call(InitUserBibliotecariosSeeder::class);
 
     }
 }

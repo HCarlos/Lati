@@ -8,9 +8,10 @@
             @if( count($items) <= 0)
                 <div class="alert alert-danger" role="alert">Resultado de la busqueda: <i><b>{{$tsString}}</b></i> : <strong>{{count($items)}}</strong> elementos.</div>
             @else
-                <p>Resultado de la busqueda: <i><b>{{$stringBusqueda}}</b></i> : <strong>{{count($items)}}</strong> elementos.</p>
+                <p>Resultado de la busqueda: <i><b>{{$stringBusqueda}}</b></i> : <strong>{{$paginator->total()}}</strong> elementos.</p>
             @endif
             </div>
+            @include('catalogos.listados.paginate_list')
             @foreach($items as $lib)
                 <div class="card">
                     <div class="card-header text-left"><strong>{{$lib->titulo}}</strong></div>
@@ -47,7 +48,9 @@
                     </div>
                 </div>
                 <span class="separator-lati-2em"></span>
+
             @endforeach
+            @include('catalogos.listados.paginate_list')
         </div>
     </div>
 @endsection

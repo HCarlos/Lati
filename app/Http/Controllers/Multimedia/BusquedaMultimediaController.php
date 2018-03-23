@@ -10,27 +10,28 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Constraint\IsEmpty;
+use Illuminate\Support\Facades\Input;
+
+
+
 class BusquedaMultimediaController extends Controller
 {
     protected $redirectTo = '/home_alumno';
+    protected $itemPorPagina = 5;
 
     /**
      * @param Request $request
      */
     public function busquedaMultimedia(Request $request){
-        $F        = new FuncionesController();
-        $data     = $request->all();
-        $tsString = $F->string_to_tsQuery( strtoupper($data['searchWords']),' & ');
-        //dd($tsString);
-
-        $libros = DB::select("SELECT DISTINCT isbn FROM fichas
-                              WHERE to_tsvector(coalesce(trim(titulo),'') || ' ' || 
-                                    coalesce(trim(autor),'') || ' ' || 
-                                    coalesce(trim(isbn),''))
-                                    @@
-                                    to_tsquery(?)",
-            [$tsString]
-        );
+        $F           = new FuncionesController();
+        $data        =  $request->all();
+        $npage       = $data['npage'];
+        $tpaginas    = $data['tpaginas'];
+        $searchWords = $data['searchWords'];
+        $tsString    = $F->string_to_tsQuery( strtoupper($searchWords),' & ');
+        $libros      = Ficha::select('isbn')->search($tsString)->get()->forPage($npage,$this->itemPorPagina);
+        $tpaginator  = Ficha::search($tsString)->paginate($this->itemPorPagina,['*'],'p');
+        //dd($libros);
 
         foreach ($libros as $lib){
             $ff  = Ficha::hasIsbnWithImages($lib->isbn);
@@ -51,18 +52,64 @@ class BusquedaMultimediaController extends Controller
             $lib->existencia = $ficha->getExistencia();
         }
 
-        // dd($libros);
-
+        $tpaginas = $tpaginas == 0 ? $tpaginator->lastPage() : $tpaginas;
         $user = Auth::User();
+        $tpaginator->withPath("/bM/$npage/$tpaginas/$searchWords");
+        //dd($libros);
         return view ('multimedia.busqueda_multimedia_alumno',
             [
                 'items' => $libros,
                 'user' => $user,
-                'stringBusqueda' => $data['searchWords'],
+                'stringBusqueda' => $searchWords,
                 'tsString' => $tsString,
+                'npage'=> $npage,
+                'tpaginas' => $tpaginas,
+                'searchWords' => $searchWords,
             ]
-        );
+        )->with("paginator" , $tpaginator);
 
+
+    }
+
+    public function bMultimedia($npage = 1, $tpaginas = 0, $searchWords=''){
+        $F        = new FuncionesController();
+        $npage = Input::get('p');
+        $tsString = $F->string_to_tsQuery( strtoupper($searchWords),' & ');
+        $libros = Ficha::select('isbn')->search($tsString)->get()->forPage($npage,$this->itemPorPagina);
+        $tpaginator = Ficha::search($tsString)->paginate($this->itemPorPagina,['*'],'p');
+
+        foreach ($libros as $lib){
+            $ff  = Ficha::hasIsbnWithImages($lib->isbn);
+            //dd($ff);
+            if ( $ff->count() > 0 ) {
+                $ficha = Ficha::findOrFail($ff[0]->ficha_id);
+            }else {
+                $ficha = Ficha::whereIsbn($lib->isbn)->first();
+            }
+
+            $eti = explode('|', $ficha->etiqueta_marc);
+            $lib->titulo = $ficha->titulo;
+            $lib->autor = $ficha->autor;
+            $lib->imagenes = $ff;
+            $lib->etiquetas = $eti;
+            $lib->tipo_material = $ficha->tipo_material == 1 ? 'LIBRO' : 'REVISTA';
+            $lib->clasificacion = $ficha->clasificacion;
+            $lib->existencia = $ficha->getExistencia();
+        }
+
+        $user = Auth::User();
+        $tpaginator->withPath("/bM/$npage/$tpaginas/$searchWords");
+        return view ('multimedia.busqueda_multimedia_alumno',
+            [
+                'items' => $libros,
+                'user' => $user,
+                'stringBusqueda' => $searchWords,
+                'tsString' => $tsString,
+                'npage'=> $npage,
+                'tpaginas' => $tpaginas,
+                'searchWords' => $searchWords,
+            ]
+        )->with("paginator" , $tpaginator);
 
     }
 

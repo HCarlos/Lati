@@ -23,7 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home_alumno', 'HomeController@index_alumno')->name('home_alumno');
 Route::get('/storage/{root}/{archivo}', 'Funciones\FuncionesController@showFile')->name('callFile/');
 
-Route::post('busquedaMultimedia','Multimedia\BusquedaMultimediaController@busquedaMultimedia')->name('busquedaMultimedia/');
+Route::post('/busquedaMultimedia/','Multimedia\BusquedaMultimediaController@busquedaMultimedia')->name('busquedaMultimedia/');
+Route::get('/bM/{npage}/{tpaginas}/{searchWords}/','Multimedia\BusquedaMultimediaController@bMultimedia')->name('bM/');
 
 Route::group(['middleware' => 'auth'], function () {
 

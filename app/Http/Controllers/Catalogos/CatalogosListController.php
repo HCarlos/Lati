@@ -164,6 +164,7 @@ class CatalogosListController extends Controller
                     break;
                 case 10:
                     if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
+                        //$search = $F->toMayus($search);
                         $this->tableName = 'usuarios';
                         $total = User::all()->count();
                         $items = User::select('id','username','nombre_completo','email')
