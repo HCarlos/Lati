@@ -2273,6 +2273,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'InitUserAlumnosSeeder' => __DIR__ . '/../..' . '/database/seeds/InitUserAlumnosSeeder.php',
+        'InitUserProfesoresSeeder' => __DIR__ . '/../..' . '/database/seeds/InitUserProfesoresSeeder.php',
         'InitializeCodigoLenguajePaisesSeeder' => __DIR__ . '/../..' . '/database/seeds/InitializeCodigoLenguajePaisesSeeder.php',
         'InitializePermissionsSeeder' => __DIR__ . '/../..' . '/database/seeds/InitializePermissionsSeeder.php',
         'Intervention\\Image\\AbstractColor' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/AbstractColor.php',

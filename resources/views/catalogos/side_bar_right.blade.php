@@ -37,7 +37,6 @@
 
     <div class="panel-body">
         @include('catalogos.listados.paginate_list')
-
         <div class="fa-2x" id="preloaderLocal">
             <i class="fa fa-cog fa-spin"></i> Cargado datos...
         </div>

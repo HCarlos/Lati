@@ -1885,6 +1885,7 @@ return array(
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
     'InitUserAlumnosSeeder' => $baseDir . '/database/seeds/InitUserAlumnosSeeder.php',
+    'InitUserProfesoresSeeder' => $baseDir . '/database/seeds/InitUserProfesoresSeeder.php',
     'InitializeCodigoLenguajePaisesSeeder' => $baseDir . '/database/seeds/InitializeCodigoLenguajePaisesSeeder.php',
     'InitializePermissionsSeeder' => $baseDir . '/database/seeds/InitializePermissionsSeeder.php',
     'Intervention\\Image\\AbstractColor' => $vendorDir . '/intervention/image/src/Intervention/Image/AbstractColor.php',

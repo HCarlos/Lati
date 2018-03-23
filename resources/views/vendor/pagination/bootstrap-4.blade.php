@@ -1,5 +1,6 @@
 @if ($paginator->hasPages())
-    <ul class="pagination">
+    <ul class="pagination" style="margin: 0 !important; padding: 0em !important;">
+        <li><span class="paginas-lati bolder-lati" style="margin-bottom: 0px;">Páginas</span></li>
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>

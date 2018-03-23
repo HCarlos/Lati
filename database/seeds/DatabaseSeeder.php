@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AgregarFichasSeeder::class);
         $this->call(InitializeCodigoLenguajePaisesSeeder::class);
         $this->call(InitializePermissionsSeeder::class);
+        $this->call(InitUserAlumnosSeeder::class);
+        $this->call(InitUserProfesoresSeeder::class);
 
     }
 }

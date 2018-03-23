@@ -11,6 +11,7 @@ use App\User;
 // use Illuminate\Foundation\Auth\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -37,6 +38,14 @@ class CatalogosListController extends Controller
     public function index($id = 0, $npage = 1, $tpaginas = 0)
     {
 
+        $page = Input::get('p');
+        if ( $page != 0 ){
+            $npage = $page;
+        }
+
+//        $npage = Input::get('page');
+
+
         switch ($id) {
             case 0:
                 $this->tableName = 'editoriales';
@@ -44,7 +53,7 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
-                $tpaginas = $tpaginas == 0 ? Editorial::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                $tpaginator = Editorial::paginate($this->itemPorPagina,['*'],'p');
                 break;
             case 1:
                 $this->tableName = 'fichas';
@@ -52,7 +61,7 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
-                $tpaginas = $tpaginas == 0 ? Ficha::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                $tpaginator = Ficha::paginate($this->itemPorPagina,['*'],'p');
                 break;
             case 2:
                 $this->tableName = 'codigo_lenguaje_paises';
@@ -60,13 +69,13 @@ class CatalogosListController extends Controller
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
-                $tpaginas = $tpaginas == 0 ? Codigo_Lenguaje_Pais::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                $tpaginator = Codigo_Lenguaje_Pais::paginate($this->itemPorPagina,['*'],'p');
                 break;
             case 10:
                 if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $this->tableName = 'usuarios';
                     $items = User::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
-                    $tpaginas = $tpaginas == 0 ? User::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                    $tpaginator = User::paginate($this->itemPorPagina,['*'],'p');
                 }else{
                     throw new AuthorizationException();
                 }
@@ -75,7 +84,7 @@ class CatalogosListController extends Controller
                 if ( Auth::user()->isAdmin() ){
                     $this->tableName = 'roles';
                     $items = Role::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
-                    $tpaginas = $tpaginas == 0 ? Role::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                    $tpaginator = Role::paginate($this->itemPorPagina,['*'],'p');
                 }else{
                     throw new AuthorizationException();
                 }
@@ -84,7 +93,7 @@ class CatalogosListController extends Controller
                 if ( Auth::user()->isAdmin() ){
                     $this->tableName = 'permissions';
                     $items = Permission::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
-                    $tpaginas = $tpaginas == 0 ? Permission::paginate($this->itemPorPagina)->lastPage() : $tpaginas;
+                    $tpaginator = Permission::paginate($this->itemPorPagina,['*'],'p');
                 }else{
                     throw new AuthorizationException();
                 }
@@ -93,7 +102,10 @@ class CatalogosListController extends Controller
                 throw new NotFoundHttpException();
                 break;
         }
+        $tpaginas = $tpaginas == 0 ? $tpaginator->lastPage() : $tpaginas;
         $user = Auth::User();
+        $tpaginator->withPath("/index/$id/$npage/$tpaginas");
+        //$tpaginator->appends(['sort' => 'votes'])->links();
         return view ('catalogos.side_bar_right',
             [
                 'items' => $items,
@@ -104,7 +116,7 @@ class CatalogosListController extends Controller
                 'npage'=> $npage,
                 'tpaginas' => $tpaginas,
             ]
-        );
+        )->with("paginator" , $tpaginator);
     }
 
     public function indexSearch(Request $request)
