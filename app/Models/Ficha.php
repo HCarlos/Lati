@@ -19,7 +19,8 @@ class Ficha extends Model
         'etiqueta_marc','tipo_material','isbn','titulo',
         'autor','clasificacion','status','no_coleccion',
         'prestado','fecha_salida','fecha_entrega',
-        'observaciones','idemp','status_ficha','ip','host'
+        'observaciones','idemp','status_ficha','ip','host',
+        'editorial_id'
         ];
 
     protected $casts = ['prestado'=>'boolean'];

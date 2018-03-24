@@ -49,7 +49,7 @@ class CatalogosListController extends Controller
         switch ($id) {
             case 0:
                 $this->tableName = 'editoriales';
-                $items = Editorial::select('id','editorial','representante')
+                $items = Editorial::select('id','editorial','representante','predeterminado')
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);

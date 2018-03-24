@@ -47,7 +47,8 @@ class FichaController extends Controller
         $data["host"]      = $F->getIHE(2);
         Ficha::create($data);
 
-        return redirect('index/'.$cat_id);
+//        return redirect('index/'.$cat_id);
+        return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
 
     }
 
@@ -57,6 +58,8 @@ class FichaController extends Controller
         $cat_id = $data['cat_id'];
         $idItem = $data['idItem'];
         $action = $data['action'];
+
+        // dd($data);
 
         $validator = Validator::make($data, [
             'datos_fijos' => "required|max:100",

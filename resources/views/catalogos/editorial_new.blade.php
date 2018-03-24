@@ -35,6 +35,17 @@
                     <input type="text" name="representante"  value="" class="col-md-12"/>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label for = "predeterminado" class="col-md-3 col-form-label text-md-right">Default</label>
+                <div class="col-md-9">
+                    <label>
+                        {{ Form::checkbox('predeterminado', Null, Null, ['class' => 'col-md-3']) }}
+                    </label>
+                </div>
+            </div>
+
+
             <div>
                 <label class="col-md-2 col-form-label text-md-right"></label>
                 <div class="col-md-8" >

@@ -32,7 +32,7 @@
                             </a>
                         @endif
                         @if ($user->hasAnyPermission(['eliminar_registro','all']))
-                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-03em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_ficha/" title="Eliminar">
+                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-03em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id.'-'.$npage.'-'.$tpaginas}}-2-/destroy_ficha/" title="Eliminar">
                                 <i class="fa fa-trash fa-lg red" ></i>
                             </a>
                         @endif

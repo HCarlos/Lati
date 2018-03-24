@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CatalogosController extends Controller
 {
     protected $otrosDatos;
+    protected $Predeterminado = false;
     protected $redirectTo = '/home';
     public function __construct()
     {
@@ -37,9 +38,12 @@ class CatalogosController extends Controller
             switch ($id) {
                 case 0;
                     $items = Editorial::findOrFail($idItem);
+                    //dd($items);
                     break;
                 case 1;
                     $items = Ficha::findOrFail($idItem);
+                    $this->otrosDatos = Editorial::all()->sortBy('predeterminado')->sortBy('editorial')->pluck('editorial', 'id');
+                    // dd($this->otrosDatos);
                     break;
                 case 2;
                     $items = Codigo_Lenguaje_Pais::findOrFail($idItem);
@@ -78,6 +82,11 @@ class CatalogosController extends Controller
         }elseif ($action == 0){
             $items = [];
             switch ($id) {
+                case 1;
+                    $this->otrosDatos = Editorial::all()->sortBy('predeterminado')->sortBy('editorial')->pluck('editorial', 'id');
+                    $pred = Editorial::select('id')->where('predeterminado',true)->first();
+                    $this->Predeterminado = $pred->id;
+                    break;
                 case 10;
                     if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                         $this->otrosDatos = Role::all()->sortByDesc('name')->pluck('name', 'name');
@@ -94,7 +103,7 @@ class CatalogosController extends Controller
         $user = Auth::User();
         //dd($items);
         $oView = 'catalogos.' ;
-        //dd($id);
+//        dd($items->editorial_id);
 
         return view ($oView.$views[$id],
             [
@@ -105,6 +114,7 @@ class CatalogosController extends Controller
                 'items' => $items,
                 'user' => $user,
                 'otrosDatos' => $this->otrosDatos,
+                'predeterminado' => $this->Predeterminado,
             ]
         );
 

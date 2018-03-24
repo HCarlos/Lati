@@ -14,14 +14,14 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->editorial }}</td>
-                    <td>{{ $item->representante }}</td>
+                    <td>{{ $item->representante.' '.$item->predeterminado }}</td>
                     <td width="100">
-                        @if ($user->hasAnyPermission(['eliminar_registro','all']))
-                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-03em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id}}-2-/destroy_editorial/" title="Eliminar">
+                        @if ($user->hasAnyPermission(['eliminar_registro','all']) && !$item->isPredeterminado())
+                            <a href="#" class="btn btn-link btn-xs margen-izquierdo-03em pull-right btnAction2" id ="editorial-{{$item->id.'-'.$user->id.'-'.$id.'-'.$npage.'-'.$tpaginas}}-2-/destroy_editorial/" title="Eliminar">
                                 <i class="fa fa-trash fa-lg red" ></i>
                             </a>
                         @endif
-                        @if ($user->hasAnyPermission(['editar_registro','all']))
+                        @if ( $user->hasAnyPermission(['editar_registro','all']))
                             {{--<a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right" title="Editar">--}}
                             <a href="{{ route('catalogos/', array('id' => $id,'idItem' => $item->id,'action' => 1)) }}" class="btn btn-link btn-xs pull-right editarReg" target="_blank" title="Editar">
                                 <i class="fas fa-pencil-alt blue"></i>

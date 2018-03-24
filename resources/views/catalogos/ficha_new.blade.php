@@ -77,6 +77,12 @@
                                 <input type="number" name="no_coleccion" id="no_coleccion"  value="{{ old('clasificacion',0) }}" min="0" max="99" class="col-md-2" />
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for = "editorial_id" class="col-md-2 col-form-label text-md-right">Editorial</label>
+                            <div class="col-md-10">
+                                {{ Form::select('editorial_id', $otrosDatos, $predeterminado) }}
+                            </div>
+                        </div>
 
                         <div>
                             <label class="col-md-2 col-form-label text-md-right"></label>
