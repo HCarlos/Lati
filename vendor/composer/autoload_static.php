@@ -431,6 +431,7 @@ class ComposerStaticInit6926490e8cacb4230f3b8460e8653874
         'App\\Models\\Codigo_Lenguaje_Pais' => __DIR__ . '/../..' . '/app/Models/Codigo_Lenguaje_Pais.php',
         'App\\Models\\Editorial' => __DIR__ . '/../..' . '/app/Models/Editorial.php',
         'App\\Models\\Ficha' => __DIR__ . '/../..' . '/app/Models/Ficha.php',
+        'App\\Models\\Ficha_User' => __DIR__ . '/../..' . '/app/Models/Ficha_User.php',
         'App\\Models\\Fichafile' => __DIR__ . '/../..' . '/app/Models/Fichafile.php',
         'App\\Notifications\\MyResetPassword' => __DIR__ . '/../..' . '/app/Notifications/MyResetPassword.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',

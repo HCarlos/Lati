@@ -16,10 +16,14 @@ class Fichafile extends Model
     protected $fillable = [
         'ficha_id','isbn','root','filename','num',
     ];
+    protected $hidden = ['created_at', 'updated_at'];
 
-    public function fichas(){
-        return $this->belongsToMany(Ficha::class,'fichafiles','ficha_id');
+    public function fichasFiles(){
+        return $this->hasMany(Ficha::class,'ficha_id');
     }
 
+    public function fichas(){
+        return $this->hasMany(Ficha::class,'ficha_id');
+    }
 
 }

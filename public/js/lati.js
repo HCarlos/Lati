@@ -20,7 +20,7 @@ $(document).ready(function() {
             }else{
                 var Url = aID[7]+aID[1]+"/"+aID[1]+"/"+aID[4];
             }
-            alert(Url);
+            // alert(Url);
             $(function() {
                 $.ajax({
                     method: "GET",
@@ -37,25 +37,25 @@ $(document).ready(function() {
         });
     }
 
-    if ( $("#btnPrueba") ){
-        $("#btnPrueba").on('click', function(event) {
-            event.preventDefault();
-            var Data = {'id':1};
-            $(function() {
-                $.ajax({
-                    method: "GET",
-                    url: "/catajax/"+1,
-                    data: Data
-                })
-                    .done(function( response ) {
-                        var dat = response.data[5];
-                        alert(dat.titulo);
-                        var datt = response.dataTable.original.data[5];
-                        alert(datt.titulo);
-                    });
-            });
-        });
-    }
+    // if ( $("#btnPrueba") ){
+    //     $("#btnPrueba").on('click', function(event) {
+    //         event.preventDefault();
+    //         var Data = {'id':1};
+    //         $(function() {
+    //             $.ajax({
+    //                 method: "GET",
+    //                 url: "/catajax/"+1,
+    //                 data: Data
+    //             })
+    //                 .done(function( response ) {
+    //                     var dat = response.data[5];
+    //                     alert(dat.titulo);
+    //                     var datt = response.dataTable.original.data[5];
+    //                     alert(datt.titulo);
+    //                 });
+    //         });
+    //     });
+    // }
 
     if ( $(".listTarget") ){
         $(".listTarget").on('change', function(event) {
@@ -136,6 +136,27 @@ $(document).ready(function() {
                     });
             });
 
+        });
+    }
+
+
+    if ( $(".apartame") ){
+        $(".apartame").on('click', function(event) {
+            event.preventDefault();
+            var IdArr  = this.id.split('-');
+            var Ida    = IdArr[1];
+            var Url = '/apartame/'+IdArr[1]+'/'+IdArr[2];
+            // alert(Url);
+            $(function() {
+                $.ajax({
+                    method: "GET",
+                    url: Url
+                })
+                    .done(function( response ) {
+                        alert(response.mensaje);
+                        window.location.reload();
+                    });
+            });
         });
     }
 

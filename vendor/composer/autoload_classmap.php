@@ -43,6 +43,7 @@ return array(
     'App\\Models\\Codigo_Lenguaje_Pais' => $baseDir . '/app/Models/Codigo_Lenguaje_Pais.php',
     'App\\Models\\Editorial' => $baseDir . '/app/Models/Editorial.php',
     'App\\Models\\Ficha' => $baseDir . '/app/Models/Ficha.php',
+    'App\\Models\\Ficha_User' => $baseDir . '/app/Models/Ficha_User.php',
     'App\\Models\\Fichafile' => $baseDir . '/app/Models/Fichafile.php',
     'App\\Notifications\\MyResetPassword' => $baseDir . '/app/Notifications/MyResetPassword.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',

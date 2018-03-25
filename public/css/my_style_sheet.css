@@ -86,25 +86,55 @@ ul.role-list-hrz li a {
 }
 
 .green{
-	color: #0b2e13;
+	color: #0b2e13 !important;
 }
 .lemon{
-	color: #5eb95e;
+	color: #5eb95e !important;
 }
 .blue{
-	color: #1a67bd;
+	color: #1a67bd !important;
 }
 .red{
-	color: #ee5f5b;
+	color: #ee5f5b !important;
 }
 .orange{
-	color: #c67f10;
+	color: #c67f10 !important;
 }
 .purple{
-	color: #7c41c6;
+	color: #7c41c6 !important;
 }
+
+.coral{
+	color: coral !important;
+}
+
+.seagreen{
+	color: seagreen !important;
+}
+
+.bg-coral-lati-bib{
+	background-color: coral !important;
+	color: ghostwhite !important;
+	font-weight: bold !important;
+	padding: 0.3em !important;
+}
+
+.bg-seagreen-lati-bib{
+	background-color: seagreen !important;
+	color: ghostwhite !important;
+	font-weight: bold !important;
+	padding: 0.3em !important;
+}
+
+.bg-ghostwhite-lati-bib{
+	background-color: papayawhip !important;
+	color: darkorchid !important;
+	font-weight: bold !important;
+	padding: 0.3em !important;
+}
+
 .margen-izquierdo-03em{
-	margin-left:0.3em;
+	margin-left:0.3em !important;
 }
 
 .searchNavBar {

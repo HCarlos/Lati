@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Catalogos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ficha_User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Ficha;
@@ -107,6 +108,7 @@ class FichaController extends Controller
         $data['clasificacion'] = $oFicha['clasificacion'];
         $data['status']        = $oFicha['status'];
         $data['no_coleccion']  = $oFicha['no_coleccion'];
+        $data['editorial_id']  = $oFicha['editorial_id'];
         $data["idemp"]         = $F->getIHE(0);
         $data["ip"]            = $F->getIHE(1);
         $data["host"]          = $F->getIHE(2);
@@ -124,5 +126,54 @@ class FichaController extends Controller
         return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
     }
 
+    public function apartar($ficha_id = 0, $user_id = 0){
+        $ficha = Ficha::findOrFail($ficha_id)->first();
+        if ( !$ficha->isApartado() ){
+            $F = (new FuncionesController);
+            Ficha_User::create([
+                'ficha_id' => $ficha_id,
+                'user_id'  => $user_id,
+                'action'   => 'Apartado',
+                'fecha'    => NOW(),
+                'idemp'    => $F->getIHE(0),
+                'ip'       => $F->getIHE(1),
+                'host'     => $F->getIHE(2)
+            ]);
+            Ficha::findOrFail($ficha_id)->update([
+                'apartado'  => true,
+                'apartado_user_id'  => $user_id,
+                'fecha_apartado'  => NOW(),
+                'prestado'  => false
+            ]);
+            return Response::json(['mensaje' => 'Apartado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+        }else{
+            return Response::json(['mensaje' => 'No se pudo apartar', 'data' => 'Error', 'status' => '200'], 200);
+        }
+    }
 
+    public function prestar($ficha_id = 0, $user_id = 0){
+        $ficha = Ficha::findOrFail($ficha_id)->first();
+        if ( !$ficha->isPrestado() ){
+            $F = (new FuncionesController);
+            Ficha_User::create([
+                'ficha_id' => $ficha_id,
+                'user_id'  => $user_id,
+                'action'   => 'Prestado',
+                'fecha'    => NOW(),
+                'idemp'    => $F->getIHE(0),
+                'ip'       => $F->getIHE(1),
+                'host'     => $F->getIHE(2)
+            ]);
+            Ficha::findOrFail($ficha_id)->update([
+                'prestado'  => true,
+                'prestado_user_id'  => $user_id,
+                'fecha_salida'  => NOW(),
+                'fecha_entrega'  => NOW(),
+                'apartado'  => false
+            ]);
+            return Response::json(['mensaje' => 'Prestado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+        }else{
+            return Response::json(['mensaje' => 'No se pudo prestar', 'data' => 'Error', 'status' => '200'], 200);
+        }
+    }
 }

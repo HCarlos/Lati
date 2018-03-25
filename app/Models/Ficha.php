@@ -13,33 +13,38 @@ class Ficha extends Model
     protected $guard_name = 'web';
 
     protected $table = 'fichas';
+    protected $editoriales = [];
 
     protected $fillable = [
         'fecha','fecha_mod','datos_fijos',
         'etiqueta_marc','tipo_material','isbn','titulo',
         'autor','clasificacion','status','no_coleccion',
         'prestado','fecha_salida','fecha_entrega',
-        'observaciones','idemp','status_ficha','ip','host',
-        'editorial_id'
+        'observaciones', 'editorial_id','fecha_apartado',
+        'apartado','apartado_user_id','prestado_user_id',
         ];
 
-    protected $casts = ['prestado'=>'boolean'];
+    protected $hidden = ['idemp','status_ficha','ip','host','created_at', 'updated_at',];
+    protected $casts = ['prestado'=>'boolean','apartado'=>'boolean',];
 
-
-//    public function fichafiles(){
-//        return $this->belongsToMany(Fichafile::class);
-//    }
-
-    public function fichafiles(){
-        return $this->hasMany(Fichafile::class,'ficha_id');
+    public function editoriales(){
+        return $this->hasOne(Editorial::class,'editorial_id');
     }
 
     public function isPrestado(){
         return $this->prestado;
     }
 
+    public function isApartado(){
+        return $this->apartado;
+    }
+
     public function getExistencia(){
         return $this::whereIsbn($this->isbn)->where('prestado',false)->count();
+    }
+
+    public function getEditorial(){
+        return Editorial::findOrFail($this->editorial_id)->first();
     }
 
     public function hasImages(){

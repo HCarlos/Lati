@@ -14,12 +14,19 @@
             @include('catalogos.listados.paginate_list')
             @foreach($items as $lib)
                 <div class="card">
-                    <div class="card-header text-left"><strong>{{$lib->titulo}}</strong></div>
+                    <div class="card-header text-left"><b class="seagreen">{{$lib->id}}</b> <strong>{{$lib->titulo}}</strong></div>
                     <div class="card-body">
                         <table>
                             <tr>
                                 <td class="col-md-1 text-left bg-info text-white bolder-lati border border-info">AUTOR</td>
                                 <td class="col-md-11 text-left border border-info">{{$lib->autor}}</td>
+                                @if($lib->apartado)
+                                    <td rowspan="7" class="bg-coral-lati-bib">APARTADO</td>
+                                @elseif($lib->prestado)
+                                    <td rowspan="7" class="bg-seagreen-lati-bib">PRESTADO</td>
+                                @else
+                                    <td rowspan="7" class="bg-ghostwhite-lati-bib">DISPONIBLE</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td class="col-md-1 text-left bg-info text-white bolder-lati border border-info">ISBN</td>
@@ -36,6 +43,18 @@
                             <tr>
                                 <td class="col-md-1 text-left bg-info text-white bolder-lati border border-info">EXISTENCIA</td>
                                 <td class="col-md-11 text-left border-bottom border-right border-info">{{$lib->existencia}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-1 text-left bg-info text-white bolder-lati border border-info">EDITORIAL</td>
+                                <td class="col-md-11 text-left border-bottom border-right border-info">{{strtoupper($lib->editorial->editorial)}}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-1 text-left bg-info text-white bolder-lati border border-info"></td>
+                                <td class="col-md-11 text-left border-bottom border-right border-info">
+                                    @if(!$lib->prestado && !$lib->apartado)
+                                        <a class="btn btn-link bolder-lati coral apartame" href="#" id="ficha-{{$lib->id.'-'.$user->id}}" >Apartar este material</a>
+                                    @endif
+                                </td>
                             </tr>
                         </table>
                     </div>

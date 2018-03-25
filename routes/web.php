@@ -69,6 +69,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
+    Route::group(['middleware' => ['role:alumno']], function () {
+        Route::get('/apartame/{ficha_id}/{user_id}','Catalogos\FichaController@apartar')->name('apartame');
+        Route::get('/prestame/{ficha_id}/{user_id}','Catalogos\FichaController@prestar')->name('prestame');
+    });
     // Fichas Usuarios
     Route::post('/create_usuario','Catalogos\UsuarioController@create')->name('usuarioCreate/');
     Route::put('/update_usuario/{usr}','Catalogos\UsuarioController@update')->name('usuarioUpdate/');

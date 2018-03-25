@@ -15,6 +15,11 @@ class Editorial extends Model
     protected $table = 'editoriales';
     protected $fillable = ['editorial','representante','no','predeterminado'];
     protected $casts = ['predeterminado'=>'boolean'];
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function fichas() {
+        return $this->belongsToMany(Ficha::class,'editorial_id');
+    }
 
     public function isPredeterminado(){
         return $this->predeterminado == Null ? false : true;
@@ -22,12 +27,10 @@ class Editorial extends Model
 
     public function deletePredeterminado(){
         return $this::where('predeterminado', true)->update(['predeterminado'=>false]);
-
     }
 
     public function setPredeterminado(){
-//        $this::update(['predeterminado'=>true]);
-        // return $this::update(['predeterminado'=>true]);
+        return $this::update(['predeterminado'=>true]);
     }
 
 }

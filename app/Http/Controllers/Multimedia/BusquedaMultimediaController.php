@@ -41,10 +41,13 @@ class BusquedaMultimediaController extends Controller
             }else {
                 $ficha = Ficha::whereIsbn($lib->isbn)->first();
             }
-
+            $lib->id =  $ficha->id;
+            $lib->editorial =  $ficha->getEditorial();
             $eti = explode('|', $ficha->etiqueta_marc);
             $lib->titulo = $ficha->titulo;
             $lib->autor = $ficha->autor;
+            $lib->apartado = $ficha->isApartado();
+            $lib->prestado = $ficha->isPrestado();
             $lib->imagenes = $ff;
             $lib->etiquetas = $eti;
             $lib->tipo_material = $ficha->tipo_material == 1 ? 'LIBRO' : 'REVISTA';
@@ -86,10 +89,13 @@ class BusquedaMultimediaController extends Controller
             }else {
                 $ficha = Ficha::whereIsbn($lib->isbn)->first();
             }
-
+            $lib->id =  $ficha->id;
+            $lib->editorial =  $ficha->getEditorial();
             $eti = explode('|', $ficha->etiqueta_marc);
             $lib->titulo = $ficha->titulo;
             $lib->autor = $ficha->autor;
+            $lib->apartado = $ficha->isApartado();
+            $lib->prestado = $ficha->isPrestado();
             $lib->imagenes = $ff;
             $lib->etiquetas = $eti;
             $lib->tipo_material = $ficha->tipo_material == 1 ? 'LIBRO' : 'REVISTA';
