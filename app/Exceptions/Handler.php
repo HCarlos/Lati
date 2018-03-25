@@ -46,21 +46,21 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+////        return parent::render($request, $exception);
+//        return view('errors.401');
+        if ($e instanceof ModelNotFoundException) {
+//            return parent::render($request, new NotFoundHttpException);
+            return view('errors.401');
+        }
+        if ( ! config('app.debug') && ! $this->isHttpException($e)) {
+            return response(null, 500)->view('errors.500');
+        }
+        return parent::render($request, $e);
     }
 
-//    protected function unauthenticated($request, AuthenticationException $exception)
-//    {
-//        if ($request->expectsJson()) {
-//            return response()->json(['error' => 'Unauthenticated.'], 401);
-//            //throw new AuthenticationException;
-//            //return redirect('views.errors.401');
-//        }
-//
-//        return redirect()->guest(route('login'));
-//    }
+
 
 
 }
