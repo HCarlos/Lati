@@ -222,6 +222,8 @@ class CatalogosListController extends Controller
                 'titulo_catalogo' => "Catálogo de ".ucwords($this->tableName),
                 'user' => $user,
                 'tableName'=>$this->tableName,
+                'npage'=> 1,
+                'tpaginas' => 0,
             ]
         );
     }

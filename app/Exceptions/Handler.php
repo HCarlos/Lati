@@ -48,14 +48,30 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-////        return parent::render($request, $exception);
-//        return view('errors.401');
-        if ($e instanceof ModelNotFoundException) {
-//            return parent::render($request, new NotFoundHttpException);
-            return view('errors.401');
-        }
-        if ( ! config('app.debug') && ! $this->isHttpException($e)) {
-            return response(null, 500)->view('errors.500');
+//        if ($e instanceof ModelNotFoundException) {
+////            return parent::render($request, new NotFoundHttpException);
+//            return view('errors.401');
+//        }
+//        if ( ! config('app.debug') && ! $this->isHttpException($e)) {
+//            return response(null, 500)->view('errors.500');
+//        }
+//        return parent::render($request, $e);
+
+        if( ! config('app.debug') )
+        {
+            // MethodNotAllowedHttpException
+            if( $e instanceof MethodNotAllowedHttpException )
+                $e = new HttpException( 405, $e->getMessage() );
+
+            // TokenMismatchException
+            if( $e instanceof TokenMismatchException )
+                $e = new HttpException( 400, $e->getMessage() );
+
+            if ($e instanceof ModelNotFoundException)
+                $e = new HttpException( 401, $e->getMessage() );
+
+            if (  ! $this->isHttpException($e))
+                $e = new HttpException( 500, $e->getMessage() );
         }
         return parent::render($request, $e);
     }

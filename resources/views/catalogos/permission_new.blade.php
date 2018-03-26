@@ -4,7 +4,7 @@
 <div class="panel panel-primary" id="frmNew0">
     <div class="panel-heading">
             <span><strong>{{ ucwords($titulo) }}</strong> | Nuevo Registro
-                <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id" }}">
+                <a class="btn btn-info btn-xs pull-right" href="{{ "/index/$id/1/0" }}">
                     Regresar
                 </a>
             </span>
