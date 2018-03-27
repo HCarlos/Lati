@@ -27,11 +27,11 @@ class CatalogosController extends Controller
 
     public function index($id=0,$idItem=0,$action=0)
     {
-        $tables = ['editoriales','fichas','codigo_lenguaje_paises','3','4','5','6','7','8','9','users','roles','permissions'];
+        $tables = ['editoriales','fichas','codigo_lenguaje_paises','fichas','4','5','6','7','8','9','users','roles','permissions'];
         if ($action == 0){
-            $views  = ['editorial_new','ficha_new','clp_new','3','4','5','6','7','8','9','usuario_new','role_new','permission_new'];
+            $views  = ['editorial_new','ficha_new','clp_new','apartar_edit','4','5','6','7','8','9','usuario_new','role_new','permission_new'];
         }else{
-            $views  = ['editorial_edit','ficha_edit','clp_edit','3','4','5','6','7','8','9','usuario_edit','role_edit','permission_edit'];
+            $views  = ['editorial_edit','ficha_edit','clp_edit','apartar_edit','4','5','6','7','8','9','usuario_edit','role_edit','permission_edit'];
         }
 
         if ($action == 1) {
@@ -43,10 +43,14 @@ class CatalogosController extends Controller
                 case 1;
                     $items = Ficha::findOrFail($idItem);
                     $this->otrosDatos = Editorial::all()->sortBy('predeterminado')->sortBy('editorial')->pluck('editorial', 'id');
-                    // dd($this->otrosDatos);
                     break;
                 case 2;
                     $items = Codigo_Lenguaje_Pais::findOrFail($idItem);
+                    break;
+                case 3;
+                    $items = Ficha::findOrFail($idItem);
+                    $this->otrosDatos = User::findOrFail($items->apartado_user_id);
+                    ///dd($this->otrosDatos);
                     break;
                 case 10;
                     if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){

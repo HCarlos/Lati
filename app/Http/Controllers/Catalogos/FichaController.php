@@ -127,7 +127,7 @@ class FichaController extends Controller
     }
 
     public function apartar($ficha_id = 0, $user_id = 0){
-        $ficha = Ficha::findOrFail($ficha_id)->first();
+        $ficha = Ficha::findOrFail($ficha_id);
         if ( !$ficha->isApartado() ){
             $F = (new FuncionesController);
             Ficha_User::create([
@@ -151,8 +151,30 @@ class FichaController extends Controller
         }
     }
 
-    public function prestar($ficha_id = 0, $user_id = 0){
-        $ficha = Ficha::findOrFail($ficha_id)->first();
+    public function prestar(Request $request, Ficha $oFicha){
+        $data = $request->all();
+
+        $cat_id   = $data['cat_id'];
+        $idItem   = $data['idItem'];
+        $action   = $data['action'];
+
+        $ficha_id = $oFicha['id'];
+        $user_id  = $oFicha['apartado_user_id'];
+        $fecha_salida  = $data['fecha_salida'];
+        $fecha_entrega = $data['fecha_devolucion'];
+
+        $validator = Validator::make($data, [
+            'fecha_salida' => 'required',
+            'fecha_devolucion'   => 'required|after:fecha_salida'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $ficha = Ficha::findOrFail($ficha_id);
         if ( !$ficha->isPrestado() ){
             $F = (new FuncionesController);
             Ficha_User::create([
@@ -167,13 +189,14 @@ class FichaController extends Controller
             Ficha::findOrFail($ficha_id)->update([
                 'prestado'  => true,
                 'prestado_user_id'  => $user_id,
-                'fecha_salida'  => NOW(),
-                'fecha_entrega'  => NOW(),
+                'fecha_salida'  => $fecha_salida,
+                'fecha_entrega'  => $fecha_entrega,
                 'apartado'  => false
             ]);
-            return Response::json(['mensaje' => 'Prestado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
+            //return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
         }else{
-            return Response::json(['mensaje' => 'No se pudo prestar', 'data' => 'Error', 'status' => '200'], 200);
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
         }
     }
 }

@@ -15,6 +15,7 @@
                 @case(0)
                 @case(1)
                 @case(2)
+                @case(3)
                 @case(10)
                     <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" target="_blank" title="Agregar nuevo registro" style="margin-left: 2em;">
                     @break
@@ -54,6 +55,11 @@
             @case(2)
                 @if($user->hasRole('user'))
                     @include('catalogos.listados.clp_list')
+                @endif
+                @break;
+            @case(3)
+                @if($user->hasRole('user'))
+                    @include('catalogos.listados.apartados_list')
                 @endif
                 @break;
             @case(10)

@@ -9,6 +9,7 @@ use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
 // use Illuminate\Foundation\Auth\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -70,6 +71,22 @@ class CatalogosListController extends Controller
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
                 $tpaginator = Codigo_Lenguaje_Pais::paginate($this->itemPorPagina,['*'],'p');
+                break;
+            case 3:
+                $this->tableName = 'fichas';
+                $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
+                    'apartado','apartado_user_id','prestado_user_id','prestado')
+                    ->where('apartado',true)
+                    ->orderBy('id','desc')
+                    ->get()
+                    ->forPage($npage,$this->itemPorPagina);
+                $tpaginator = Ficha::where('apartado',true)->paginate($this->itemPorPagina,['*'],'p');
+                foreach ($items as $item){
+                    if ($item->apartado_user_id > 0){
+                        $item->usuario_apartador = User::findOrFail($item->apartado_user_id);
+                    }
+                }
+//                dd($tpaginator);
                 break;
             case 10:
                 if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
@@ -161,6 +178,25 @@ class CatalogosListController extends Controller
                         ->get()
                         ->sortByDesc('id');
                     $items = $total == count($items) ? collect(new Ficha) : $items;
+                    break;
+                case 3:
+                    $search = $F->toMayus($search);
+                    $this->tableName = 'fichas';
+                    $total = Ficha::all()->count();
+                    $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
+                        'apartado','apartado_user_id','prestado_user_id')
+                        ->orWhere('titulo','LIKE',"%{$search}%")
+                        ->orWhere('autor','LIKE',"%{$search}%")
+                        ->orWhere('isbn','LIKE',"%{$search}%")
+                        ->andWhere('apartado',true)
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new Ficha) : $items;
+                    foreach ($items as $item){
+                        if ($item->apartado_user_id > 0){
+                            $item->usuario_apartador = User::findOrFail($item->apartado_user_id);
+                        }
+                    }
                     break;
                 case 10:
                     if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){

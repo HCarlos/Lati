@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Fichafile;
@@ -31,12 +32,24 @@ class Ficha extends Model
         return $this->hasOne(Editorial::class,'editorial_id');
     }
 
+    public function apartador(){
+        return $this->hasMany(User::class,'apartado_user_id');
+    }
+
+    public function prestador(){
+        return $this->hasMany(User::class,'prestado_user_id');
+    }
+
     public function isPrestado(){
         return $this->prestado;
     }
 
     public function isApartado(){
         return $this->apartado;
+    }
+
+    public function getFichasApartadas(){
+        return $this::whereApartado(true)->get();
     }
 
     public function getExistencia(){

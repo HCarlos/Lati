@@ -3,6 +3,7 @@
     <a class="button list-group-item form-control" href="{{ route('listItem', ['id' => 0,'npage' => 1, 'tpaginas' => 0]) }}">Editoriales</a>
     <a class="button list-group-item form-control" href="{{ route('listItem', ['id' => 1,'npage' => 1, 'tpaginas' => 0]) }}">Fichas</a>
     <a class="button list-group-item form-control" href="{{ route('listItem', ['id' => 2,'npage' => 1, 'tpaginas' => 0]) }}">Códigos de lenguaje de paises</a>
+    <a class="button list-group-item form-control" href="{{ route('listItem', ['id' => 3,'npage' => 1, 'tpaginas' => 0]) }}">Apartados</a>
     {{--<a></a>--}}
     {{--<a class="button list-group-item form-control" href="#" id="btnPrueba">Prueba</a>--}}
     @endrole

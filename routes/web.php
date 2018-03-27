@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/clone_ficha/{oFicha}','Catalogos\FichaController@clone')->name('fichaClone/');
         Route::post('/subir_imagen_ficha/{oFicha}','Storage\StorageFichaController@subirArchivoFicha')->name('storageFichaUpload/');
         Route::get('/quitar_imagen_ficha/{cat_id}/{idItem}/{action}/{idFF}','Storage\StorageFichaController@quitarArchivoFicha')->name('storageFichaRemove/');
+        Route::put('/prestame/{oFicha}','Catalogos\FichaController@prestar')->name('prestame');
 
         // Codigo de Lenguaje de Paises
         Route::post('/store_clp','Catalogos\CodigoLenguajePaisController@store')->name('clpStore/');
@@ -71,7 +72,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => ['role:alumno']], function () {
         Route::get('/apartame/{ficha_id}/{user_id}','Catalogos\FichaController@apartar')->name('apartame');
-        Route::get('/prestame/{ficha_id}/{user_id}','Catalogos\FichaController@prestar')->name('prestame');
     });
     // Fichas Usuarios
     Route::post('/create_usuario','Catalogos\UsuarioController@create')->name('usuarioCreate/');
