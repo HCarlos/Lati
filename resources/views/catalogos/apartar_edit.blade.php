@@ -25,11 +25,29 @@
                             </div>
                         @endif
                         <div class="form-group row">
+                            <label for = "isbn" class="col-md-2 col-form-label text-md-right">ISBN</label>
+                            <div class="col-md-10">
+                                <input type="text" name="isbn" id="isbn" value="{{ $items->isbn }}" class="col-md-10" readonly/>
+                                <span class="bg-seagreen-lati-bib pull-right">{{$items->isPrestado() ? 'Prestado': ''}}</span>
+                                <span class="bg-coral-lati-bib pull-right">{{$items->isApartado() ? 'Apartado': ''}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for = "titulo" class="col-md-2 col-form-label text-md-right">Título</label>
+                            <div class="col-md-10">
+                                <input type="text" name="titulo" id="titulo" value="{{ $items->titulo }}" class="col-md-12" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for = "autor" class="col-md-2 col-form-label text-md-right">Autor</label>
+                            <div class="col-md-10">
+                                <input type="text" name="autor" id="autor" value="{{ $items->autor }}" class="col-md-12" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for = "fecha_apartado" class="col-md-2 col-form-label text-md-right">Fecha Apartado</label>
                             <div class="col-md-10">
                                 <input type="date" name="fecha_apartado" id="fecha_apartado" value="{{ old('fecha_apartado',$items->fecha_apartado) }}" class="col-md-3" disabled />
-                                <span class="bg-seagreen-lati-bib pull-right">{{$items->isPrestado() ? 'Prestado': ''}}</span>
-                                <span class="bg-coral-lati-bib pull-right">{{$items->isApartado() ? 'Apartado': ''}}</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -62,10 +80,10 @@
                             </div>
                         </div>
                         <div>
-                            {{--<label class="col-md-2 col-form-label text-md-right"></label>--}}
+                            <label class="col-md-2 col-form-label text-md-right"></label>
                             <div class="col-md-8" >
                                 <button type="submit" class="btn btn-primary">
-                                    Guardar
+                                    Prestar
                                 </button>
                             </div>
 

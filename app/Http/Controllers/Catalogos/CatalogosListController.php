@@ -73,7 +73,7 @@ class CatalogosListController extends Controller
                 $tpaginator = Codigo_Lenguaje_Pais::paginate($this->itemPorPagina,['*'],'p');
                 break;
             case 3:
-                $this->tableName = 'fichas';
+                $this->tableName = 'apartados';
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
                     'apartado','apartado_user_id','prestado_user_id','prestado')
                     ->where('apartado',true)
@@ -84,6 +84,21 @@ class CatalogosListController extends Controller
                 foreach ($items as $item){
                     if ($item->apartado_user_id > 0){
                         $item->usuario_apartador = User::findOrFail($item->apartado_user_id);
+                    }
+                }
+                break;
+            case 4:
+                $this->tableName = 'prestados';
+                $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
+                    'apartado','apartado_user_id','prestado_user_id','prestado')
+                    ->where('prestado',true)
+                    ->orderBy('id','desc')
+                    ->get()
+                    ->forPage($npage,$this->itemPorPagina);
+                $tpaginator = Ficha::where('prestado',true)->paginate($this->itemPorPagina,['*'],'p');
+                foreach ($items as $item){
+                    if ($item->prestado_user_id > 0){
+                        $item->usuario_prestador = User::findOrFail($item->prestado_user_id);
                     }
                 }
 //                dd($tpaginator);
@@ -195,6 +210,25 @@ class CatalogosListController extends Controller
                     foreach ($items as $item){
                         if ($item->apartado_user_id > 0){
                             $item->usuario_apartador = User::findOrFail($item->apartado_user_id);
+                        }
+                    }
+                    break;
+                case 4:
+                    $search = $F->toMayus($search);
+                    $this->tableName = 'fichas';
+                    $total = Ficha::all()->count();
+                    $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
+                        'apartado','apartado_user_id','prestado_user_id')
+                        ->orWhere('titulo','LIKE',"%{$search}%")
+                        ->orWhere('autor','LIKE',"%{$search}%")
+                        ->orWhere('isbn','LIKE',"%{$search}%")
+                        ->andWhere('prestado',true)
+                        ->get()
+                        ->sortByDesc('id');
+                    $items = $total == count($items) ? collect(new Ficha) : $items;
+                    foreach ($items as $item){
+                        if ($item->prestado_user_id > 0){
+                            $item->usuario_prestador = User::findOrFail($item->prestado_user_id);
                         }
                     }
                     break;

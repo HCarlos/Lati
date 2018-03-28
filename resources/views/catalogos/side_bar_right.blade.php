@@ -62,6 +62,11 @@
                     @include('catalogos.listados.apartados_list')
                 @endif
                 @break;
+            @case(4)
+            @if($user->hasRole('user'))
+                @include('catalogos.listados.prestados_list')
+            @endif
+            @break;
             @case(10)
                 @if($user->hasRole('administrator|system_operator'))
                     @include('catalogos.listados.usuarios_list')

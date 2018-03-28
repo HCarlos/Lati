@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Funciones\FuncionesController;
+use phpDocumentor\Reflection\Types\Null_;
 
 class FichaController extends Controller
 {
@@ -194,9 +195,59 @@ class FichaController extends Controller
                 'apartado'  => false
             ]);
             return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
-            //return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
         }else{
             return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
         }
     }
+
+    public function devolver(Request $request, Ficha $oFicha){
+        $data = $request->all();
+
+        $cat_id   = $data['cat_id'];
+        $idItem   = $data['idItem'];
+        $action   = $data['action'];
+
+        $ficha_id = $oFicha['id'];
+        $user_id  = $oFicha['prestado_user_id'];
+        $fecha_salida  = $data['fecha_salida'];
+        $fecha_entrega = $data['fecha_devolucion'];
+
+        $validator = Validator::make($data, [
+            'fecha_salida' => 'required',
+            'fecha_devolucion'   => 'required|after:fecha_salida'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $ficha = Ficha::findOrFail($ficha_id);
+        if ( $ficha->isPrestado() ){
+            $F = (new FuncionesController);
+            Ficha_User::create([
+                'ficha_id' => $ficha_id,
+                'user_id'  => $user_id,
+                'action'   => 'Devuelto',
+                'fecha'    => $fecha_entrega,
+                'idemp'    => $F->getIHE(0),
+                'ip'       => $F->getIHE(1),
+                'host'     => $F->getIHE(2)
+            ]);
+            Ficha::findOrFail($ficha_id)->update([
+                'prestado'  => false,
+                'prestado_user_id'  => 0,
+                'fecha_salida'  => null,
+                'fecha_entrega'  => null,
+                'apartado'  => false,
+                'apartado_user_id'  => 0,
+                'fecha_apartado'  => null,
+            ]);
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
+        }else{
+            return redirect('catalogos/'.$cat_id.'/'.$idItem.'/'.$action);
+        }
+    }
+
 }

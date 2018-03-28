@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/subir_imagen_ficha/{oFicha}','Storage\StorageFichaController@subirArchivoFicha')->name('storageFichaUpload/');
         Route::get('/quitar_imagen_ficha/{cat_id}/{idItem}/{action}/{idFF}','Storage\StorageFichaController@quitarArchivoFicha')->name('storageFichaRemove/');
         Route::put('/prestame/{oFicha}','Catalogos\FichaController@prestar')->name('prestame');
+        Route::put('/devuelveme/{oFicha}','Catalogos\FichaController@devolver')->name('devuelveme');
 
         // Codigo de Lenguaje de Paises
         Route::post('/store_clp','Catalogos\CodigoLenguajePaisController@store')->name('clpStore/');
