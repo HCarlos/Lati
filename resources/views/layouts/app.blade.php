@@ -57,7 +57,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="links-lati"><a class="nav-link bolder-lati" href="{{ route('login') }}">Iniciar sesión</a></li>
-                            <li class="links-lati"><a class="nav-link bolder-lati" href="{{ route('register') }}">Regístrate</a></li>
+                            {{--<li class="links-lati"><a class="nav-link bolder-lati" href="{{ route('register') }}">Regístrate</a></li>--}}
                         @else
                             <li class="nav-item dropdown links-lati" >
                                 <a class="nav-link dropdown-toggle menu-principal-lati" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

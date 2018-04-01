@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'ip' => $ip,
             'host' => $host
         ]);
-        $role = Role::where('name', 'user')->first();
+        $role = Role::where('name', 'alumno')->first();
         $user->roles()->attach($role);
         return $user;
 
