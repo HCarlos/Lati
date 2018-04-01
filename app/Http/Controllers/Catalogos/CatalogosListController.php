@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Catalogos;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones\FuncionesController;
 use App\Models\Codigo_Lenguaje_Pais;
+use App\Models\Config;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use App\User;
@@ -75,30 +76,47 @@ class CatalogosListController extends Controller
             case 3:
                 $this->tableName = 'apartados';
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
-                    'apartado','apartado_user_id','prestado_user_id','prestado')
+                    'apartado','apartado_user_id','prestado_user_id','prestado',
+                    'fecha_apartado')
                     ->where('apartado',true)
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
                 $tpaginator = Ficha::where('apartado',true)->paginate($this->itemPorPagina,['*'],'p');
+                $config = Config::all()->where('key','dias_apartado')->first();
                 foreach ($items as $item){
                     if ($item->apartado_user_id > 0){
                         $item->usuario_apartador = User::findOrFail($item->apartado_user_id);
+                        $fa = new Carbon($item->fecha_apartado);
+                        $fa = $fa->addDay($config->value);
+                        $item->vencimiento = $fa->format('d-m-Y');
                     }
                 }
                 break;
             case 4:
                 $this->tableName = 'prestados';
                 $items = Ficha::select('id','ficha_no','isbn','titulo', 'autor',
-                    'apartado','apartado_user_id','prestado_user_id','prestado')
+                    'apartado','apartado_user_id','prestado_user_id','prestado',
+                    'fecha_salida','fecha_entrega')
                     ->where('prestado',true)
                     ->orderBy('id','desc')
                     ->get()
                     ->forPage($npage,$this->itemPorPagina);
                 $tpaginator = Ficha::where('prestado',true)->paginate($this->itemPorPagina,['*'],'p');
+                $config = Config::all()->where('key','dias_prestado')->first();
                 foreach ($items as $item){
                     if ($item->prestado_user_id > 0){
                         $item->usuario_prestador = User::findOrFail($item->prestado_user_id);
+                        $fs = new Carbon($item->fecha_salida);
+                        $fe = new Carbon($item->fecha_entrega);
+                        $fn = Carbon::now();
+//                        dd($fn <= $fe);
+//                        dd($fe->diffInDays($fn));
+                        if ($fn <= $fe){
+                            $item->dias_vencidos = 0;
+                        }else{
+                            $item->dias_vencidos = $fn->diffInDays($fe);
+                        }
                     }
                 }
 //                dd($tpaginator);

@@ -7,6 +7,7 @@
                 <th aria-label="isbn" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">TÍTULO</th>
                 <th aria-label="titulo" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">AUTOR</th>
                 <th aria-label="autor" style="width: 200px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">USUARIO</th>
+                <th aria-label="vencimiento" style="width: 100px;" colspan="1" rowspan="1" aria-controls="{{ $tableName}}" tabindex="2" role="columnheader" class="sorting">VENCE</th>
                 <th aria-label="" style="width: 100px;" colspan="1" rowspan="1" role="columnheader" class="sorting_disabled"></th>
             </tr>
             </thead>
@@ -17,6 +18,7 @@
                     <td>{{ $item->titulo }}</td>
                     <td>{{ $item->autor.' '}} @if($item->isImages() )    <i class="far fa-images red"></i> @endif </td>
                     <td>{{ $item->usuario_apartador->nombre_completo }}</td>
+                    <td>{{ $item->vencimiento }}</td>
                     <td width="100">
                         @if ($user->hasAnyPermission(['subir_imagen_fichas','all']))
                             <a href="{{ route('catalogosSubirImagenFichas/', array('id' => $id,'idItem' => $item->id,'action' => 4)) }}" class="btn btn-link btn-xs  margen-izquierdo-03em pull-right" target="_blank" title="Subir imagen" >

@@ -71,7 +71,7 @@
                         <div class="form-group row">
                             <label for = "fecha_devolucion" class="col-md-2 col-form-label text-md-right">Fecha Devolución</label>
                             <div class="col-md-10">
-                                {{ Form::date('fecha_devolucion',\Carbon\Carbon::now()->addDay(5), ['id'=>'fecha_devolucion','class'=>'col-md-3']) }}
+                                {{ Form::date('fecha_devolucion',$fVencimiento, ['id'=>'fecha_devolucion','class'=>'col-md-3']) }}
                                 @if ($errors->has('fecha_devolucion'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('fecha_devolucion') }}</strong>

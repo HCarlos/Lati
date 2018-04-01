@@ -7,12 +7,14 @@ use App\Models\Codigo_Lenguaje_Pais;
 use App\Models\Editorial;
 use App\Models\Ficha;
 use App\Models\Fichafile;
+use App\Models\Config;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException as AuthorizationException;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Carbon\Carbon;
 
 
 class CatalogosController extends Controller
@@ -20,6 +22,7 @@ class CatalogosController extends Controller
     protected $otrosDatos;
     protected $Predeterminado = false;
     protected $redirectTo = '/home';
+    protected $fVencimiento = '';
     public function __construct()
     {
         $this->middleware('auth');
@@ -50,6 +53,11 @@ class CatalogosController extends Controller
                 case 3;
                     $items = Ficha::findOrFail($idItem);
                     $this->otrosDatos = User::findOrFail($items->apartado_user_id);
+                    $config = Config::all()->where('key','dias_apartado')->first();
+                    $fa = new Carbon($items->fecha_apartado);
+                    $fa = Carbon::now();
+                    $fa = $fa->addDay($config->value);
+                    $this->fVencimiento = $fa;
                     break;
                 case 4;
                     $items = Ficha::findOrFail($idItem);
@@ -122,6 +130,7 @@ class CatalogosController extends Controller
                 'user' => $user,
                 'otrosDatos' => $this->otrosDatos,
                 'predeterminado' => $this->Predeterminado,
+                'fVencimiento' => $this->fVencimiento,
             ]
         );
 
