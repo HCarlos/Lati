@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
      * @param  \Closure  $next
      * @return mixed
      */
+
 //    public function handle($request, Closure $next)
 //    {
 //        if ($this->isReading($request) || $this->tokensMatch($request)) {

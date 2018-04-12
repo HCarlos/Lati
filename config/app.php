@@ -108,6 +108,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'cache-duration' => 9999999,
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -165,6 +168,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Geocoder\Laravel\Providers\GeocoderService::class,
+
 
     ],
 
@@ -219,6 +224,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Image' => Intervention\Image\Facades\Image::class,
+
+
 
     ],
 

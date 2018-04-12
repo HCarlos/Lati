@@ -122,6 +122,12 @@ class CatalogosListController extends Controller
 //                dd($tpaginator);
                 break;
             case 10:
+
+//                dd(app('geocoder')->geocode('Villahermosa, MX')->get());
+//                dd(app('geocoder')->geocode('8.8.8.8')->get());
+//                dd(app('geocoder')->reverse(43.882587,-103.454067)->get());
+//                dd(app('geocoder')->geocode('Villahermosa, MX')->dump('kml'));
+
                 if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $this->tableName = 'usuarios';
                     $items = User::all()->sortByDesc('id')->forPage($npage,$this->itemPorPagina);
