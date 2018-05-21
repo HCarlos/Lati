@@ -128,7 +128,7 @@ class CatalogosListController extends Controller
 //                dd(app('geocoder')->reverse(43.882587,-103.454067)->get());
 //                dd(app('geocoder')->geocode('Villahermosa, MX')->dump('kml'));
 
-                
+
 
                 if ( Auth::user()->isAdmin() || Auth::user()->hasRole('system_operator') ){
                     $this->tableName = 'usuarios';

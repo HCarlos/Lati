@@ -43,27 +43,27 @@
         </div>
         @switch($id)
             @case(0)
-                @if($user->hasRole('user'))
+                @if($user->hasRole('user|bibliotecario'))
                     @include('catalogos.listados.editoriales_list')
                 @endif
                 @break;
             @case(1)
-                @if($user->hasRole('user'))
+                @if($user->hasRole('user|bibliotecario'))
                     @include('catalogos.listados.fichas_list')
                 @endif
                 @break;
             @case(2)
-                @if($user->hasRole('user'))
+                @if($user->hasRole('user|bibliotecario'))
                     @include('catalogos.listados.clp_list')
                 @endif
                 @break;
             @case(3)
-                @if($user->hasRole('user'))
+                @if($user->hasRole('user|bibliotecario'))
                     @include('catalogos.listados.apartados_list')
                 @endif
                 @break;
             @case(4)
-            @if($user->hasRole('user'))
+            @if($user->hasRole('user|bibliotecario'))
                 @include('catalogos.listados.prestados_list')
             @endif
             @break;
