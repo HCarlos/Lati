@@ -10,14 +10,18 @@
     <div class="panel-heading">
 
         <span id="titulo_catalogo">Catálogos </span>
-        @if ($user->hasAnyPermission(['crear_registro','crear_usuarios','crear_roles','crear_permisos','all']))
+        @if ($user->hasAnyPermission(['crear_registro','crear_usuarios','crear_roles','crear_permisos','bibliotecario_consulta','all']))
             @switch($id)
                 @case(0)
                 @case(1)
                 @case(2)
                 @case(3)
                 @case(10)
-                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" target="_blank" title="Agregar nuevo registro" style="margin-left: 2em;">
+                    @if ( ($id == 3 || $id == 4 ) )
+                        <a class="btn btn-info btn-xs marginLeft2em" style="margin-left: 2em;">
+                    @else
+                          <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" target="_blank" title="Agregar nuevo registro" style="margin-left: 2em;">
+                    @endif
                     @break
                 @default
                    <a href="{{ route('catalogos/', array('id' => $id,'idItem' => 0,'action' => 0)) }}" class="btn btn-info btn-xs marginLeft2em" title="Agregar nuevo registro" style="margin-left: 2em;">

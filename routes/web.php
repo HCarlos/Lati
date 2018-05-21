@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
-    Route::group(['middleware' => ['role:alumno']], function () {
+    Route::group(['middleware' => ['role:alumno|bibliotecario']], function () {
         Route::get('/apartame/{ficha_id}/{user_id}','Catalogos\FichaController@apartar')->name('apartame');
     });
     // Fichas Usuarios
